@@ -1,42 +1,70 @@
 { config, pkgs, lib, ...}:
+
+let
+  plugins = {
+   "redmine" = pkgs.callPackage ./packages/ckanext-redmine-autoissues.nix {
+      pkgs = pkgs;
+      buildPythonPackage = pkgs.python27Packages.buildPythonPackage;
+   };
+
+   "hierarchy" = pkgs.callPackage ./packages/ckanext-hierarchy.nix {
+      pkgs = pkgs;
+      buildPythonPackage = pkgs.python27Packages.buildPythonPackage;
+   };
+
+   "noregistration" = pkgs.callPackage ./packages/ckanext-noregistration.nix {
+      pkgs = pkgs;
+      buildPythonPackage = pkgs.python27Packages.buildPythonPackage;
+   };
+
+  };
+
+in
+
 {
-  # XXX split to postgresql.nix
-  boot.kernel.sysctl."kernel.shmmax" = 8589934592; # 8GB
+  imports = [
+    ./modules/ckan.nix
+  ];
 
-  services.postgresql = {
+  services.ckan = {
     enable = true;
-    # shared_buffers to 25% of the memory in your system.
+    #debug = true;
+    #ckanURL = "http://192.168.122.109:5000";
+    ckanURL = "http://ckan";
+
+    createAdmin = true;
+
+    extraPluginPackages = plugins;
+    enabledPlugins = [
+      "stats"
+      "text_view"
+      "image_view"
+      "recline_view"
+      "redmine"
+      "hierarchy_display"
+      "hierarchy_form"
+      "noregistration"
+    ];
+
     extraConfig = ''
-      listen_addresses = '0.0.0.0'
-      shared_buffers = 8GB
-      temp_buffers = 8MB
-      work_mem = 16MB
-      max_connections = 250
-      max_stack_depth = 2MB
+      ### extension: ckanext-redmine-autoissues
+      # The URL of the Redmine site
+      ckan.redmine.url = https://redmine/
+
+      # Redmine API key
+      ckan.redmine.apikey = CHANGE
+
+      # Redmine project
+      ckan.redmine.project = mestska_data
+
+      # The custom metadata flag used for storing redmine URL
+      # (optional, default: redmine_url).
+      ckan.redmine.flag = md_ticket_url
+
+      # A prefix to apply to the name of the dataset when creating an issue
+      # (optional, default: New dataset)
+      ckan.redmine.subject_prefix = Úkoly datasetu:
     '';
-    package = pkgs.postgresql96;
-    authentication = lib.mkForce ''
-      # Generated file; do not edit!
-      # TYPE  DATABASE        USER            ADDRESS                 METHOD
-      local   all             all                                     trust
-      host    all             all             127.0.0.1/32            trust
-      host    all             all             ::1/128                 trust
-      host    all             all             172.19.9.19/32          trust
-    '';
   };
 
-  services.redis.enable = true;
-
-  services.solr.enable = true;
-  services.solr.user = "ckan";
-  services.solr.group = "ckan";
-  services.solr.solrHome = "/srv/ckan/solr";
-
-  users.extraUsers.ckan = {
-    uid = 6666;
-  };
-  users.extraGroups.ckan = {
-    gid = 6666;
-  };
-  users.extraUsers.ckan.extraGroups = [ "ckan" ];
 }
