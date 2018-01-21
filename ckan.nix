@@ -1,26 +1,8 @@
 { config, pkgs, lib, ...}:
 
 let
-  plugins = {
-   "redmine" = pkgs.callPackage ./packages/ckanext-redmine-autoissues.nix {
-      pkgs = pkgs;
-      buildPythonPackage = pkgs.python27Packages.buildPythonPackage;
-   };
-
-   "hierarchy" = pkgs.callPackage ./packages/ckanext-hierarchy.nix {
-      pkgs = pkgs;
-      buildPythonPackage = pkgs.python27Packages.buildPythonPackage;
-   };
-
-   "noregistration" = pkgs.callPackage ./packages/ckanext-noregistration.nix {
-      pkgs = pkgs;
-      buildPythonPackage = pkgs.python27Packages.buildPythonPackage;
-   };
-
-  };
-
+  plugins = (import ./packages/all-ckan-plugins.nix { inherit pkgs; }).plugins;
 in
-
 {
   imports = [
     ./modules/ckan.nix
@@ -44,26 +26,28 @@ in
       "hierarchy_display"
       "hierarchy_form"
       "noregistration"
+      "odczdataset"
+      "syndicate"
     ];
 
     extraConfig = ''
+      ### extension: ckanext-odczdataset
+      ckan.odczdataset.private_catalog = true
+
       ### extension: ckanext-redmine-autoissues
-      # The URL of the Redmine site
       ckan.redmine.url = https://redmine/
-
-      # Redmine API key
       ckan.redmine.apikey = CHANGE
-
-      # Redmine project
       ckan.redmine.project = mestska_data
-
-      # The custom metadata flag used for storing redmine URL
-      # (optional, default: redmine_url).
       ckan.redmine.flag = md_ticket_url
-
-      # A prefix to apply to the name of the dataset when creating an issue
-      # (optional, default: New dataset)
       ckan.redmine.subject_prefix = Úkoly datasetu:
+
+
+      ### extension: ckanext-syndicate
+      ckan.syndicate.ckan_url = http://ckan-pub
+      ckan.syndicate.api_key = CHANGE
+      ckan.syndicate.flag = md_syndicate
+      ckan.syndicate.id = md_syndicated_id
+      ckan.syndicate.replicate_organization = true
     '';
   };
 

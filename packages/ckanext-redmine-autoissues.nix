@@ -10,8 +10,8 @@ buildPythonPackage {
   src = pkgs.fetchFromGitHub {
     owner = "sorki";
     repo = "ckanext-redmine-autoissues";
-    rev = "050a95d00d62d13a69911c9a1b4667ded979e654";
-    sha256 = "1yy1xl5lsg9cr8p6icqydvfxa5rzd5hyx3dfai5x0nwyczsslsd7";
+    rev = "70ec18e3154e6040d48607fb241d1e956fae166e";
+    sha256 = "1fpscm6lhhjyjnvgim3h8fcdamqh8xlxahdzyr4ll2wbhx8ik61k";
   };
 
   propagatedBuildInputs = [ python-redmine ];
