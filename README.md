@@ -11,10 +11,13 @@ otevrenamesta.cz configuration
 
     This configures `NIX_PATH`, `NIXOPS_DEPLOYMENT` variables and configures prompt.
 
-3. Generate keys for Hydra
+3. Generate keys for Hydra and empty secret files for API keys
 
     ~~~~~ bash
     ssh-keygen -C "hydra@hydra.example.org" -N "" -f id_buildfarm
+    for i in syndication-api-key redmine-api-key; do
+      echo "CHANGE_ME" > static/$i.secret
+    done
     ~~~~~
 
 4. Create the deployment:

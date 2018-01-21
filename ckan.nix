@@ -36,7 +36,7 @@ in
 
       ### extension: ckanext-redmine-autoissues
       ckan.redmine.url = https://redmine/
-      ckan.redmine.apikey = CHANGE
+      ckan.redmine.apikey = ${ lib.fileContents ./static/redmine-api-key.secret }
       ckan.redmine.project = mestska_data
       ckan.redmine.flag = md_ticket_url
       ckan.redmine.subject_prefix = Úkoly datasetu:
@@ -44,7 +44,7 @@ in
 
       ### extension: ckanext-syndicate
       ckan.syndicate.ckan_url = http://ckan-pub
-      ckan.syndicate.api_key = CHANGE
+      ckan.syndicate.api_key = ${ lib.fileContents ./static/syndication-api-key.secret }
       ckan.syndicate.flag = md_syndicate
       ckan.syndicate.id = md_syndicated_id
       ckan.syndicate.replicate_organization = true
