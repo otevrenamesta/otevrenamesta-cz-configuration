@@ -12,11 +12,13 @@ let
       </console>
     '';
   };
+
 in
 {
   network.description = "testing infrastructure";
 
   ckan        = lvirt;
+  redmine     = lvirt;
   hydra       = lvirt;
   hydra_slave = lvirt;
 }

@@ -9,6 +9,15 @@
         ./ckan.nix
       ];
     };
+
+  redmine =
+    { config, lib, pkgs, ...}:
+    {
+      imports = [
+        ./env.nix
+        #./redmine.nix
+      ];
+    };
   hydra =
     { config, lib, pkgs, ... }:
     {
