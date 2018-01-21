@@ -10,6 +10,15 @@
       ];
     };
 
+  ckan-pub =
+    { config, lib, pkgs, ...}:
+    {
+      imports = [
+        ./env.nix
+        ./ckan-pub.nix
+      ];
+    };
+
   redmine =
     { config, lib, pkgs, ...}:
     {

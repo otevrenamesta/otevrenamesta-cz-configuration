@@ -18,6 +18,7 @@ in
   network.description = "testing infrastructure";
 
   ckan        = lvirt;
+  ckan-pub    = lvirt;
   redmine     = lvirt;
   hydra       = lvirt;
   hydra_slave = lvirt;
