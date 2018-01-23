@@ -238,6 +238,7 @@ in
 
       extraPluginPackages = mkOption {
         type = types.attrs;
+        default = {};
         description = "Extra packages to be used as CKAN plugins";
       };
 
@@ -249,6 +250,7 @@ in
 
       extraConfig = mkOption {
         type = types.lines;
+        default = "";
         description = "Extra lines for the CKAN configuration.";
       };
 
