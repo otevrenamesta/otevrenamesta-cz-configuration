@@ -43,4 +43,28 @@
         ./hydra-slave.nix
       ];
     };
+  lpetl =
+    { config, lib, pkgs, ... }:
+    {
+      imports = [
+        ./env.nix
+        ./lpetl.nix
+      ];
+    };
+  proxy =
+    { config, lib, pkgs, ... }:
+    {
+      imports = [
+        ./env.nix
+        ./proxy.nix
+      ];
+    };
+  virtuoso =
+    { config, lib, pkgs, ... }:
+    {
+      imports = [
+        ./env.nix
+        ./virtuoso.nix
+      ];
+    };
 }

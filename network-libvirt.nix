@@ -22,4 +22,7 @@ in
   redmine     = lvirt;
   hydra       = lvirt;
   hydra_slave = lvirt;
+  proxy       = lvirt;
+  lpetl       = lvirt;
+  virtuoso    = lvirt;
 }
