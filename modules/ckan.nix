@@ -14,7 +14,7 @@ let
     plugins = concatStringsSep " " cfg.enabledPlugins;
     inherit baseDir;
     inherit debugStr;
-    inherit (cfg) ckanURL extraConfig;
+    inherit (cfg) ckanURL localeDefault extraConfig;
   };
 
   whoIni = pkgs.substituteAll {
@@ -239,6 +239,12 @@ in
       extraPluginPackages = mkOption {
         type = types.attrs;
         description = "Extra packages to be used as CKAN plugins";
+      };
+
+      localeDefault = mkOption {
+        type = types.str;
+        default = "en";
+        description = "Default locale";
       };
 
       extraConfig = mkOption {
