@@ -9,9 +9,10 @@
   systemd.tmpfiles.rules = [ "d /tmp 1777 root root 7d" ];
 
   environment.systemPackages = with pkgs; [
-    wget
-    vim
+    htop
     screen
+    vim
+    wget
   ];
 
   users.extraUsers.root.openssh.authorizedKeys.keys =
