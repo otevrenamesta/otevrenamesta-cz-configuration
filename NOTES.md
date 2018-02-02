@@ -26,6 +26,18 @@ Brno
 nixops create network-small.nix network-brno.nix
 ```
 
+Host OS configuration
+---------------------
+
+```
+nix.useSandbox = true;
+
+# if cache gives you problems
+nix.extraOptions = ''
+ binary-caches-parallel-connections = 3
+ connect-timeout = 5
+'';
+```
 
 NixOps
 ------
