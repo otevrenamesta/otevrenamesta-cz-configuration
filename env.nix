@@ -10,6 +10,7 @@
 
   environment.systemPackages = with pkgs; [
     htop
+    lynx
     screen
     vim
     wget
