@@ -6,6 +6,7 @@ let
 
   cfg = config.services.ckan;
   debugStr = if cfg.debug then "true" else "false";
+  gunicornLogLevel = if cfg.debug then "debug" else "info";
   baseDir = "/var/lib/ckan";
   solrDir = "/var/lib/ckan/solr/";
 
@@ -111,7 +112,7 @@ let
       -u ckan \
       -g ckan \
       --workers 1 \
-      --log-level=debug \
+      --log-level=${gunicornLogLevel} \
       --pid /run/gunicorn.pid \
       --paste development.ini \
       --bind=0.0.0.0:80 \
