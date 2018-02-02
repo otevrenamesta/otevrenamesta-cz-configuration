@@ -20,6 +20,7 @@ in
       "text_view"
       "image_view"
       "recline_view"
+      "fileremove"
       "hierarchy_display"
       "hierarchy_form"
       "redmine"

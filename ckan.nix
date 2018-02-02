@@ -24,6 +24,7 @@ in
       "text_view"
       "image_view"
       "recline_view"
+      "fileremove"
       "redmine"
       "hierarchy_display"
       "hierarchy_form"

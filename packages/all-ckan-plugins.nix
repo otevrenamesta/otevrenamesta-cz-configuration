@@ -6,6 +6,11 @@
        buildPythonPackage = pkgs.python27Packages.buildPythonPackage;
     };
 
+    "fileremove" = pkgs.callPackage ./ckanext-fileremove.nix {
+       pkgs = pkgs;
+       buildPythonPackage = pkgs.python27Packages.buildPythonPackage;
+    };
+
     "hierarchy" = pkgs.callPackage ./ckanext-hierarchy.nix {
        pkgs = pkgs;
        buildPythonPackage = pkgs.python27Packages.buildPythonPackage;
