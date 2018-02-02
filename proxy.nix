@@ -1,5 +1,19 @@
 { config, pkgs, lib, ...}:
 
+let
+  bigFileNginx = ''
+    client_body_in_file_only clean;
+    client_body_buffer_size 32K;
+
+    # set max upload size
+    client_max_body_size 2G;
+
+    sendfile on;
+    send_timeout 3600s;
+  '';
+
+in
+
 {
 
   networking.firewall = {
@@ -9,63 +23,45 @@
   services.nginx = {
     enable = true;
 
+    recommendedProxySettings = true;
+
     virtualHosts = {
       "ckan" = {
         default = true;
         locations = {
           "/" = {
+            proxyPass = "http://ckan";
             extraConfig = ''
-              proxy_set_header        Host $host;
-              proxy_set_header        X-Real-IP $remote_addr;
-              proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header        X-Forwarded-Proto $scheme;
-
-              proxy_pass          http://ckan;
-              proxy_read_timeout  90;
-
-              # XXX: probably not needed
-              #proxy_redirect      http://ckan http://172.17.4.127;
-
-              # big file start
-              client_body_in_file_only clean;
-              client_body_buffer_size 32K;
-
-              # set max upload size
-              client_max_body_size 2G;
-
-              sendfile on;
-              send_timeout 3600s;
-              # big file end
+              ${bigFileNginx}
             '';
           };
         };
       };
+
       "ckan-pub" = {
         locations = {
           "/" = {
+            proxyPass = "http://ckan-pub";
             extraConfig = ''
-              proxy_set_header        Host $host;
-              proxy_set_header        X-Real-IP $remote_addr;
-              proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header        X-Forwarded-Proto $scheme;
-
-              proxy_pass          http://ckan-pub;
-              proxy_read_timeout  90;
-
-              # big file start
-              client_body_in_file_only clean;
-              client_body_buffer_size 32K;
-
-              # set max upload size
-              client_max_body_size 2G;
-
-              sendfile on;
-              send_timeout 3600s;
-              # big file end
+              ${bigFileNginx}
             '';
           };
         };
       };
+
+      "lpetl" = {
+        locations = {
+          "/" = {
+            #proxyPass = "http://lpetl:8080";
+            proxyPass = "http://ckan";
+          };
+        };
+
+        basicAuth = {
+          lpetl-user = lib.fileContents ./static/lpetl-user-password.secret;
+        };
+      };
+
     };
   };
 }

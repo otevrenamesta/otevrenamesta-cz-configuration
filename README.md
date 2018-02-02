@@ -15,7 +15,7 @@ otevrenamesta.cz configuration
 
     ~~~~~ bash
     ssh-keygen -C "hydra@hydra.example.org" -N "" -f id_buildfarm
-    for i in syndication-api-key redmine-api-key; do
+    for i in syndication-api-key redmine-api-key lpetl-user-password; do
       echo "CHANGE_ME" > static/$i.secret
     done
     ~~~~~
