@@ -10,7 +10,10 @@ in
 
   services.ckan = {
     enable = true;
+
     ckanURL = "http://ckan-pub";
+
+    localeDefault = "cs_CZ";
 
     createAdmin = true;
 
