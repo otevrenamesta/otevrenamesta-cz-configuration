@@ -21,6 +21,11 @@
        buildPythonPackage = pkgs.python27Packages.buildPythonPackage;
     };
 
+    "showcase" = pkgs.callPackage ./ckanext-showcase.nix {
+       pkgs = pkgs;
+       buildPythonPackage = pkgs.python27Packages.buildPythonPackage;
+    };
+
     "syndicate" = pkgs.callPackage ./ckanext-syndicate.nix {
        pkgs = pkgs;
        buildPythonPackage = pkgs.python27Packages.buildPythonPackage;
