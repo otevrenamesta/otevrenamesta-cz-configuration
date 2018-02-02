@@ -16,7 +16,7 @@
         { device = "/dev/disk/by-uuid/2133ba67-f556-4b46-883c-2cd48a969b9d";
           fsType = "ext4";
         };
-    
+
       fileSystems."/boot" =
         { device = "/dev/disk/by-uuid/8d46138d-d360-4382-90a5-c96ac05a6ccb";
           fsType = "ext4";
@@ -37,7 +37,7 @@
         { device = "/dev/disk/by-uuid/2133ba67-f556-4b46-883c-2cd48a969b9d";
           fsType = "ext4";
         };
-    
+
       fileSystems."/boot" =
         { device = "/dev/disk/by-uuid/8d46138d-d360-4382-90a5-c96ac05a6ccb";
           fsType = "ext4";
@@ -54,7 +54,7 @@
         { device = "/dev/disk/by-uuid/d0b28917-8c38-4870-b085-5091cbf39f4a";
           fsType = "ext4";
         };
-    
+
       fileSystems."/boot" =
         { device = "/dev/disk/by-uuid/e9207110-4211-4993-b430-85c5930e567c";
           fsType = "ext4";

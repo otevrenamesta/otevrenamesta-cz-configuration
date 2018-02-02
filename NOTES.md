@@ -55,7 +55,7 @@ Apache
 ------
 
 ```
-services.httpd.virtualHosts.<name>.sslServerCert = "/cesta" 
+services.httpd.virtualHosts.<name>.sslServerCert = "/cesta"
 services.httpd.virtualHosts.<name>.sslServerKey = "/cesta"
 ```
 
