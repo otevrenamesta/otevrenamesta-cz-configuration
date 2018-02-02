@@ -115,7 +115,7 @@ let
       --log-level=${gunicornLogLevel} \
       --pid /run/gunicorn.pid \
       --paste development.ini \
-      --bind=0.0.0.0:80 \
+      --bind=${cfg.listenAddress}:${toString cfg.listenPort} \
       -k gevent
     '';
 
@@ -171,6 +171,22 @@ in
         example = "dbi:Pg:dbname=hydra;host=postgres.example.org;user=foo;";
         description = ''
           The DBI string for CKAN database connection.
+        '';
+      };
+
+      listenAddress = mkOption {
+        type = types.str;
+        default = "0.0.0.0";
+        description = ''
+          Listen address for gunicorn HTTP server
+        '';
+      };
+
+      listenPort = mkOption {
+        type = types.int;
+        default = 80;
+        description = ''
+          Listen port for gunicorn HTTP server
         '';
       };
 
