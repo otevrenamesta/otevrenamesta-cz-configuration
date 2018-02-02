@@ -359,6 +359,8 @@ in
           PrivateTmp = true;
           ExecStart = gunicornWrapper;
           WorkingDirectory = baseDir;
+          Restart = "always";
+          RestartSec = 3;
         };
       };
 
