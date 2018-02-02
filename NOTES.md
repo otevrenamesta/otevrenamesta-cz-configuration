@@ -1,11 +1,9 @@
-NixOps
-======
+Environments
+============
 
-Envs
-----
 
 Virt
-~~~~
+----
 
 ```
 . activate_virt
@@ -13,7 +11,7 @@ nixops create network.nix network-virt.nix
 ```
 
 Staging
-~~~~~~~
+-------
 
 ```
 . activate_staging
@@ -21,7 +19,7 @@ nixops create network-small-staging.nix network-staging.nix
 ```
 
 Brno
-~~~~
+----
 
 ```
 . activate_brno
@@ -29,8 +27,8 @@ nixops create network-small.nix network-brno.nix
 ```
 
 
-Commands
---------
+NixOps
+------
 
 Delete obsolete vms
 ```
