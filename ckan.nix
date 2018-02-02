@@ -11,7 +11,7 @@ in
   services.ckan = {
     enable = true;
     #debug = true;
-    #ckanURL = "http://192.168.122.109:5000";
+
     ckanURL = "http://ckan";
 
     localeDefault = "cs_CZ";
