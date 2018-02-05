@@ -37,6 +37,8 @@ let
       cp -R $f ${baseDir}/i18n/
     done
 
+    mkdir -p ${baseDir}/i18n_js
+
     ln -sf ${ckanConf} ${baseDir}/ckan.ini
 
     # use make-config to obtain generated.ini so we can get uuid and session secret from it
@@ -125,10 +127,10 @@ let
 
   #nixpkgs_python = import ../nixpkgs-python/default.nix {};
   nixpkgs_python = (import (pkgs.fetchFromGitHub {
-    owner = "garbas";
+    owner = "sorki";
     repo = "nixpkgs-python";
-    rev = "72b162123b0dbdea1d6b1598a2cb2ec4d3df2189";
-    sha256 = "1jvx6xl4626zy05i6hv1g5zwr576hnkdzv3f3irlb4c867ww6irr";
+    rev = "7b048554abe81918213fe937342357ecbfbd0ad8";
+    sha256 = "041qp8mipb0wkrynciv0l70pjvzy3754hqxwmkscpbjsjia69w83";
   }) {});
 
   extendedPackage = nixpkgs_python.ckan.withPackages (cfg.extraPluginPackages);
