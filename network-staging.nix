@@ -10,6 +10,8 @@
         ./brno.nix
       ];
 
+      services.ckan.ckanURL = "http://lada-ckan";
+
       boot.loader.grub.device = "/dev/sda";
 
       fileSystems."/" =
@@ -30,6 +32,8 @@
       imports = [
         ./brno.nix
       ];
+
+      services.ckan.ckanURL = "http://lada-ckan-pub";
 
       boot.loader.grub.device = "/dev/sda";
 
