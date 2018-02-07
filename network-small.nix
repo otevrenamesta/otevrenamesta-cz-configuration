@@ -1,7 +1,7 @@
 {
   network.description = "otevrenamesta-cz small infrastructure";
 
-  ckan =
+  kmd =
     { config, lib, pkgs, ...}:
     {
       imports = [
@@ -10,7 +10,7 @@
       ];
     };
 
-  ckan-pub =
+  kod =
     { config, lib, pkgs, ...}:
     {
       imports = [
