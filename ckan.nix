@@ -24,13 +24,13 @@ in
       "text_view"
       "image_view"
       "recline_view"
-      #"showcase"
       "fileremove"
       "redmine"
       "hierarchy_display"
       "hierarchy_form"
       "noregistration"
       "odczdataset"
+      "showcase"
       "syndicate"
     ];
 

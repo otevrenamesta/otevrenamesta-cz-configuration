@@ -29,6 +29,7 @@ in
       "redmine"
       "noregistration"
       "odczdataset"
+      "showcase"
     ];
 
     extraConfig = ''
