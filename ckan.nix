@@ -12,7 +12,7 @@ in
     enable = true;
     #debug = true;
 
-    ckanURL = "http://ckan";
+    ckanURL = lib.mkDefault "http://ckan";
 
     localeDefault = "cs_CZ";
 

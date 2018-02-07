@@ -11,7 +11,7 @@ in
   services.ckan = {
     enable = true;
 
-    ckanURL = "http://ckan-pub";
+    ckanURL = lib.mkDefault "http://ckan-pub";
 
     localeDefault = "cs_CZ";
 
