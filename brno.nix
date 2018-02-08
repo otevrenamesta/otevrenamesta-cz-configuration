@@ -67,7 +67,7 @@ in
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.jdk}/bin/java -jar /root/mon/GPCAgent.jar.";
+        ExecStart = "${pkgs.jdk}/bin/java -jar /root/mon/GPCAgent.jar";
       };
     };
 }
