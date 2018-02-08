@@ -47,6 +47,7 @@
           ipAddress = "10.10.11.10";
           prefixLength = 24;
         };
+     };
 
       fileSystems."/" =
         { device = "/dev/disk/by-uuid/abb1e733-15fd-4228-9eae-51800b209a2c";
