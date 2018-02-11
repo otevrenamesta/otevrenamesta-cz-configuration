@@ -8,7 +8,6 @@
 
   users = {
     mutableUsers = false;
-    users.root.openssh.authorizedKeys.keyFiles = [ ~/.ssh/id_rsa.pub ];
   };
 
 }
