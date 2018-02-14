@@ -10,6 +10,8 @@
         ./brno.nix
       ];
 
+      services.ckan.ckanURL = "https://kmd.brno.cz";
+
       boot.loader.grub.device = "/dev/sda";
 
       networking = {
@@ -36,6 +38,8 @@
       imports = [
         ./brno.nix
       ];
+ 
+      services.ckan.ckanURL = "https://kod.brno.cz";
 
       boot.loader.grub.device = "/dev/sda";
 
