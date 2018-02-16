@@ -15,7 +15,7 @@ let
     plugins = concatStringsSep " " cfg.enabledPlugins;
     inherit baseDir;
     inherit debugStr;
-    inherit (cfg) ckanURL localeDefault extraConfig;
+    inherit (cfg) ckanURL storagePath localeDefault extraConfig;
   };
 
   whoIni = pkgs.substituteAll {
@@ -28,8 +28,8 @@ let
     chmod 0750 ${baseDir}
     chown ckan:ckan ${baseDir}
 
-    mkdir -p ${baseDir}/data/{storage,uploads}
-    chown -R ckan:ckan ${baseDir}/data
+    mkdir -p ${cfg.storagePath}{storage,uploads}
+    chown -R ckan:ckan ${cfg.storagePath}
 
     # translations needs to end up in writable dir otherwise we get exceptions
     mkdir -p ${baseDir}/i18n
@@ -205,6 +205,14 @@ in
           The base URL for the CKAN webserver
 
           e.g. https://ckan.example.org
+        '';
+      };
+
+      storagePath = mkOption {
+        type = types.str;
+        default = "${baseDir}/data/";
+        description = ''
+          The base folder for file uploads.
         '';
       };
 

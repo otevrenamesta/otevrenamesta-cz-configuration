@@ -32,7 +32,7 @@ in
   services.openssh.permitRootLogin = "yes";
   services.openssh.ports = [ 22 ];
 
-  networking.firewall.allowedTCPPorts = [ 443 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
   networking.firewall.extraCommands = ''
     iptables -A INPUT -s 10.0.77.77 -j ACCEPT
     '';
@@ -51,7 +51,8 @@ in
       "default" = {
         default = true;
 
-        onlySSL = true;
+        #onlySSL = true;
+        addSSL = true;
         sslCertificate = "/root/certs/domain.crt";
         sslCertificateKey = "/root/certs/domain.key";
 

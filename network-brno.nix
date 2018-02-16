@@ -10,7 +10,10 @@
         ./brno.nix
       ];
 
-      services.ckan.ckanURL = "https://kmd.brno.cz";
+      services.ckan = {
+        ckanURL = "https://kmd.brno.cz";
+        #storagePath = "/home/";
+      };
 
       boot.loader.grub.device = "/dev/sda";
 
@@ -24,12 +27,18 @@
         };
       };
 
+      security.pki.certificateFiles = [ /root/certs/root_brno.crt ];
+
       fileSystems."/" =
         { device = "/dev/disk/by-uuid/75502abb-8b5d-4e62-b1c1-8c3ed00317f6";
           fsType = "ext4";
         };
-    };
 
+      # fileSystems."/data" =
+      #   { device = "/dev/disk/by-uuid/6mazDN-1Pwk-RTlK-jG1y-xzY5-1qIv-ClheFE";
+      #     fsType = "ext4";
+      #   };
+    };
   kod =
     { config, lib, pkgs, ...}:
     {

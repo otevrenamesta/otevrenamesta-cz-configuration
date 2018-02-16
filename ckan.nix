@@ -47,7 +47,8 @@ in
 
 
       ### extension: ckanext-syndicate
-      ckan.syndicate.ckan_url = http://ckan-pub
+      #ckan.syndicate.ckan_url = http://ckan-pub
+      ckan.syndicate.ckan_url = http://kod.brno.cz
       ckan.syndicate.api_key = ${ lib.fileContents ./static/syndication-api-key.secret }
       ckan.syndicate.flag = md_syndicate
       ckan.syndicate.id = md_syndicated_id
