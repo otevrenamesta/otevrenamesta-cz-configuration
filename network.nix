@@ -27,22 +27,6 @@
         #./redmine.nix
       ];
     };
-  hydra =
-    { config, lib, pkgs, ... }:
-    {
-      imports = [
-        ./env.nix
-        ./hydra-master.nix
-      ];
-    };
-  hydra_slave =
-    { config, lib, pkgs, ... }:
-    {
-      imports = [
-        ./env.nix
-        ./hydra-slave.nix
-      ];
-    };
   lpetl =
     { config, lib, pkgs, ... }:
     {

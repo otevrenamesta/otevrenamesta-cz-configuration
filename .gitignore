@@ -3,5 +3,4 @@
 *.secret
 
 /attic
-/id_buildfarm
-/id_buildfarm.pub
+/static

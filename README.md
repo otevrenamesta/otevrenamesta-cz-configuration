@@ -11,10 +11,9 @@ otevrenamesta.cz configuration
 
     This configures `NIX_PATH`, `NIXOPS_DEPLOYMENT` variables and configures prompt.
 
-3. Generate keys for Hydra and empty secret files for API keys
+3. Generate empty secret files for API keys
 
     ~~~~~ bash
-    ssh-keygen -C "hydra@hydra.example.org" -N "" -f id_buildfarm
     for i in syndication-api-key redmine-api-key lpetl-user-password; do
       echo "CHANGE_ME" > static/$i.secret
     done
@@ -38,13 +37,4 @@ Virtualized deployment
 ```bash
 nixops create -d virt network.nix network-libvirt.nix
 nixops deploy -d virt
-```
-
-Hydra specific
---------------
-
-Ensure that the main server knows the binary cache for `nixos`:
-
-```bash
-nixops ssh hydra -- nix-channel --update
 ```

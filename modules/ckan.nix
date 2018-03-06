@@ -170,7 +170,7 @@ in
       dbi = mkOption {
         type = types.str;
         default = localDB;
-        example = "dbi:Pg:dbname=hydra;host=postgres.example.org;user=foo;";
+        example = "dbi:Pg:dbname=ckan;host=postgres.example.org;user=foo;";
         description = ''
           The DBI string for CKAN database connection.
         '';
