@@ -1,14 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    git
-    jdk9
-    maven
-    nodejs
-  ];
+  imports = [ ./modules/etl.nix ];
 
-  # XXX: finish this, needs package for https://github.com/linkedpipes/etl
-
+  services.etl = {
+    enable = true;
+    domainURI = "http://lpetl";
+  };
 }
 

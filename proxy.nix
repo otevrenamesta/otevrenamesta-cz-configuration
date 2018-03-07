@@ -52,8 +52,7 @@ in
       "lpetl" = {
         locations = {
           "/" = {
-            #proxyPass = "http://lpetl:8080";
-            proxyPass = "http://ckan";
+            proxyPass = "http://lpetl:8080";
           };
         };
 
