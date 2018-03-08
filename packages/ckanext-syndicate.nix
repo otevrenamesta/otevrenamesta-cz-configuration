@@ -10,8 +10,8 @@ buildPythonPackage {
   src = pkgs.fetchFromGitHub {
     owner = "otevrenamesta";
     repo = "ckanext-syndicate";
-    rev = "09c0dd0419a07aabd368009cf9eac982553c0faa";
-    sha256 = "1902c6zfdhacqg84dl6c300375agvxqx31iqck2wicia6lkjzi1q";
+    rev = "e1eab48682c637c37b13bdb2942041693c3cd13c";
+    sha256 = "104cpcfxz47cqifrzqm0ya4ryv12lvbnr60sr1fh09ijajv2nmj4";
   };
 
   propagatedBuildInputs = with self; [ ckanapi requests pyasn1 ndg-httpsclient pyopenssl ];
