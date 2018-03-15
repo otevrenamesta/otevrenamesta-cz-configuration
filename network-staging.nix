@@ -7,7 +7,7 @@
       deployment.targetHost = "172.17.4.140";
 
       imports = [
-        ./brno.nix
+        #./brno.nix
       ];
 
       services.ckan.ckanURL = "http://lada-ckan";
@@ -30,7 +30,7 @@
       deployment.targetHost = "172.17.4.142";
 
       imports = [
-        ./brno.nix
+        #./brno.nix
       ];
 
       services.ckan.ckanURL = "http://lada-ckan-pub";
@@ -55,13 +55,8 @@
       boot.loader.grub.device = "/dev/sda";
 
       fileSystems."/" =
-        { device = "/dev/disk/by-uuid/d0b28917-8c38-4870-b085-5091cbf39f4a";
+        { device = "/dev/disk/by-uuid/3096dc2b-1f6a-4986-a959-dba3e993bf01";
           fsType = "ext4";
         };
-
-      fileSystems."/boot" =
-        { device = "/dev/disk/by-uuid/e9207110-4211-4993-b430-85c5930e567c";
-          fsType = "ext4";
-      };
     };
 }
