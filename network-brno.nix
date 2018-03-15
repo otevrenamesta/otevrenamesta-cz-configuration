@@ -68,21 +68,16 @@
         };
     };
 
-  #lpetl =
-  #  { config, lib, pkgs, ...}:
-  #  {
-  #    deployment.targetHost = "172.17.4.141";
+  lpetl =
+    { config, lib, pkgs, ...}:
+    {
+      deployment.targetHost = "10.21.162.20";
 
-  #    boot.loader.grub.device = "/dev/sda";
+      boot.loader.grub.device = "/dev/sda";
 
-  #    fileSystems."/" =
-  #      { device = "/dev/disk/by-uuid/d0b28917-8c38-4870-b085-5091cbf39f4a";
-  #        fsType = "ext4";
-  #      };
-
-  #    fileSystems."/boot" =
-  #      { device = "/dev/disk/by-uuid/e9207110-4211-4993-b430-85c5930e567c";
-  #        fsType = "ext4";
-  #    };
-  #  };
+      fileSystems."/" =
+        { device = "/dev/disk/by-uuid/97f7a696-e901-4e1c-b712-f3e6e48644bc";
+          fsType = "ext4";
+        };
+    };
 }
