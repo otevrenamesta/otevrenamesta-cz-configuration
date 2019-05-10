@@ -14,6 +14,17 @@ in
   };
 
   # uses network.pkgs
+  "libvirt" = { config, pkgs, ... }: with pkgs; {
+     imports = [
+       ./env.nix
+       ./ct.nix
+       ./machines/libvirt.nix
+     ];
+
+     deployment = {
+       targetHost = "37.205.14.17";
+     };
+  };
 
   # virt-guest -p 10222 (midpoint)
   "virt-guest" = { config, pkgs, ... }: with pkgs; {
@@ -44,23 +55,22 @@ in
      nix.maxJobs = lib.mkDefault 2;
 
      deployment = {
-        healthChecks = {
-        /*
-        cmd = [{
-          cmd = ["true" "one argument" "another argument"];
-          description = "Testing that 'true' works.";
-        }];
-        */
-
-        http = [
-          {
-            scheme = "http";
-            port = 80;
-            path = "/";
-            description = "Check whether nginx is running.";
-            period = 1; # number of seconds between retries
-          }
-        ];
+       healthChecks = {
+         /*
+         cmd = [{
+           cmd = ["true" "one argument" "another argument"];
+           description = "Testing that 'true' works.";
+         }];
+         http = [
+           {
+             scheme = "http";
+             port = 80;
+             path = "/";
+             description = "Check whether nginx is running.";
+             period = 1; # number of seconds between retries
+           }
+         ];
+         */
       };
     };
   };
