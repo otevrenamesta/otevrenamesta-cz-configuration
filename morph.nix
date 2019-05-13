@@ -14,16 +14,17 @@ in
   };
 
   # uses network.pkgs
-  "libvirt" = { config, pkgs, ... }: with pkgs; {
+  "mesta-libvirt" = { config, pkgs, ... }: with pkgs; {
      imports = [
        ./env.nix
        ./ct.nix
        ./machines/libvirt.nix
      ];
 
-     deployment = {
-       targetHost = "37.205.14.17";
-     };
+     nixpkgs.overlays = [
+       (import ./overlays/morph.nix)
+     ];
+     environment.systemPackages = with pkgs; [ morph ];
   };
 
   # virt-guest -p 10222 (midpoint)
