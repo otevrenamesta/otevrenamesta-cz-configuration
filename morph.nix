@@ -27,6 +27,7 @@ in
     imports = [
       ./env.nix
       ./qemu.nix
+      ./machines/mail.nix
     ];
 
     fileSystems."/" =
