@@ -11,14 +11,6 @@
     };
   };
 
-  networking.nat = {
-     forwardPorts = [
-       { destination = "192.168.122.100:22"; sourcePort = 10022;} # mail
-       { destination = "192.168.122.101:22"; sourcePort = 10122;} # sympa
-       { destination = "192.168.122.102:22"; sourcePort = 10222;} # ?
-     ];
-  };
-
   environment.systemPackages = with pkgs; [
     screen
     git

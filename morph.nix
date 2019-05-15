@@ -14,64 +14,84 @@ in
   };
 
   # uses network.pkgs
-  "mesta-libvirt" = { config, pkgs, ... }: with pkgs; {
-     imports = [
-       ./env.nix
-       ./ct.nix
-       ./machines/libvirt.nix
-     ];
-
-     nixpkgs.overlays = [
-       (import ./overlays/morph.nix)
-     ];
-     environment.systemPackages = with pkgs; [ morph ];
+  mesta-libvirt = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./ct.nix
+      ./machines/mesta-libvirt.nix
+    ];
   };
 
-  # virt-guest -p 10222 (midpoint)
-  "virt-guest" = { config, pkgs, ... }: with pkgs; {
-     imports = [
-       ./env.nix
-       <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
-     ];
-     boot.loader.grub.enable = true;
-     boot.loader.grub.version = 2;
-     boot.loader.grub.device = "/dev/sda";
+  # qemu guest port 10022 (mail)
+  mail = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./qemu.nix
+    ];
 
-     boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "ehci_pci" "sd_mod" "sr_mod" ];
-     boot.kernelModules = [ ];
-     boot.extraModulePackages = [ ];
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/50884094-57df-49fe-984a-5e25c1f629ac";
+        fsType = "ext4";
+      };
 
-     fileSystems."/" =
-       { device = "/dev/disk/by-uuid/86171d08-b62d-4c99-b1d6-ea075e8183d0";
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/c4cb4b0c-2009-4c22-8ab4-9c9cfc061b59";
+        fsType = "ext4";
+      };
+  };
+
+  # qemu guest port 10122 (sympa)
+  sympa = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./qemu.nix
+    ];
+
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/3558270a-9c25-492b-bf4b-dcd2db2c5cfa";
+        fsType = "ext4";
+      };
+
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/d4eb070a-10ee-42f3-bd59-69d7d891965a";
+        fsType = "ext4";
+      };
+  };
+
+  # qemu guest port 10222 (midpoint)
+  midpoint = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./qemu.nix
+    ];
+
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/86171d08-b62d-4c99-b1d6-ea075e8183d0";
          fsType = "ext4";
-       };
+      };
 
-     fileSystems."/boot" =
-       { device = "/dev/disk/by-uuid/a821424a-1ffd-4c08-acf9-74078ee1eeff";
-         fsType = "ext4";
-       };
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/a821424a-1ffd-4c08-acf9-74078ee1eeff";
+        fsType = "ext4";
+      };
 
-     swapDevices = [ ];
-
-     nix.maxJobs = lib.mkDefault 2;
-
-     deployment = {
-       healthChecks = {
-         /*
-         cmd = [{
-           cmd = ["true" "one argument" "another argument"];
-           description = "Testing that 'true' works.";
-         }];
-         http = [
-           {
-             scheme = "http";
-             port = 80;
-             path = "/";
-             description = "Check whether nginx is running.";
-             period = 1; # number of seconds between retries
-           }
-         ];
-         */
+    deployment = {
+      healthChecks = {
+        /*
+        cmd = [{
+          cmd = ["true" "one argument" "another argument"];
+          description = "Testing that 'true' works.";
+        }];
+        http = [
+          {
+            scheme = "http";
+            port = 80;
+            path = "/";
+            description = "Check whether nginx is running.";
+            period = 1; # number of seconds between retries
+          }
+        ];
+        */
       };
     };
   };
