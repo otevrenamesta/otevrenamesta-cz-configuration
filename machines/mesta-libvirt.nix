@@ -2,6 +2,7 @@
 {
   imports = [
     ../modules/libvirt.nix
+    ../modules/deploy.nix
   ];
   networking.nat = {
      forwardPorts = [
