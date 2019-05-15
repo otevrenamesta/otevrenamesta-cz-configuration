@@ -5,8 +5,8 @@ self: super:
     src = super.fetchFromGitHub {
       owner = "sorki";
       repo = "morph";
-      rev = "3f098a29f01bfee6f8103519c9fe9d1b02949688";
-      sha256 = "0n2gxhkwrhl2aabrmqp3yqkqf2rf0ypl7pmg0qn784ca8ccmjvv6";
+      rev = "d9396af1adeb7d9d012c2f75f7c90475464b12a4";
+      sha256 = "1viwphxq7dm0zbgag6q2psibkbfhiylhp15s1i2wzlh0gnlslkd8";
     };
   });
 }
