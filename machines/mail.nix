@@ -10,11 +10,11 @@
 
   mailserver = {
     enable = true;
-    fqdn = "mail.otevrenamesta.cz";
+    fqdn = "mx.otevrenamesta.cz";
     domains = [ "try.otevrenamesta.cz" ];
     loginAccounts = {
-        "user1@otevrenamesta.cz" = {
-            hashedPassword = "$6$/z4n8AQl6K$kiOkBTWlZfBd7PvF5GsJ8PmPgdZsFGN1jPGZufxxr60PoR0oUsrvzm2oQiflyz5ir9fFJ.d/zKm/NgLXNUsNX/";
+        "user1@try.otevrenamesta.cz" = {
+            hashedPassword = "$6$z2nge7lfKTc2p0uH$8dToEqj6AMu5cNaNtDu8aJ3p/bO.mBO2L1D6kTKfYPa/uLViSXIXiyPwIgR33K3oxk/1MGgvIFKNu9.Dlw1O/.";
 
             aliases = [
                 "info@otevrenamesta.cz"
