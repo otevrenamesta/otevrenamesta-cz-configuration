@@ -37,8 +37,9 @@
             identityFile = "~/.ssh/mesta_deploy";
           };
           "mail" = {
-            hostname = "37.205.14.17";
-            port = 10022;
+            hostname = "192.168.122.100";
+            #hostname = "37.205.14.17";
+            #port = 10022;
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
