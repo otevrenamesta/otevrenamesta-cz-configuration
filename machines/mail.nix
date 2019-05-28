@@ -18,9 +18,24 @@
 
             aliases = [
                 "info@otevrenamesta.cz"
+                "info@try.otevrenamesta.cz"
                 "postmaster@otevrenamesta.cz"
             ];
         };
+
+        "info2@try.otevrenamesta.cz" = {
+            hashedPassword = "$6$z2nge7lfKTc2p0uH$8dToEqj6AMu5cNaNtDu8aJ3p/bO.mBO2L1D6kTKfYPa/uLViSXIXiyPwIgR33K3oxk/1MGgvIFKNu9.Dlw1O/.";
+
+            sieveScript = '' 
+                 redirect "nesnera@email.cz";
+            ''; 
+        };
     };
+
+    extraVirtualAliases = {
+        # address = forward address;
+        #"abuse@try.otevrenamesta.cz" = "user1@try.otevrenamesta.cz";
+    };
+
   };
 }
