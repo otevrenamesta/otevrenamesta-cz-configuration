@@ -61,6 +61,11 @@ in
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
+          "proxy" = {
+            hostname = "83.167.228.98";
+            user = "root";
+            identityFile = "~/.ssh/mesta_deploy";
+          };
         };
       };
     };
