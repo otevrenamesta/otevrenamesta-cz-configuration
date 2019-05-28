@@ -34,6 +34,14 @@ in
     ];
   };
 
+  mesta-services = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./ct.nix
+      ./machines/mesta-services.nix
+    ];
+  };
+
   # qemu guest port 10022 (mail)
   mail = { config, pkgs, ... }: with pkgs; {
     imports = [
