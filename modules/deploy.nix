@@ -44,20 +44,16 @@ in
           };
           "mail" = {
             hostname = "192.168.122.100";
-            #hostname = "37.205.14.17";
-            #port = 10022;
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
           "sympa" = {
-            hostname = "37.205.14.17";
-            port = 10122;
+            hostname = "192.168.122.101";
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
           "midpoint" = {
-            hostname = "37.205.14.17";
-            port = 10222;
+            hostname = "192.168.122.102";
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
