@@ -2,13 +2,9 @@
 
 {
 
-  #Y/N? environment.systemPackages = with pkgs; [
-  #Y/N?   htop
-  #Y/N?   lynx
-  #Y/N?   screen
-  #Y/N?   vim
-  #Y/N?   wget
-  #Y/N? ];
+  environment.systemPackages = with pkgs; [
+    #htop
+  ];
 
   networking = {
      #Y/N? hostName =  lib.mkForce "proxy";
@@ -22,8 +18,8 @@
   services.nginx = {
     enable = true;
     clientMaxBodySize = "2G";
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
+    #recommendedProxySettings = true;
+    #recommendedTlsSettings = true;
 
     virtualHosts = {
 
@@ -81,8 +77,7 @@
 
         locations = {
           "/" = {
-            #proxyPass = "http://[2a03:3b40:7:5:5054:ff:fe99:cc48]";
-            proxyPass = "http://[fe80::5054:ff:fe99:cc48]";
+            proxyPass = "http://[2a03:3b40:fe:32::]";
           };
         };
       };
@@ -118,19 +113,19 @@
 
         locations = {
           "/" = {
-            proxyPass = "http://[2a03:3b40:100::1:467]:3000";
-            #Y/N? proxyPass = "http://37.205.14.2";
+            #proxyPass = "http://[2a03:3b40:100::1:467]:3000";
+            proxyPass = "http://37.205.14.2";
           };
         };
-        #Y/N? locations."/ws" = {
-        #Y/N?   proxyPass = "http://37.205.14.2";
-        #Y/N?   extraConfig = '' 
-        #Y/N?     proxy_http_version 1.1;
-        #Y/N?     proxy_set_header Upgrade $http_upgrade;
-        #Y/N?     proxy_set_header Connection "upgrade";
-        #Y/N?     proxy_set_header Host $host;
-        #Y/N?   '';
-        #Y/N? };
+        locations."/ws" = {
+          proxyPass = "http://37.205.14.2";
+          extraConfig = '' 
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_set_header Host $host;
+          '';
+        };
       };
 
       "kmd.otevrenamesta.cz" = {
