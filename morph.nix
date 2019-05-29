@@ -6,6 +6,18 @@ let
     url = "https://github.com/NixOS/nixpkgs-channels/archive/180aa21259b666c6b7850aee00c5871c89c0d939.tar.gz";
     sha256 = "0gxd10djy6khbjb012s9fl3lpjzqaknfv2g4dpfjxwwj9cbkj04h";
   }) {};
+
+  # for VZ nodes
+  legacyPkgs = builtins.fetchTarball {
+    url    = "https://d3g5gsiof5omrk.cloudfront.net/nixos/17.09/nixos-17.09.3243.bca2ee28db4/nixexprs.tar.xz";
+    sha256 = "1adi0m8x5wckginbrq0rm036wgd9n1j1ap0zi2ph4kll907j76i2";
+  };
+
+  buildVpsFreeTemplates = builtins.fetchTarball {
+    url = "https://github.com/vpsfreecz/build-vpsfree-templates/archive/f5829847c8ee1666481eb8a64df61f3018635ec7.tar.gz";
+    sha256 = "1r8b3wyn4ggw1skdalib6i4c4i0cwmbr828qm4msx7c0j76910z4";
+  };
+
 in
 {
   network =  {
@@ -19,6 +31,14 @@ in
       ./env.nix
       ./ct.nix
       ./machines/mesta-libvirt.nix
+    ];
+  };
+
+  mesta-services = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./ct.nix
+      ./machines/mesta-services.nix
     ];
   };
 
@@ -94,6 +114,20 @@ in
         ];
         */
       };
+    };
+  };
+
+  proxy = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./machines/proxy.nix
+      "${buildVpsFreeTemplates}/files/configuration.nix"
+    ];
+
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = legacyPkgs; }
+      ];
     };
   };
 }

@@ -1,7 +1,13 @@
 { config, lib, pkgs, ... }:
+let
+  home-manager-src = builtins.fetchTarball {
+    url = "https://github.com/rycee/home-manager/archive/8b15f1899356762187ce119980ca41c0aba782bb.tar.gz";
+    sha256 = "17bahz18icdnfa528zrgrfpvmsi34i859glfa595jy8qfap4ckng";
+  };
+in
 {
   imports = [
-    "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz}/nixos"
+    "${home-manager-src}/nixos"
   ];
 
   nixpkgs.overlays = [
@@ -38,20 +44,21 @@
           };
           "mail" = {
             hostname = "192.168.122.100";
-            #hostname = "37.205.14.17";
-            #port = 10022;
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
           "sympa" = {
-            hostname = "37.205.14.17";
-            port = 10122;
+            hostname = "192.168.122.101";
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
           "midpoint" = {
-            hostname = "37.205.14.17";
-            port = 10222;
+            hostname = "192.168.122.102";
+            user = "root";
+            identityFile = "~/.ssh/mesta_deploy";
+          };
+          "proxy" = {
+            hostname = "83.167.228.98";
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
