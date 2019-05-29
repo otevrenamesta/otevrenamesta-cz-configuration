@@ -128,6 +128,46 @@ in
       nixPath = [
         { prefix = "nixpkgs"; path = legacyPkgs; }
       ];
+
+      healthChecks = {
+        http = [
+          {
+            scheme = "http";
+            port = 80;
+            host = "otevrenamesta.cz";
+            path = "/";
+            description = "Nginx is up";
+          }
+          {
+            scheme = "https";
+            port = 443;
+            host = "otevrenamesta.cz";
+            path = "/";
+            description = "Web is up";
+          }
+          {
+            scheme = "https";
+            port = 443;
+            host = "www.otevrenamesta.cz";
+            path = "/";
+            description = "WWW is up";
+          }
+          {
+            scheme = "https";
+            port = 443;
+            host = "forum.otevrenamesta.cz";
+            path = "/latest";
+            description = "Forum is up";
+          }
+          {
+            scheme = "https";
+            port = 443;
+            host = "iot.otevrenamesta.cz";
+            path = "/about";
+            description = "IoT is up";
+          }
+        ];
+      };
     };
   };
 }
