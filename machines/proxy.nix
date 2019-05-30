@@ -78,6 +78,9 @@
         locations = {
           "/" = {
             proxyPass = "http://[2a03:3b40:fe:32::]";
+            extraConfig = ''
+              proxy_set_header Host $http_host;
+            '';
           };
         };
       };
