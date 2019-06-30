@@ -8,6 +8,13 @@
 
   networking = {
      firewall.allowedTCPPorts = [ 80 443 ];
+
+     domain = "otevrenamesta.cz";
+     hostName =  "navstevnost";
+
+     hosts = {
+       "127.0.0.1" = [ "matomo.navstevnost.otevrenamesta.cz" ];
+     };
   };
 
   services.matomo.enable = true;

@@ -3,12 +3,18 @@
   imports = [
     ../modules/libvirt.nix
   ];
+
+  environment.systemPackages = with pkgs; [
+     nmap
+  ];
+
+  networking.firewall.allowedTCPPorts = [ 80 3306];
+
   networking.nat = {
      forwardPorts = [ ];
   };
 
   virtualisation.docker.enable = true;
-  networking.firewall.allowedTCPPorts = [ 80 ];
 
   services.mysql.enable = true;
   services.mysql.package = pkgs.mysql;

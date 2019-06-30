@@ -118,6 +118,25 @@ in
   };
 
   proxy = { config, pkgs, ... }: with pkgs; {
+  # qemu guest port 10322 (matomo)
+  matomo = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./qemu.nix
+      ./machines/matomo.nix
+    ];
+
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/7274ccea-6b6f-4dde-96cf-822ab916a20a";
+        fsType = "ext4";
+      };
+
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/b576410e-733d-46ed-b705-c07b801bac5a";
+        fsType = "ext4";
+      };
+  };
+
     imports = [
       ./env.nix
       ./machines/proxy.nix

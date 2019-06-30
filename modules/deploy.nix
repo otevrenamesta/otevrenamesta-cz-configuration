@@ -49,6 +49,11 @@ in
           };
           "sympa" = {
             hostname = "192.168.122.101";
+          "matomo" = {
+            hostname = "192.168.122.103";
+            user = "root";
+            identityFile = "~/.ssh/mesta_deploy";
+          };
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
