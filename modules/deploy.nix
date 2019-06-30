@@ -73,6 +73,12 @@ in
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
+          "wp" = {
+            hostname = "37.205.14.138";
+            port = 10522;
+            user = "root";
+            identityFile = "~/.ssh/mesta_deploy";
+          };
         };
       };
     };

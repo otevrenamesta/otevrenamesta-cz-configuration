@@ -158,6 +158,26 @@ in
       };
   };
 
+  # qemu guest port 10522 (wp)
+  wp = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./qemu.nix
+      ./machines/wp.nix
+    ];
+
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/2e1eef19-5376-4c21-a6d2-a543b22cb079";
+        fsType = "ext4";
+      };
+
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/1b2e41d9-9034-47a6-80eb-21f16215af54";
+        fsType = "ext4";
+      };
+  };
+
+ proxy = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
       ./machines/proxy.nix
