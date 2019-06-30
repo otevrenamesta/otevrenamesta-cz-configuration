@@ -12,6 +12,7 @@
 
   networking.nat = {
       { destination = "192.168.122.103:22"; sourcePort = 10322;}    # roundcube ssh
+      { destination = "192.168.122.104:22"; sourcePort = 10422;}    # glpi ssh
       { destination = "192.168.122.105:22"; sourcePort = 10522;}    # wp ssh
   };
 
@@ -74,7 +75,8 @@
       "glpi.otevrenamesta.cz" = {
         locations = {
           "/" = {
-            proxyPass = "http://127.0.0.1:8002";
+            #proxyPass = "http://127.0.0.1:8002";
+            proxyPass = "http://192.168.122.104";
           };
         };
       };

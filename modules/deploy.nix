@@ -39,6 +39,9 @@ in
           };
           "mesta-libvirt" = {
             hostname = "37.205.14.17";
+          "glpi" = {
+            hostname = "37.205.14.138";
+            port = 10422;
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };

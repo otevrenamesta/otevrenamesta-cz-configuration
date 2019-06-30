@@ -34,6 +34,25 @@ in
     ];
   };
 
+  # qemu guest port 10422 (GLPI)
+  glpi = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./qemu.nix
+      ./machines/glpi.nix
+    ];
+
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/11e70a61-7abc-478d-a436-4d601c8b1502";
+        fsType = "ext4";
+      };
+
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/9c3b7793-d880-41d1-8438-f15323fe9400";
+        fsType = "ext4";
+      };
+  };
+
   mesta-services = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
