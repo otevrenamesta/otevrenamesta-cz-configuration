@@ -34,6 +34,25 @@ in
     ];
   };
 
+  # qemu guest port 10222 (consul na services)
+  consul = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./qemu.nix
+      ./machines/consul.nix
+    ];
+
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/292f707d-271c-4864-9e44-9d5c3d3b4243";
+        fsType = "ext4";
+      };
+
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/c7affbc7-a187-4e3d-ad8d-7a603bd15a4d";
+        fsType = "ext4";
+      };
+  };
+
   # qemu guest port 10422 (GLPI)
   glpi = { config, pkgs, ... }: with pkgs; {
     imports = [

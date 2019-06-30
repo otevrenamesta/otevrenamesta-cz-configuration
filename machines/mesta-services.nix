@@ -11,9 +11,12 @@
   networking.firewall.allowedTCPPorts = [ 80 3306];
 
   networking.nat = {
+    forwardPorts = [
+      { destination = "192.168.122.102:22"; sourcePort = 10222;}    # consul ssh
       { destination = "192.168.122.103:22"; sourcePort = 10322;}    # roundcube ssh
       { destination = "192.168.122.104:22"; sourcePort = 10422;}    # glpi ssh
       { destination = "192.168.122.105:22"; sourcePort = 10522;}    # wp ssh
+    ];
   };
 
   virtualisation.docker.enable = true;

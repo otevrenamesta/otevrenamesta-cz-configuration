@@ -32,8 +32,9 @@ in
         controlMaster = "auto";
         controlPersist = "1h";
         matchBlocks = {
-          "mesta-services" = {
+          "consul" = {
             hostname = "37.205.14.138";
+            port = 10222;
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
