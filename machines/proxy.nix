@@ -389,6 +389,7 @@
             proxyPass = "https://otevrenamesta.github.io";
             extraConfig = ''
               proxy_set_header Host otevrenamesta.github.io;
+              proxy_set_header X-Forwarded-Proto $scheme;
             '';
           };
         };
