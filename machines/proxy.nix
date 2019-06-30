@@ -349,6 +349,20 @@
         };
       };
 
+      "webmail.otevrenamesta.cz" = {
+        forceSSL = true;
+        enableACME = true;
+
+        locations = {
+          "/" = {
+            proxyPass = "http://37.205.14.138";
+            extraConfig = ''
+              proxy_set_header Host $http_host;
+            '';
+          };
+        };
+      };
+
       "wp.otevrenamesta.cz" = {
         #forceSSL = true;
         enableACME = true;

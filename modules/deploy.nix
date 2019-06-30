@@ -67,6 +67,12 @@ in
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
+          "roundcube" = {
+            hostname = "37.205.14.138";
+            port = 10322;
+            user = "root";
+            identityFile = "~/.ssh/mesta_deploy";
+          };
         };
       };
     };

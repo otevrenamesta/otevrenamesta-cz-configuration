@@ -61,11 +61,32 @@ in
       };
   };
 
+  # qemu guest port 10222 (consul na services)
+  roundcube = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./qemu.nix
+      ./machines/roundcube.nix
+    ];
+
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/26380b05-91d2-4521-816c-b6e3c226e127";
+        fsType = "ext4";
+      };
+
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/0d79a0bc-a9bf-4c62-872e-fc68132263e1";
+        fsType = "ext4";
+      };
+  };
+
+
   # qemu guest port 10122 (sympa)
   sympa = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
       ./qemu.nix
+      ./machines/sympa.nix
     ];
 
     fileSystems."/" =

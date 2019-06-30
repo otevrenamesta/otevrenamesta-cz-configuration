@@ -11,7 +11,7 @@
   networking.firewall.allowedTCPPorts = [ 80 3306];
 
   networking.nat = {
-     forwardPorts = [ ];
+      { destination = "192.168.122.103:22"; sourcePort = 10322;}    # roundcube ssh
   };
 
   virtualisation.docker.enable = true;
@@ -81,6 +81,13 @@
         locations = {
           "/" = {
             proxyPass = "http://unix:/var/discourse/shared/standalone/nginx.http.sock:";
+          };
+        };
+      };
+      "webmail.otevrenamesta.cz" = {
+        locations = {
+          "/" = {
+            proxyPass = "http://192.168.122.103";
           };
         };
       };
