@@ -16,7 +16,7 @@
 
        { destination = "192.168.122.101:22"; sourcePort = 10122;}    # sympa ssh
 
-       { destination = "192.168.122.102:22"; sourcePort = 10222;}    # ?
+       { destination = "192.168.122.102:22"; sourcePort = 10222;}    # midpoint ssh
 
        { destination = "192.168.122.103:22"; sourcePort = 10322;}    # matomo ssh
        { destination = "192.168.122.103:80"; sourcePort = 10380;}    # matomo web
