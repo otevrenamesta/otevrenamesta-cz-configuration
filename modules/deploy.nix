@@ -47,8 +47,6 @@ in
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
-          "sympa" = {
-            hostname = "192.168.122.101";
           "matomo" = {
             hostname = "192.168.122.103";
             user = "root";
@@ -70,6 +68,11 @@ in
           "roundcube" = {
             hostname = "37.205.14.138";
             port = 10322;
+            user = "root";
+            identityFile = "~/.ssh/mesta_deploy";
+          };
+          "sympa" = {
+            hostname = "192.168.122.101";
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };

@@ -138,7 +138,6 @@ in
     };
   };
 
-  proxy = { config, pkgs, ... }: with pkgs; {
   # qemu guest port 10322 (matomo)
   matomo = { config, pkgs, ... }: with pkgs; {
     imports = [

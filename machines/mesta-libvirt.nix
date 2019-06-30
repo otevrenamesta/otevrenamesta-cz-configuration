@@ -14,7 +14,7 @@
        { destination = "192.168.122.100:4190";  sourcePort = 4190;}  # mail dovecot
        { destination = "192.168.122.100:12340"; sourcePort = 12340;} # mail dovecot
 
-       { destination = "192.168.122.101:22"; sourcePort = 10122;}    # sympa
+       { destination = "192.168.122.101:22"; sourcePort = 10122;}    # sympa ssh
 
        { destination = "192.168.122.102:22"; sourcePort = 10222;}    # ?
 
