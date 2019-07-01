@@ -14,10 +14,12 @@
   # to prevent X-Real-Ip: etc header spoofing
   networking.firewall.extraCommands = ''
     iptables -I FORWARD -p tcp -m multiport --dports 80,8080 ! -s 83.167.228.98 -j DROP
+    iptables -I INPUT -i lo -j ACCEPT
     iptables -I INPUT -p tcp -m multiport --dports 80,8000,8001,8002 ! -s 83.167.228.98 -j DROP
   '';
   networking.firewall.extraStopCommands = ''
     iptables -D FORWARD -p tcp -m multiport --dports 80,8080 ! -s 83.167.228.98 -j DROP || true
+    iptables -D INPUT -i lo -j ACCEPT || true
     iptables -D INPUT -p tcp -m multiport --dports 80,8000,8001,8002 ! -s 83.167.228.98 -j DROP || true
   '';
 
