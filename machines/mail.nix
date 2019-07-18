@@ -37,5 +37,24 @@
         #"abuse@try.otevrenamesta.cz" = "user1@try.otevrenamesta.cz";
     };
 
+    ## this was needed when sympa was hosting lists on @try.otevrenamesta.cz
+    #policydSPFExtraConfig = ''
+    #  Whitelist = 192.168.122.101/32
+    #'';
+  };
+
+  services.postfix = {
+    # relay ML domains to sympa & allow sympa to send outgoing email
+    networks = [ "192.168.122.101/32" ];
+    relayDomains = [ "lists.try.otevrenamesta.cz" ];
+    transport = ''
+      lists.try.otevrenamesta.cz    relay:[192.168.122.101]
+    '';
+    # aliases for mailing lists
+    virtual = ''
+      wwwybor@try.otevrenamesta.cz  wwwybor@lists.try.otevrenamesta.cz
+      vratnice@try.otevrenamesta.cz vratnice@lists.try.otevrenamesta.cz
+      ustredna@try.otevrenamesta.cz ustredna@lists.try.otevrenamesta.cz
+    '';
   };
 }
