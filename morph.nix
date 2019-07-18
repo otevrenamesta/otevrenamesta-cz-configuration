@@ -7,6 +7,12 @@ let
     sha256 = "0gxd10djy6khbjb012s9fl3lpjzqaknfv2g4dpfjxwwj9cbkj04h";
   }) {};
 
+  # newPkgs with sympa changes on top
+  sympaPkgs = builtins.fetchTarball {
+    url = "https://github.com/mmilata/nixpkgs/archive/80ca8aec14371fad864bd24c315358271b4eba44.tar.gz";
+    sha256 = "155fkrga5gzi42xrgzyf3h080j4g84i3g5zhh0dyyprv81wv50rb";
+  };
+
   # for VZ nodes
   legacyPkgs = builtins.fetchTarball {
     url    = "https://d3g5gsiof5omrk.cloudfront.net/nixos/17.09/nixos-17.09.3243.bca2ee28db4/nixexprs.tar.xz";
@@ -126,6 +132,12 @@ in
       ./qemu.nix
       ./machines/sympa.nix
     ];
+
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = sympaPkgs; }
+      ];
+    };
 
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/3558270a-9c25-492b-bf4b-dcd2db2c5cfa";

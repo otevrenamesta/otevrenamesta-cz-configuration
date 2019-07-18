@@ -15,6 +15,8 @@
        { destination = "192.168.122.100:12340"; sourcePort = 12340;} # mail dovecot
 
        { destination = "192.168.122.101:22"; sourcePort = 10122;}    # sympa ssh
+       { destination = "192.168.122.101:80"; sourcePort = 80;}       # sympa http
+       { destination = "192.168.122.101:443"; sourcePort = 443;}     # sympa https
 
        { destination = "192.168.122.102:22"; sourcePort = 10222;}    # midpoint ssh
 
