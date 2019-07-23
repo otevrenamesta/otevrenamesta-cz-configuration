@@ -46,15 +46,15 @@
   services.postfix = {
     # relay ML domains to sympa & allow sympa to send outgoing email
     networks = [ "192.168.122.101/32" ];
-    relayDomains = [ "lists.try.otevrenamesta.cz" ];
+    relayDomains = [ "lists.otevrenamesta.cz" ];
     transport = ''
-      lists.try.otevrenamesta.cz    relay:[192.168.122.101]
+      lists.otevrenamesta.cz    relay:[192.168.122.101]
     '';
     # aliases for mailing lists
-    virtual = ''
-      wwwybor@try.otevrenamesta.cz  wwwybor@lists.try.otevrenamesta.cz
-      vratnice@try.otevrenamesta.cz vratnice@lists.try.otevrenamesta.cz
-      ustredna@try.otevrenamesta.cz ustredna@lists.try.otevrenamesta.cz
-    '';
+#    virtual = ''
+#      wwwybor@try.otevrenamesta.cz  wwwybor@lists.try.otevrenamesta.cz
+#      vratnice@try.otevrenamesta.cz vratnice@lists.try.otevrenamesta.cz
+#      ustredna@try.otevrenamesta.cz ustredna@lists.try.otevrenamesta.cz
+#    '';
   };
 }

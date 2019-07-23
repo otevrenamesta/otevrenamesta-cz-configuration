@@ -161,6 +161,23 @@
         };
       };
 
+      "lists.otevrenamesta.cz" = {
+        forceSSL = true;
+        enableACME = true;
+
+        locations = {
+          "/" = {
+            proxyPass = "http://37.205.14.17:10180";
+            extraConfig = ''
+              proxy_set_header Host $host;
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header Front-End-Https On;
+            '';
+
+          };
+        };
+      };
+
       "lpetl.otevrenamesta.cz" = {
         forceSSL = true;
         enableACME = true;

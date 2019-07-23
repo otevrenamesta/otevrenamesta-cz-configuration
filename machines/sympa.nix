@@ -2,23 +2,19 @@
 
 {
 
-  environment.systemPackages = with pkgs; [
-     #php
-     gcc
-     gnumake
-  ];
+  environment.systemPackages = with pkgs; [ vim ];
+  #environment.systemPackages = with pkgs; [ vim (let n = import ../../nixpkgs {}; in n.pgloader) ];
 
   networking = {
      firewall.allowedTCPPorts = [ 80 25 443 ];
 
      domain = "otevrenamesta.cz";
      hostName =  "lists";
-
   };
 
   services.mysql = {
     enable = true;
-    package = pkgs.mysql;
+    package = pkgs.mariadb;
     bind = "127.0.0.1";
     ensureDatabases = [ "sympa" ];
     ensureUsers = [
@@ -31,38 +27,58 @@
     ];
   };
 
-  #services.nginx.enable = true;
   documentation.enable = false;
   documentation.nixos.enable = false;
-  services.nginx.virtualHosts."lists.try.otevrenamesta.cz" = { default = true; };
+  #services.nginx.virtualHosts."lists.try.otevrenamesta.cz" = { default = true; };
 
   services.postfix = {
     enable = true;
     relayHost = "192.168.122.100"; # do NOT use [brackets] here
   };
 
+  # workaround https reverse proxy
+  services.nginx.virtualHosts."lists.otevrenamesta.cz".locations."/".extraConfig = ''
+    fastcgi_param HTTPS on;
+  '';
+
   services.sympa = {
     enable = true;
-    mainDomain = "lists.try.otevrenamesta.cz";
+    lang = "cs";
+    mainDomain = "lists.otevrenamesta.cz";
     domains = {
-      "lists.try.otevrenamesta.cz" = {
-        webHost = "lists.try.otevrenamesta.cz";
+      "lists.otevrenamesta.cz" = {
+        webHost = "lists.otevrenamesta.cz";
       };
-      ## disabled because we use aliases on try.otevrenamesta.cz instead
-      #"try.otevrenamesta.cz" = {
-      #  webHost = "mx.otevrenamesta.cz";
-      #};
     };
     listMasters = [ "martin@martinmilata.cz" "nesnera@email.cz" "ladislav.nesnera@liberix.cz" ];
     web = {
       enable = true;
       fcgiProcs = 2;
+      https = false;
     };
     database = {
       type = "MySQL";
       host = "localhost";
       user = "sympa";
-      #name = "sympa";
     };
+#    database = {
+#      type = "PostgreSQL";
+#      host = "/run/postgresql";
+#      user = "sympa";
+#    };
+    extraConfig = ''
+      cookie 00000000000000000000000000000001
+    '';
   };
+
+#  services.postgresql = {
+#    enable = true;
+#    package = pkgs.postgresql_11;
+#    authentication = "local all all trust";
+#    initialScript = pkgs.writeText "postgresql-init" ''
+#      CREATE ROLE sympa NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT LOGIN;
+#      CREATE DATABASE sympa OWNER sympa ENCODING 'UNICODE';
+#    '';
+#  };
+
 }
