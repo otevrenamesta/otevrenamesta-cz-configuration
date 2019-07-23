@@ -9,8 +9,8 @@ let
 
   # newPkgs with sympa changes on top
   sympaPkgs = builtins.fetchTarball {
-    url = "https://github.com/mmilata/nixpkgs/archive/80ca8aec14371fad864bd24c315358271b4eba44.tar.gz";
-    sha256 = "155fkrga5gzi42xrgzyf3h080j4g84i3g5zhh0dyyprv81wv50rb";
+    url = "https://github.com/mmilata/nixpkgs/archive/68bc3f764ed497e1ded594eba64e38e25e769cf4.tar.gz";
+    sha256 = "0qmsmkjznx3ns20hyyqh1ym7jy29ypyjhd8yaxyglpfszrqffgk0";
   };
 
   # for VZ nodes
