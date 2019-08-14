@@ -16,6 +16,6 @@
   ];
 
   users.extraUsers.root.openssh.authorizedKeys.keys =
-    with import ./ssh-keys.nix; [ ln srk ps deploy ];
+    with import ./ssh-keys.nix; [ deploy ln mm srk ];
 
 }
