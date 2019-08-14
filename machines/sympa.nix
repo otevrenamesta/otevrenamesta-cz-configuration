@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  secrets = import ../secrets/sympa.nix;
+in
 {
 
   environment.systemPackages = with pkgs; [ vim ];
@@ -67,7 +70,7 @@
 #      user = "sympa";
 #    };
     extraConfig = ''
-      cookie 00000000000000000000000000000001
+      cookie ${secrets.cookie}
     '';
   };
 
