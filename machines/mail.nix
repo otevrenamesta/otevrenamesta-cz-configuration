@@ -78,6 +78,15 @@ in
     #'';
   };
 
+  # needed so that remote aliases (x@otevrenamesta.cz -> y@seznam.cz) work with strict (-all) SPF policies
+  services.postsrsd = {
+    enable = true;
+    domain = "otevrenamesta.cz";
+    excludeDomains = [ "lists.otevrenamesta.cz" ];
+    forwardPort = 10001;
+    reversePort = 10002;
+  };
+
   services.postfix = {
     # relay ML domains to sympa & allow sympa to send outgoing email
     networks = [ "192.168.122.101/32" ];
@@ -135,5 +144,13 @@ in
       vybor-subscribe@otevrenamesta.cz         vybor-subscribe@lists.otevrenamesta.cz
       vybor-unsubscribe@otevrenamesta.cz       vybor-unsubscribe@lists.otevrenamesta.cz
     '';
+
+    # enable postsrsd integration
+    config = {
+      sender_canonical_maps = "tcp:localhost:10001";
+      sender_canonical_classes = [ "envelope_sender" ];
+      recipient_canonical_maps = "tcp:localhost:10002";
+      recipient_canonical_classes = [ "envelope_recipient" "header_recipient" ];
+    };
   };
 }
