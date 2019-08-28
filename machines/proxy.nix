@@ -15,6 +15,12 @@
   #Y/N?users.extraUsers.root.openssh.authorizedKeys.keys =
   #Y/N?  with import ./ssh-keys.nix; [ ln srk ];
 
+  users.users.niap = {
+    description = "NIA proxy user (no shell, port forwarding only)";
+    shell = "${pkgs.shadow}/bin/nologin";
+    openssh.authorizedKeys.keys = with import ../ssh-keys.nix; [ ms ];
+  };
+
   services.nginx = {
     enable = true;
     clientMaxBodySize = "2G";
