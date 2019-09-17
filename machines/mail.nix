@@ -9,8 +9,8 @@ in
   imports = [
     # updating simple-nixos-mailserver? make sure submissionOptions below stays in sync
     (builtins.fetchTarball {
-      url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/v2.2.1/nixos-mailserver-v2.2.1.tar.gz";
-      sha256 = "03d49v8qnid9g9rha0wg2z6vic06mhp0b049s3whccn1axvs2zzx";
+      url = "https://gitlab.com/mmilata/nixos-mailserver/-/archive/rspamd-web/nixos-mailserver.tar.gz";
+      sha256 = "1vqrbvjf0fxmlg3qc8ggx3k8ha7sqw2gzc0pbhwhprvarx1haqaa";
     })
   ];
 
