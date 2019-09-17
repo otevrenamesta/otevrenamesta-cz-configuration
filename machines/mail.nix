@@ -8,9 +8,10 @@ in
 {
   imports = [
     # updating simple-nixos-mailserver? make sure submissionOptions below stays in sync
+    # fork that enables rspamd web UI, this will likely be part of SNM soon
     (builtins.fetchTarball {
-      url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/v2.2.1/nixos-mailserver-v2.2.1.tar.gz";
-      sha256 = "03d49v8qnid9g9rha0wg2z6vic06mhp0b049s3whccn1axvs2zzx";
+      url = "https://github.com/otevrenamesta/nixos-mailserver/archive/70ec1432187f5a97c6ed2b4614ca4c83a0755e65.tar.gz";
+      sha256 = "1vqrbvjf0fxmlg3qc8ggx3k8ha7sqw2gzc0pbhwhprvarx1haqaa";
     })
   ];
 
@@ -168,6 +169,17 @@ in
       #smtpd_sender_restrictions = "reject_sender_login_mismatch";
       smtpd_recipient_restrictions = "reject_non_fqdn_recipient,reject_unknown_recipient_domain,permit_sasl_authenticated,reject";
       cleanup_service_name = "submission-header-cleanup";
+    };
+  };
+
+  services.rspamd = {
+    locals = {
+      "options.inc" = { text = ''
+        local_addrs = [ "192.168.122.101" ];
+      ''; };
+      "classifier-bayes.conf" = { text = ''
+        autolearn = true;
+      ''; };
     };
   };
 }
