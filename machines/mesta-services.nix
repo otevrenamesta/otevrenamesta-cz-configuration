@@ -16,6 +16,8 @@
       { destination = "192.168.122.103:22"; sourcePort = 10322;}    # roundcube ssh
       { destination = "192.168.122.104:22"; sourcePort = 10422;}    # glpi ssh
       { destination = "192.168.122.105:22"; sourcePort = 10522;}    # wp ssh
+      { destination = "192.168.122.106:22"; sourcePort = 10622;}    # ucto ssh
+      { destination = "192.168.122.107:22"; sourcePort = 10722;}    # nia ssh
     ];
   };
 
@@ -87,6 +89,27 @@
         locations = {
           "/" = {
             proxyPass = "http://unix:/var/discourse/shared/standalone/nginx.http.sock:";
+          };
+        };
+      };
+      "nia.otevrenamesta.cz" = {
+        locations = {
+          "/" = {
+            proxyPass = "http://192.168.122.107";
+          };
+        };
+      };
+      "test.nia.otevrenamesta.cz" = {
+        locations = {
+          "/" = {
+            proxyPass = "http://192.168.122.107";
+          };
+        };
+      };
+      "ucto2.otevrenamesta.cz" = {
+        locations = {
+          "/" = {
+            proxyPass = "http://192.168.122.106";
           };
         };
       };

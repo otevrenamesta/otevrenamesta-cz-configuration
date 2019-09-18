@@ -207,6 +207,43 @@ in
       };
   };
 
+  # qemu guest port 10722 (nia na services)
+  nia = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./qemu.nix
+      ./machines/nia.nix
+    ];
+
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/0b49a00a-9583-40de-99d5-bb7b3d34a00c";
+        fsType = "ext4";
+      };
+
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/67c449cc-3b5f-4d06-b7d4-1525fd3fcbc2";
+        fsType = "ext4";
+      };
+  };
+  # qemu guest port 10622 (ucto na services)
+  ucto = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./qemu.nix
+      ./machines/ucto.nix
+    ];
+
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/86f81fc9-b963-41e6-9fb4-a2024578c9f4";
+        fsType = "ext4";
+      };
+
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/a27ddb64-4531-455d-a424-32682bc2aaf4";
+        fsType = "ext4";
+      };
+  };
+
   # qemu guest port 10522 (wp)
   wp = { config, pkgs, ... }: with pkgs; {
     imports = [

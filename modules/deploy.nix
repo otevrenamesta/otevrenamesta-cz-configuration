@@ -69,6 +69,12 @@ in
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
+          "nia" = {
+            hostname = "37.205.14.138";
+            port = 10722;
+            user = "root";
+            identityFile = "~/.ssh/mesta_deploy";
+          };
           "proxy" = {
             hostname = "83.167.228.98";
             user = "root";
@@ -82,6 +88,12 @@ in
           };
           "sympa" = {
             hostname = "192.168.122.101";
+            user = "root";
+            identityFile = "~/.ssh/mesta_deploy";
+          };
+          "ucto" = {
+            hostname = "37.205.14.138";
+            port = 10622;
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
