@@ -104,12 +104,11 @@ in
       danidel.kolar@otevrenamesta.cz           ${emails.dk_}
       informace@otevrenamesta.cz               info@lists.otevrenamesta.cz
       iot@otevrenamesta.cz                     ${emails.ln_}, ${emails.zg_}
-      ladislav.nesnera@otevrenamesta.cz        ${emails.lng_}
+      ladislav.nesnera@otevrenamesta.cz        ${emails.ln_}
       marcel.kolaja@otevrenamesta.cz           ${emails.mk_}
       martin.sebek@otevrenamesta.cz            ${emails.ms_}
       ondrej.profant@otevrenamesta.cz          ${emails.op_}
       pavla.kadlecova@otevrenamesta.cz         ${emails.pk_}
-      user.seznam@otevrenamesta.cz             ${emails.ln_}, ${emails.lng_}
 
       # virtual lists
       listmaster@otevrenamesta.cz              listmaster@lists.otevrenamesta.cz
