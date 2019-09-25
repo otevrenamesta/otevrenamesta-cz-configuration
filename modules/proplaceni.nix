@@ -11,7 +11,7 @@ let
   group = "proplaceni";
   dataDir = "/var/lib/proplaceni";
   writableSubDirs = [ "static_files" "media_files" "temp_files" "log_files" ];
-  manage = pkgs.writeShellScriptBin "manage-piroplaceni" ''
+  manage = pkgs.writeShellScriptBin "manage-proplaceni" ''
     export PYTHONPATH='${dataDir}'
     export DJANGO_SETTINGS_MODULE=mysettings.settings
     ${pkgs.su}/bin/su -s ${pkgs.runtimeShell} -c "${pkg}/manage.py $*" ${user}
