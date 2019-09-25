@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ../modules/proplaceni.nix
+  ];
 
   environment.systemPackages = with pkgs; [
      #php
@@ -10,25 +13,41 @@
      firewall.allowedTCPPorts = [ 80 ];
 
      domain = "otevrenamesta.cz";
-     hostName =  "ucto";
-
+     hostName =  "ucto2";
   };
 
-  users.extraUsers.root.openssh.authorizedKeys.keys =
-    with import ../ssh-keys.nix; [ ln srk deploy jh ];
+  users.extraUsers.root.openssh.authorizedKeys.keys = with import ../ssh-keys.nix; [ jh ];
 
-  services.nginx.enable = true;
-  services.nginx.virtualHosts."ucto2.otevrenamesta.cz" = {
-    forceSSL = false;
-    enableACME = false; 
+  services.proplaceni = {
+    enable = true;
+    webHost = "ucto2.otevrenamesta.cz";
+    #configFile = "FIXME";
   };
-  
-  #services.postgresql.enable = true;
-  #services.postgresql.package = pkgs.postgresql_9_6;
 
-  #services.roundcube = {
-  #  enable = true;
-  #  hostName = "webmail.otevrenamesta.cz";
-  #  database.password = "wSjL9R8T9qRL";
-  #};
+  services.nginx = {
+    enable = true;
+    virtualHosts."ucto2.otevrenamesta.cz" = {
+      forceSSL = false;
+      enableACME = false; 
+    };
+  };
+
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_11;
+    ensureDatabases = [ "proplaceni" ];
+    ensureUsers = [{
+      name = "proplaceni";
+      ensurePermissions = {
+        "DATABASE proplaceni" = "ALL PRIVILEGES";
+      };
+    }];
+  };
+
+  systemd.services.proplaceni.environment = {
+    #PIROPLACENI_DEBUG = "b-on";
+    PIROPLACENI_BASE_DOMAIN = "s-otevrenamesta.cz";
+    PIROPLACENI_BASE_SUBDOMAIN = "s-ucto2.";
+  };
 }
+

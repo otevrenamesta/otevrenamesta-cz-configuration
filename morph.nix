@@ -238,6 +238,12 @@ in
       ./machines/ucto.nix
     ];
 
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = newerPkgs; }
+      ];
+    };
+
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/86f81fc9-b963-41e6-9fb4-a2024578c9f4";
         fsType = "ext4";
