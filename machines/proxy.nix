@@ -241,6 +241,21 @@
         };
       };
 
+      "p7.otevrenamesta.cz" = {
+        forceSSL = false;
+        enableACME = true;
+
+        locations = {
+          "/" = {
+            proxyPass = "http://[2a03:3b40:3::44]";
+            extraConfig = ''
+              proxy_set_header Host $host;
+              proxy_set_header X-Forwarded-Proto $scheme;
+            '';
+          };
+        };
+      };
+
      "projekty.otevrenamesta.cz" = {
         forceSSL = true;
         enableACME = true;
@@ -430,15 +445,21 @@
       };
 
       "wp.otevrenamesta.cz" = {
-        #forceSSL = true;
+        forceSSL = true;
         enableACME = true;
+        # i don't think enableACME works with wildcard certs, at least not in this nixpkgs version anyway
+        serverAliases = [ "p7.wp.otevrenamesta.cz" "ck.wp.otevrenamesta.cz" "paro.wp.otevrenamesta.cz" ];
 
         locations = {
           "/" = {
-            #proxyPass = "http://[2a03:3b40:fe:34::]";
-            proxyPass = "http://37.205.14.138";
+            proxyPass = "http://37.205.14.138:10580";
             extraConfig = ''
-              proxy_set_header Host $http_host;
+              proxy_set_header        Host $host;
+              proxy_set_header        X-Real-IP $remote_addr;
+              proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header        X-Forwarded-Proto $scheme;
+              proxy_set_header        X-Forwarded-Host $host;
+              proxy_set_header        X-Forwarded-Server $host;
             '';
           };
         };

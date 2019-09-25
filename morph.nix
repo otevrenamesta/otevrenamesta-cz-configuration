@@ -1,6 +1,11 @@
 let
   sysPkgs = import <nixpkgs> {};
 
+  newerPkgs = builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs-channels/archive/47d65314df389ef547ac75e7a9b63f72ec37c3e9.tar.gz"; # nixos-19.09 @ 190222
+    sha256 = "0jkmx3x96qpywpvyjfh2zp7gx84pzrn8q21pd0l1bqvnhqplhcyh";
+  };
+
   # Pin the deployment package-set to a specific version of nixpkgs
   newPkgs = import (builtins.fetchTarball {
     url = "https://github.com/NixOS/nixpkgs-channels/archive/180aa21259b666c6b7850aee00c5871c89c0d939.tar.gz";
@@ -252,6 +257,12 @@ in
       ./machines/wp.nix
     ];
 
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = newerPkgs; }
+      ];
+    };
+
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/2e1eef19-5376-4c21-a6d2-a543b22cb079";
         fsType = "ext4";
@@ -263,7 +274,7 @@ in
       };
   };
 
- proxy = { config, pkgs, ... }: with pkgs; {
+  proxy = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
       ./machines/proxy.nix
