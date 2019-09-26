@@ -8,7 +8,18 @@
      nmap
   ];
 
-  networking.firewall.allowedTCPPorts = [ 80 3306];
+  networking.firewall.allowedTCPPorts = [ 80 3306 ]; # FIXME really expose mysql to everyone?
+
+  # restrict incoming connections to proxy.otevrenamesta.cz only
+  # to prevent X-Real-Ip: etc header spoofing
+  networking.firewall.extraCommands = ''
+    iptables -I FORWARD -p tcp -m multiport --dports 80,8080 ! -s 83.167.228.98 -j DROP
+    iptables -I INPUT -p tcp -m multiport --dports 80,8000,8001,8002 ! -s 83.167.228.98 -j DROP
+  '';
+  networking.firewall.extraStopCommands = ''
+    iptables -D FORWARD -p tcp -m multiport --dports 80,8080 ! -s 83.167.228.98 -j DROP || true
+    iptables -D INPUT -p tcp -m multiport --dports 80,8000,8001,8002 ! -s 83.167.228.98 -j DROP || true
+  '';
 
   networking.nat = {
     forwardPorts = [
@@ -18,7 +29,12 @@
       { destination = "192.168.122.105:22"; sourcePort = 10522;}    # wp ssh
       { destination = "192.168.122.106:22"; sourcePort = 10622;}    # ucto ssh
       { destination = "192.168.122.107:22"; sourcePort = 10722;}    # nia ssh
-      { destination = "192.168.122.105:80"; sourcePort = 10580;}    # wp http # FIXME only allow connections from proxy
+
+      { destination = "192.168.122.103:80"; sourcePort = 10380;}    # roundcube http
+      { destination = "192.168.122.104:80"; sourcePort = 10480;}    # glpi http
+      { destination = "192.168.122.105:80"; sourcePort = 10580;}    # wp http
+      { destination = "192.168.122.106:80"; sourcePort = 10680;}    # ucto http
+      { destination = "192.168.122.107:80"; sourcePort = 10780;}    # nia http
     ];
   };
 
@@ -52,16 +68,16 @@
           </Directory>
         '';
       }
-      {
-        hostName = "glpi.otevrenamesta.cz";
-        documentRoot = "/var/www/glpi";
-        listen = [{ ip = "127.0.0.1"; port = 8002; }];
-        extraConfig = ''
-          <Directory /var/www/glpi>
-            DirectoryIndex index.php
-          </Directory>
-        '';
-      }
+      #{
+      #  hostName = "glpi.otevrenamesta.cz";
+      #  documentRoot = "/var/www/glpi";
+      #  listen = [{ ip = "127.0.0.1"; port = 8002; }];
+      #  extraConfig = ''
+      #    <Directory /var/www/glpi>
+      #      DirectoryIndex index.php
+      #    </Directory>
+      #  '';
+      #}
     ];
   };
 
@@ -78,46 +94,10 @@
           };
         };
       };
-      "glpi.otevrenamesta.cz" = {
-        locations = {
-          "/" = {
-            #proxyPass = "http://127.0.0.1:8002";
-            proxyPass = "http://192.168.122.104";
-          };
-        };
-      };
       "forum.otevrenamesta.cz" = {
         locations = {
           "/" = {
             proxyPass = "http://unix:/var/discourse/shared/standalone/nginx.http.sock:";
-          };
-        };
-      };
-      "nia.otevrenamesta.cz" = {
-        locations = {
-          "/" = {
-            proxyPass = "http://192.168.122.107";
-          };
-        };
-      };
-      "test.nia.otevrenamesta.cz" = {
-        locations = {
-          "/" = {
-            proxyPass = "http://192.168.122.107";
-          };
-        };
-      };
-      "ucto2.otevrenamesta.cz" = {
-        locations = {
-          "/" = {
-            proxyPass = "http://192.168.122.106";
-          };
-        };
-      };
-      "webmail.otevrenamesta.cz" = {
-        locations = {
-          "/" = {
-            proxyPass = "http://192.168.122.103";
           };
         };
       };
