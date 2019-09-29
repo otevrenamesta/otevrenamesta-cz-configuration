@@ -6,7 +6,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-     #php
+    tmux
   ];
 
   networking = {

@@ -27,14 +27,14 @@
       { destination = "192.168.122.103:22"; sourcePort = 10322;}    # roundcube ssh
       { destination = "192.168.122.104:22"; sourcePort = 10422;}    # glpi ssh
       { destination = "192.168.122.105:22"; sourcePort = 10522;}    # wp ssh
-      { destination = "192.168.122.106:22"; sourcePort = 10622;}    # ucto ssh
       { destination = "192.168.122.107:22"; sourcePort = 10722;}    # nia ssh
+      { destination = "192.168.122.108:22"; sourcePort = 10822;}    # ucto ssh
 
       { destination = "192.168.122.103:80"; sourcePort = 10380;}    # roundcube http
       { destination = "192.168.122.104:80"; sourcePort = 10480;}    # glpi http
       { destination = "192.168.122.105:80"; sourcePort = 10580;}    # wp http
-      { destination = "192.168.122.106:80"; sourcePort = 10680;}    # ucto http
       { destination = "192.168.122.107:80"; sourcePort = 10780;}    # nia http
+      { destination = "192.168.122.108:80"; sourcePort = 10880;}    # ucto http
     ];
   };
 

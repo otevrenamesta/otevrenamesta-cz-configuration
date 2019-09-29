@@ -96,7 +96,7 @@ in
 
         Restart = "on-failure";
         RestartSec = "2s";
-        StartLimitIntervalSec = "30s";
+        StartLimitInterval = "30s";
         StartLimitBurst = 5;
 
         StateDirectory = "proplaceni";
@@ -117,7 +117,9 @@ in
         RestrictAddressFamilies = [ "AF_UNIX" "AF_INET" "AF_INET6" ];
         RestrictNamespaces = true;
         LockPersonality = true;
-        MemoryDenyWriteExecute = true;
+        # Cannot allocate write+execute memory for ffi.callback(). You might be running on a system that prevents
+        # this. For more information, see https://cffi.readthedocs.io/en/latest/using.html#callbacks
+        #MemoryDenyWriteExecute = true;
         RestrictRealtime = true;
       };
     };

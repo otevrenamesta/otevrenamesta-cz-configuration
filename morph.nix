@@ -245,12 +245,12 @@ in
     };
 
     fileSystems."/" =
-      { device = "/dev/disk/by-uuid/86f81fc9-b963-41e6-9fb4-a2024578c9f4";
+      { device = "/dev/disk/by-uuid/586ee5e6-778f-4a0e-978d-639ac1a9f605";
         fsType = "ext4";
       };
 
     fileSystems."/boot" =
-      { device = "/dev/disk/by-uuid/a27ddb64-4531-455d-a424-32682bc2aaf4";
+      { device = "/dev/disk/by-uuid/8bd49f91-0b35-4574-9f9d-cf2ce0d9efe4";
         fsType = "ext4";
       };
   };

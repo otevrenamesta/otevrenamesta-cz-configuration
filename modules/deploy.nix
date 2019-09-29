@@ -93,7 +93,7 @@ in
           };
           "ucto" = {
             hostname = "37.205.14.138";
-            port = 10622;
+            port = 10822;
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
