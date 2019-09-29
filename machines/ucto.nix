@@ -21,7 +21,8 @@
   services.proplaceni = {
     enable = true;
     webHost = "ucto2.otevrenamesta.cz";
-    #configFile = "FIXME";
+    settingsGlobal = "/etc/proplaceni/settings_global.py";
+    settingsLocal = "/etc/proplaceni/settings_local.py";
   };
 
   services.nginx = {

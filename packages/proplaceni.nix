@@ -1,5 +1,8 @@
 { stdenv, fetchgit, python3 }:
 
+# FIXME: use pypi2nix to pin dependencies
+# see also https://github.com/aither64/havesnippet/blob/master/requirements.nix
+
 let
 
   python = python3.override {
@@ -52,7 +55,6 @@ let
   django_2_0 = pyPkgs: pyPkgs.django_2_1.overrideDerivation (_: rec {
     pname = "Django";
     version = "2.0.13";
-    name = "${pname}-${version}";
     src = pyPkgs.fetchPypi {
       inherit pname version;
       sha256 = "0bzjvm5dkjhmjjff380ggp1v8vnx2b9sapn9kgl7h1j1pi6nvr5x";

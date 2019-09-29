@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+# there's nicer django deployment module that we should probably use insted:
+# https://gitea.havefun.cz/aither/havefun-cz-configuration/src/branch/master/modules/services/web-apps/django-app.nix
+
 with lib;
 let
   py3 = pkgs.python3;
@@ -21,12 +24,23 @@ in
   options.services.proplaceni = {
     enable = mkEnableOption "Proplaceni";
 
-    configFile = mkOption {
+    # why two files?
+    settingsLocal = mkOption {
       type = types.path;
-      default = ../files/ucto/settings_local.py;
-      example = "/run/keys/ucto-settigs_local.py";
+      default = "${pkg}/main/settings_local.distrib.py";
+      example = "/etc/proplaceni/ucto-settings_local.py";
       description = ''
         Path to <filename>settings_local.py</filename>.
+        You may want to keep it out of nix store if it contains keys and passwords.
+      '';
+    };
+
+    settingsGlobal = mkOption {
+      type = types.path;
+      default = "${pkg}/main/settings_global.py";
+      example = "/etc/proplaceni/ucto-settings_global.py";
+      description = ''
+        Path to <filename>settings_global.py</filename>.
         You may want to keep it out of nix store if it contains keys and passwords.
       '';
     };
@@ -43,7 +57,6 @@ in
       example = "/ucto";
       description = "Location part of the app URL.";
     };
-
   };
 
   config = mkIf cfg.enable {
@@ -54,11 +67,11 @@ in
       description = "Proplaceni / ucto";
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" "postgresql.service" ];
-      restartTriggers = [ cfg.configFile ];
+      restartTriggers = [ cfg.settingsLocal cfg.settingsGlobal ];
       restartIfChanged = true;
       preStart = ''
-        ${pkg}/manage.py makemigrations piructo
-        ${pkg}/manage.py migrate
+        ${pkg}/manage.py makemigrations --no-input piructo
+        ${pkg}/manage.py migrate --no-input
         ${pkg}/manage.py collectstatic --no-input
       '';
 
@@ -84,6 +97,7 @@ in
         Restart = "on-failure";
         RestartSec = "2s";
         StartLimitIntervalSec = "30s";
+        StartLimitBurst = 5;
 
         StateDirectory = "proplaceni";
         StateDirectoryMode = "0550";
@@ -136,12 +150,13 @@ in
     };
 
     systemd.tmpfiles.rules = [
-      "d ${dataDir}                               0750 ${user} ${group} - -"
-      "d ${dataDir}/mysettings                    0750 ${user} ${group} - -"
-      "f ${dataDir}/mysettings/__init__.py        0750 ${user} ${group} - -"
+      "d  /etc/proplaceni                          0750 ${user} ${group} - -"
+      "d  ${dataDir}                               0750 ${user} ${group} - -"
+      "d  ${dataDir}/mysettings                    0750 ${user} ${group} - -"
+      "f  ${dataDir}/mysettings/__init__.py        0750 ${user} ${group} - -"
       "L+ ${dataDir}/mysettings/settings.py        0750 ${user} ${group} - ${pkg}/main/settings.py"
-      "L+ ${dataDir}/mysettings/settings_global.py 0750 ${user} ${group} - ${pkg}/main/settings_global.py"
-      "L+ ${dataDir}/mysettings/settings_local.py  0750 ${user} ${group} - ${cfg.configFile}"
+      "L+ ${dataDir}/mysettings/settings_global.py 0750 ${user} ${group} - ${cfg.settingsGlobal}"
+      "L+ ${dataDir}/mysettings/settings_local.py  0750 ${user} ${group} - ${cfg.settingsLocal}"
     ]
     ++ (map (subDir: "C ${dataDir}/${subDir} 0750 ${user} ${group} - ${pkg}/${subDir}") writableSubDirs);
 
