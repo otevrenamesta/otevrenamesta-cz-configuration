@@ -110,7 +110,11 @@ in
         ProtectHome = true;
         PrivateTmp = true;
         PrivateDevices = true;
-        PrivateNetwork = true; # remove for --bind with inet socket
+        # gunicorn[1123]: Chyba SSO login: HTTPSConnectionPool(host='mojeid.cz', port=443):
+        # Max retries exceeded with url: /oidc//.well-known/openid-configuration
+        # (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x7f6312ecb850>:
+        # Failed to establish a new connection: [Errno 101] Network is unreachable'))
+        # PrivateNetwork = true;
         ProtectKernelTunables = true;
         ProtectKernelModules = true;
         ProtectControlGroups = true;
