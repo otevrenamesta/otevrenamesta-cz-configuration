@@ -13,21 +13,21 @@
      firewall.allowedTCPPorts = [ 80 ];
 
      domain = "otevrenamesta.cz";
-     hostName =  "ucto2";
+     hostName =  "ucto";
   };
 
   users.extraUsers.root.openssh.authorizedKeys.keys = with import ../ssh-keys.nix; [ jh ];
 
   services.proplaceni = {
     enable = true;
-    webHost = "ucto2.otevrenamesta.cz";
+    webHost = "ucto.otevrenamesta.cz";
     settingsGlobal = "/etc/proplaceni/settings_global.py";
     settingsLocal = "/etc/proplaceni/settings_local.py";
   };
 
   services.nginx = {
     enable = true;
-    virtualHosts."ucto2.otevrenamesta.cz" = {
+    virtualHosts."ucto.otevrenamesta.cz" = {
       forceSSL = false;
       enableACME = false; 
     };
@@ -48,7 +48,7 @@
   systemd.services.proplaceni.environment = {
     #PIROPLACENI_DEBUG = "b-on";
     PIROPLACENI_BASE_DOMAIN = "s-otevrenamesta.cz";
-    PIROPLACENI_BASE_SUBDOMAIN = "s-ucto2.";
+    PIROPLACENI_BASE_SUBDOMAIN = "s-ucto.";
   };
 }
 
