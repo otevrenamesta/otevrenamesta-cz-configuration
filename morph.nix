@@ -1,18 +1,21 @@
 let
   sysPkgs = import <nixpkgs> {};
 
+  # TODO switch to 19.09 stable
   newerPkgs = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs-channels/archive/47d65314df389ef547ac75e7a9b63f72ec37c3e9.tar.gz"; # nixos-19.09 @ 190222
+    url = "https://github.com/NixOS/nixpkgs-channels/archive/47d65314df389ef547ac75e7a9b63f72ec37c3e9.tar.gz"; # nixos-19.09 @ 190922
     sha256 = "0jkmx3x96qpywpvyjfh2zp7gx84pzrn8q21pd0l1bqvnhqplhcyh";
   };
 
   # Pin the deployment package-set to a specific version of nixpkgs
+  # TODO update whatever's possible to newerPkgs
   newPkgs = import (builtins.fetchTarball {
     url = "https://github.com/NixOS/nixpkgs-channels/archive/180aa21259b666c6b7850aee00c5871c89c0d939.tar.gz";
     sha256 = "0gxd10djy6khbjb012s9fl3lpjzqaknfv2g4dpfjxwwj9cbkj04h";
   }) {};
 
   # newPkgs with sympa changes on top
+  # TODO update to newerPkgs + sympa module in this repo
   sympaPkgs = builtins.fetchTarball {
     url = "https://github.com/mmilata/nixpkgs/archive/68bc3f764ed497e1ded594eba64e38e25e769cf4.tar.gz";
     sha256 = "0qmsmkjznx3ns20hyyqh1ym7jy29ypyjhd8yaxyglpfszrqffgk0";
@@ -160,7 +163,14 @@ in
     imports = [
       ./env.nix
       ./qemu.nix
+      ./machines/midpoint.nix
     ];
+
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = newerPkgs; }
+      ];
+    };
 
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/86171d08-b62d-4c99-b1d6-ea075e8183d0";
@@ -172,9 +182,9 @@ in
         fsType = "ext4";
       };
 
+    /*
     deployment = {
       healthChecks = {
-        /*
         cmd = [{
           cmd = ["true" "one argument" "another argument"];
           description = "Testing that 'true' works.";
@@ -188,9 +198,9 @@ in
             period = 1; # number of seconds between retries
           }
         ];
-        */
       };
     };
+    */
   };
 
   # qemu guest port 10322 (matomo)

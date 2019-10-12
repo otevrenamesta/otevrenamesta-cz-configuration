@@ -208,7 +208,7 @@
 
         locations = {
           "/" = {
-            proxyPass = "http://[2a01:430:17:1::ffff:1309]:8080";
+            proxyPass = "http://37.205.14.17:10280";
           };
         };
       };
