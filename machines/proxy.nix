@@ -369,9 +369,9 @@
 
         locations = {
           "/" = {
-            proxyPass = "https://otevrenamesta.github.io";
+            proxyPass = "https://otevrenamesta.gitlab.io";
             extraConfig = ''
-              proxy_set_header Host otevrenamesta.github.io;
+              proxy_set_header Host otevrenamesta.gitlab.io;
             '';
           };
         };
@@ -462,9 +462,9 @@
 
         locations = {
           "/" = {
-            proxyPass = "https://otevrenamesta.github.io";
+            proxyPass = "https://otevrenamesta.gitlab.io";
             extraConfig = ''
-              proxy_set_header Host otevrenamesta.github.io;
+              proxy_set_header Host otevrenamesta.gitlab.io;
               proxy_set_header X-Forwarded-Proto $scheme;
             '';
           };
