@@ -1,40 +1,26 @@
 otevrenamesta.cz configuration
 ==============================
 
-1. Install NixOps - https://nixos.org/nixops/manual/#chap-installation
+1. Install Morph using [provided overlay](overlays/morph.nix)
 
-2. Configure environment
+    ~~~~~ nix
+    nixpkgs.overlays = [
+      (import /path/to/this/repository/overlays/morph.nix)
+    ];
 
-    ~~~~~ bash
-    source activate
+    environment.systemPackages = with pkgs; [
+      morph
+    ];
     ~~~~~
 
-    This configures `NIX_PATH`, `NIXOPS_DEPLOYMENT` variables and configures prompt.
-
-3. Generate empty secret files for API keys
+2. Deploy environment
 
     ~~~~~ bash
-    for i in syndication-api-key redmine-api-key lpetl-user-password; do
-      echo "CHANGE_ME" > static/$i.secret
-    done
+    morph deploy morph.nix
     ~~~~~
 
-4. Create the deployment:
+3. or deploy a single machine
 
     ~~~~~ bash
-    nixops create network.nix network-prod.nix
+    morph deploy --on=<machine_name> morph.nix
     ~~~~~
-
-5. Deploy!
-
-    ~~~~~ bash
-    nixops deploy
-    ~~~~~
-
-Virtualized deployment
-----------------------
-
-```bash
-nixops create -d virt network.nix network-libvirt.nix
-nixops deploy -d virt
-```
