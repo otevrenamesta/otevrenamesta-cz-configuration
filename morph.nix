@@ -1,10 +1,11 @@
 let
   sysPkgs = import <nixpkgs> {};
 
-  # TODO switch to 19.09 stable
+  # update with nix-prefetch-url --unpack <URL>
+  # tracks release-19.09 branch
   newerPkgs = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs-channels/archive/47d65314df389ef547ac75e7a9b63f72ec37c3e9.tar.gz"; # nixos-19.09 @ 190922
-    sha256 = "0jkmx3x96qpywpvyjfh2zp7gx84pzrn8q21pd0l1bqvnhqplhcyh";
+    url = "https://github.com/NixOS/nixpkgs/archive/7ee5dc023211027a7fbc2950fa588aabba751b7a.tar.gz";
+    sha256 = "0x8799kpg7ps2z5kqxgniifn6s6kb2fszcr1hpz2047cj027z26n";
   };
 
   # Pin the deployment package-set to a specific version of nixpkgs
