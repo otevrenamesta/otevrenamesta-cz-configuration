@@ -18,4 +18,5 @@
   users.extraUsers.root.openssh.authorizedKeys.keys =
     with import ./ssh-keys.nix; [ deploy ln mm srk ];
 
+  system.stateVersion = "18.09";
 }
