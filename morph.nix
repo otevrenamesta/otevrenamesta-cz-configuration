@@ -44,7 +44,7 @@ in
   mesta-libvirt = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
-      ./ct.nix
+      ./profiles/ct.nix
       ./machines/mesta-libvirt.nix
     ];
   };
@@ -53,7 +53,7 @@ in
   consul = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
-      ./qemu.nix
+      ./profiles/qemu.nix
       ./machines/consul.nix
     ];
 
@@ -72,7 +72,7 @@ in
   glpi = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
-      ./qemu.nix
+      ./profiles/qemu.nix
       ./machines/glpi.nix
     ];
 
@@ -90,7 +90,7 @@ in
   mesta-services = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
-      ./ct.nix
+      ./profiles/ct.nix
       ./machines/mesta-services.nix
     ];
   };
@@ -99,7 +99,7 @@ in
   mail = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
-      ./qemu.nix
+      ./profiles/qemu.nix
       ./machines/mail.nix
     ];
 
@@ -118,7 +118,7 @@ in
   roundcube = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
-      ./qemu.nix
+      ./profiles/qemu.nix
       ./machines/roundcube.nix
     ];
 
@@ -138,7 +138,7 @@ in
   sympa = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
-      ./qemu.nix
+      ./profiles/qemu.nix
       ./machines/sympa.nix
     ];
 
@@ -163,7 +163,7 @@ in
   midpoint = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
-      ./qemu.nix
+      ./profiles/qemu.nix
       ./machines/midpoint.nix
     ];
 
@@ -208,7 +208,7 @@ in
   matomo = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
-      ./qemu.nix
+      ./profiles/qemu.nix
       ./machines/matomo.nix
     ];
 
@@ -227,7 +227,7 @@ in
   nia = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
-      ./qemu.nix
+      ./profiles/qemu.nix
       ./machines/nia.nix
     ];
 
@@ -245,7 +245,7 @@ in
   ucto = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
-      ./qemu.nix
+      ./profiles/qemu.nix
       ./machines/ucto.nix
     ];
 
@@ -270,7 +270,7 @@ in
   wp = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
-      ./qemu.nix
+      ./profiles/qemu.nix
       ./machines/wp.nix
     ];
 
@@ -294,7 +294,7 @@ in
   proxy = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
-      ./qemu.nix
+      ./profiles/qemu.nix
       ./machines/proxy.nix
     ];
 
