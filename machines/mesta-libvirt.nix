@@ -22,6 +22,10 @@
 
        { destination = "192.168.122.103:22"; sourcePort = 10322;}    # matomo ssh
        { destination = "192.168.122.103:80"; sourcePort = 10380;}    # matomo web
+
+       { destination = "192.168.122.104:22";  sourcePort = 10422;}   # proxy ssh
+       { destination = "192.168.122.104:80";  sourcePort = 80;}      # proxy web
+       { destination = "192.168.122.104:443"; sourcePort = 443;}     # proxy ssl
      ];
   };
 }

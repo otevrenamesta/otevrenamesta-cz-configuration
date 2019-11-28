@@ -7,13 +7,8 @@
   ];
 
   networking = {
-     #Y/N? hostName =  lib.mkForce "proxy";
      firewall.allowedTCPPorts = [ 80 443 ];
    };
-
-  #Y/N?services.openssh.enable = true;
-  #Y/N?users.extraUsers.root.openssh.authorizedKeys.keys =
-  #Y/N?  with import ./ssh-keys.nix; [ ln srk ];
 
   users.users.niap = {
     description = "NIA proxy user (no shell, port forwarding only)";

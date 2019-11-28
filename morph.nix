@@ -294,13 +294,23 @@ in
   proxy = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
+      ./qemu.nix
       ./machines/proxy.nix
-      "${buildVpsFreeTemplates}/files/configuration.nix"
     ];
+
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/3bc8b6e8-56e1-40c4-b0de-8eba32313610";
+        fsType = "ext4";
+      };
+
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/00552ecd-9bf6-4111-9339-d9180e2023e1";
+        fsType = "ext4";
+      };
 
     deployment = {
       nixPath = [
-        { prefix = "nixpkgs"; path = legacyPkgs; }
+        { prefix = "nixpkgs"; path = newerPkgs; }
       ];
 
       healthChecks = {
