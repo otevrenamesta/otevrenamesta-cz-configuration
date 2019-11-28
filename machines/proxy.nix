@@ -464,7 +464,7 @@
           "/" = {
             proxyPass = "https://otevrenamesta.gitlab.io";
             extraConfig = ''
-              proxy_set_header Host otevrenamesta.gitlab.io;
+              proxy_set_header Host $host;
               proxy_set_header X-Forwarded-Proto $scheme;
             '';
           };
