@@ -35,7 +35,7 @@
             proxyPass = "http://37.205.14.138";
             extraConfig = ''
               rewrite ^/$ /Web/index.php redirect;
-              proxy_set_header Host $http_host;
+              proxy_set_header Host $host;
             '';
           };
         };
@@ -82,7 +82,7 @@
           "/" = {
             proxyPass = "http://[2a03:3b40:fe:32::]";
             extraConfig = ''
-              proxy_set_header Host $http_host;
+              proxy_set_header Host $host;
             '';
           };
         };
@@ -96,7 +96,7 @@
           "/" = {
             proxyPass = "http://37.205.14.138:10480";
             extraConfig = ''
-              proxy_set_header Host $http_host;
+              proxy_set_header Host $host;
             '';
           };
         };
@@ -232,7 +232,7 @@
           "/" = {
             proxyPass = "http://37.205.14.138:10780";
             extraConfig = ''
-              proxy_set_header Host $http_host;
+              proxy_set_header Host $host;
             '';
           };
         };
@@ -306,18 +306,18 @@
           location ^~ /loleaflet {
                    proxy_pass http://172.16.9.44:9980;
                    #proxyPass = "http://[2a01:430:17:1::ffff:689]"; 
-                   proxy_set_header Host $http_host;
+                   proxy_set_header Host $host;
                }
           location ^~ /hosting/discovery {
                    proxy_pass http://172.16.9.44:9980;
-                   proxy_set_header Host $http_host;
+                   proxy_set_header Host $host;
                }
           # main websocket
           location ~ ^/lool/(.*)/ws$ {
               proxy_pass http://172.16.9.44:9980;
               proxy_set_header Upgrade $http_upgrade;
               proxy_set_header Connection "Upgrade";
-              proxy_set_header Host $http_host;
+              proxy_set_header Host $host;
               proxy_read_timeout 36000s;
           }
 
@@ -325,7 +325,7 @@
                    proxy_pass http://172.16.9.44:9980;
                    proxy_set_header Upgrade $http_upgrade;
                    proxy_set_header Connection "upgrade";
-                   proxy_set_header Host $http_host;
+                   proxy_set_header Host $host;
                }
           location / {
               proxy_pass http://172.16.9.44;
@@ -380,7 +380,7 @@
           "/" = {
             proxyPass = "http://37.205.14.138:10780";
             extraConfig = ''
-              proxy_set_header Host $http_host;
+              proxy_set_header Host $host;
             '';
           };
         };
@@ -422,7 +422,7 @@
           "/" = {
             proxyPass = "http://37.205.14.138:10380";
             extraConfig = ''
-              proxy_set_header Host $http_host;
+              proxy_set_header Host $host;
             '';
           };
         };
