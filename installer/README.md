@@ -1,6 +1,10 @@
 VM installer
 ============
 
+Creates custom ISO installer for easy libvirt guest creation.
+
+We need to build it ourselves so that it contains the right set of SSH keys.
+
 Build with
 ----------
 

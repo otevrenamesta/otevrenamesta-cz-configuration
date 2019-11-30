@@ -4,6 +4,15 @@
     ../modules/libvirt.nix
     ../modules/deploy.nix
   ];
+
+  virtualisation.libvirtd = {
+    enable = true;
+    networking = {
+      enable = true;
+      infiniteLeaseTime = true;
+    };
+  };
+
   networking.nat = {
      forwardPorts = [
        { destination = "192.168.122.100:22";    sourcePort = 10022;} # mail ssh

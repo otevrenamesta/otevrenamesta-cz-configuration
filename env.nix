@@ -13,6 +13,7 @@
     screen
     vim
     wget
+    git
   ];
 
   users.extraUsers.root.openssh.authorizedKeys.keys =
