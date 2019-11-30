@@ -8,6 +8,14 @@
      nmap
   ];
 
+  virtualisation.libvirtd = {
+    enable = true;
+    networking = {
+      enable = true;
+      infiniteLeaseTime = true;
+    };
+  };
+
   networking.firewall.allowedTCPPorts = [ 80 3306 ]; # FIXME really expose mysql to everyone?
 
   # restrict incoming connections to proxy.otevrenamesta.cz only
