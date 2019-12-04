@@ -37,4 +37,23 @@
        { destination = "192.168.122.104:443"; sourcePort = 443;}     # proxy ssl
      ];
   };
+
+  boot.enableContainers = true;
+  # BAD!
+  #networking.bridges.brct.interfaces = [ "venet0" ];
+  #networking.interfaces.brct.ipv6.addresses = [
+  #     { address = "2a03:3b40:fe:3d:8000::"; prefixLength = 65; }
+  #   ];
+
+  containers.test = {
+    privateNetwork = true;
+    #hostBridge = "brct";
+    localAddress6 = "2a03:3b40:fe:3d:8000::1/65";
+    config = 
+      { config, pkgs, ... }:
+      {
+        networking.firewall.allowedTCPPorts = [ 80 ];
+        services.nginx.enable = true;
+      };
+  };
 }
