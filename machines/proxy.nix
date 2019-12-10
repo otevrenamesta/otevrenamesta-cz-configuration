@@ -60,22 +60,22 @@
         };
       };
 
-      "diskurz.otevrenamesta.cz" = {
-        forceSSL = true;
-        #addSSL = true;dd
-        enableACME = true;
+      #"diskurz.otevrenamesta.cz" = {
+      #  forceSSL = true;
+      #  #addSSL = true;dd
+      #  enableACME = true;
+      #
+      #  locations = {
+      #    "/" = {
+      #      proxyPass = "http://[2a03:3b40:7:5:5054:ff:fe99:cc48]";
+      #      #Y/N? proxyPass = "http://37.205.14.138";
+      #    };
+      #  };
+      #};
 
-        locations = {
-          "/" = {
-            proxyPass = "http://[2a03:3b40:7:5:5054:ff:fe99:cc48]";
-            #Y/N? proxyPass = "http://37.205.14.138";
-          };
-        };
-      };
-
-      "forum.otevrenamesta.cz" = {
+      "forum.vesp.cz" = {
+        #globalRedirect = "forum.otevrenamesta.cz";
         forceSSL = true;
-        #addSSL = true;dd
         enableACME = true;
 
         locations = {
@@ -86,6 +86,21 @@
             '';
           };
         };
+      };
+
+      "forum.otevrenamesta.cz" = {
+        forceSSL = true;
+        enableACME = true;
+        globalRedirect = "forum.vesp.cz";
+
+#        locations = {
+#          "/" = {
+#            proxyPass = "http://[2a03:3b40:fe:32::]";
+#            extraConfig = ''
+#              proxy_set_header Host $host;
+#            '';
+#          };
+#        };
       };
 
       "glpi.otevrenamesta.cz" = {

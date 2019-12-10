@@ -5,10 +5,6 @@
     ../modules/proplaceni.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    tmux
-  ];
-
   networking = {
      firewall.allowedTCPPorts = [ 80 ];
 

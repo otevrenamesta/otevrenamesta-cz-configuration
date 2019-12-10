@@ -104,10 +104,13 @@
           };
         };
       };
-      "forum.otevrenamesta.cz" = {
+      "forum.vesp.cz" = {
         locations = {
           "/" = {
             proxyPass = "http://unix:/var/discourse/shared/standalone/nginx.http.sock:";
+            extraConfig = ''
+              proxy_set_header X-Forwarded-Proto https;
+            '';
           };
         };
       };

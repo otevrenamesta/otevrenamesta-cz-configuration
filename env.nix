@@ -11,6 +11,7 @@
     htop
     lynx
     screen
+    tmux
     vim
     wget
     git
