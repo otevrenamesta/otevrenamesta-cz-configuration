@@ -1,9 +1,7 @@
 { config, pkgs, ... }:
 
 {
-
   environment.systemPackages = with pkgs; [
-     #php
   ];
 
   networking = {

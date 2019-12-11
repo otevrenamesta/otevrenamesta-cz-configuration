@@ -212,6 +212,12 @@ in
       ./machines/matomo.nix
     ];
 
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = newerPkgs; }
+      ];
+    };
+
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/7274ccea-6b6f-4dde-96cf-822ab916a20a";
         fsType = "ext4";
