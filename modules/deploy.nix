@@ -108,6 +108,12 @@ in
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
+          "matrix" = {
+            hostname = "37.205.14.138";
+            port = 10922;
+            user = "root";
+            identityFile = "~/.ssh/mesta_deploy";
+          };
         };
       };
     };

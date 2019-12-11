@@ -241,7 +241,8 @@ in
         fsType = "ext4";
       };
   };
-  # qemu guest port 10622 (ucto na services)
+
+  # qemu guest port 10822 (ucto na services)
   ucto = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
@@ -265,6 +266,32 @@ in
         fsType = "ext4";
       };
   };
+
+  # qemu guest port 10922 (matrix na services)
+  matrix = { config, pkgs, ... }: with pkgs; {
+    imports = [
+      ./env.nix
+      ./profiles/qemu.nix
+      ./machines/matrix.nix
+    ];
+
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = newerPkgs; }
+      ];
+    };
+
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/9bdeed3f-a0de-4438-be71-357742e9a08b";
+        fsType = "ext4";
+      };
+  
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/55759f28-3493-49be-be9a-4fe6847b2406";
+        fsType = "ext4";
+      };
+  };
+
 
   # qemu guest port 10522 (wp)
   wp = { config, pkgs, ... }: with pkgs; {

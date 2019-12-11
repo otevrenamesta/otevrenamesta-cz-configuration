@@ -39,6 +39,7 @@
       { destination = "192.168.122.105:22"; sourcePort = 10522;}    # wp ssh
       { destination = "192.168.122.107:22"; sourcePort = 10722;}    # nia ssh
       { destination = "192.168.122.108:22"; sourcePort = 10822;}    # ucto ssh
+      { destination = "192.168.122.109:22"; sourcePort = 10922;}    # matrix ssh
 
       { destination = "192.168.122.103:80"; sourcePort = 10380;}    # roundcube http
       { destination = "192.168.122.104:80"; sourcePort = 10480;}    # glpi http
