@@ -212,6 +212,17 @@
         };
       };
 
+      "matrix.otevrenamesta.cz" = {
+        forceSSL = true;
+        enableACME = true;
+
+        locations = {
+          "/" = {
+            proxyPass = "http://37.205.14.138:10980";
+          };
+        };
+      };
+
       "midpoint.otevrenamesta.cz" = {
         forceSSL = true;
         enableACME = true;

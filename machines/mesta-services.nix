@@ -46,6 +46,9 @@
       { destination = "192.168.122.105:80"; sourcePort = 10580;}    # wp http
       { destination = "192.168.122.107:80"; sourcePort = 10780;}    # nia http
       { destination = "192.168.122.108:80"; sourcePort = 10880;}    # ucto http
+      { destination = "192.168.122.109:8008"; sourcePort = 10980;}  # matrix http
+
+      { destination = "192.168.122.109:8448"; sourcePort = 8448;}   # matrix synapse
     ];
   };
 
