@@ -89,6 +89,7 @@
       };
 
       "forum.otevrenamesta.cz" = {
+        serverAliases = [ "vesp.cz" "www.vesp.cz" ];
         forceSSL = true;
         enableACME = true;
         globalRedirect = "forum.vesp.cz";
