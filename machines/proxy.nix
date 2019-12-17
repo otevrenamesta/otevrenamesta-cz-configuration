@@ -186,7 +186,8 @@
 
         locations = {
           "/" = {
-            proxyPass = "http://37.205.14.17:10180";
+            #proxyPass = "http://37.205.14.17:10180";
+            proxyPass = "http://192.168.122.101";
             extraConfig = ''
               proxy_set_header Host $host;
               proxy_set_header X-Forwarded-Proto $scheme;
@@ -230,7 +231,8 @@
 
         locations = {
           "/" = {
-            proxyPass = "http://37.205.14.17:10280";
+            #proxyPass = "http://37.205.14.17:10280";
+            proxyPass = "http://192.168.122.102:8080";
           };
         };
       };
@@ -241,7 +243,8 @@
 
         locations = {
           "/" = {
-            proxyPass = "http://37.205.14.17:10380";
+            #proxyPass = "http://37.205.14.17:10380";
+            proxyPass = "http://192.168.122.103";
             extraConfig = ''
               proxy_set_header Host $host;
               proxy_set_header X-Forwarded-Proto $scheme;

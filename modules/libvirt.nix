@@ -98,14 +98,20 @@ in
        externalInterface = extIf;
 
      } // optionalAttrs v6Enabled {
-       extraCommands = flip concatMapStrings cfg.ipv6.forwardPorts (f: ''
+       extraCommands = (flip concatMapStrings cfg.ipv6.forwardPorts (f: ''
          ip6tables -w -t nat -I PREROUTING -i ${extIf} -p ${f.proto} --dport ${toString f.sourcePort} -j DNAT --to-destination ${f.destination}
-       '');
+       ''))
+       + ''
+         ip6tables -w -t nat -I POSTROUTING -o ${extIf} -j MASQUERADE
+       '';
 
        # XXX removing element from forwardPorts won't work, we should use custom chain and flush it instead
-       extraStopCommands = flip concatMapStrings cfg.ipv6.forwardPorts (f: ''
+       extraStopCommands = (flip concatMapStrings cfg.ipv6.forwardPorts (f: ''
          ip6tables -w -t nat -D PREROUTING -i ${extIf} -p ${f.proto} --dport ${toString f.sourcePort} -j DNAT --to-destination ${f.destination} || true
-       '');
+       ''))
+       + ''
+         ip6tables -w -t nat -D POSTROUTING -o ${extIf} -j MASQUERADE || true
+       '';
      };
 
      # libvirt uses 192.168.122.0

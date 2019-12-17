@@ -15,6 +15,8 @@
     vim
     wget
     git
+    nmap
+    tcpdump
   ];
 
   users.extraUsers.root.openssh.authorizedKeys.keys =
