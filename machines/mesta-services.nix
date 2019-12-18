@@ -22,18 +22,19 @@ in
 
   networking.firewall.allowedTCPPorts = [ 80 3306 ]; # FIXME really expose mysql to everyone?
 
-  # restrict incoming connections to proxy.otevrenamesta.cz only
-  # to prevent X-Real-Ip: etc header spoofing
-  networking.firewall.extraCommands = ''
-    iptables -I FORWARD -o ${brDev} -p tcp -m multiport --dports 80,8080,8008 ! -s ${proxyIp} -j DROP
-    iptables -I INPUT -i lo -j ACCEPT
-    iptables -I INPUT -p tcp -m multiport --dports 80,8000,8001,8002 ! -s ${proxyIp} -j DROP
-  '';
-  networking.firewall.extraStopCommands = ''
-    iptables -D FORWARD -o ${brDev} -p tcp -m multiport --dports 80,8080,8008 ! -s ${proxyIp} -j DROP || true
-    iptables -D INPUT -i lo -j ACCEPT || true
-    iptables -D INPUT -p tcp -m multiport --dports 80,8000,8001,8002 ! -s ${proxyIp} -j DROP || true
-  '';
+# old proxy needs access for NIA
+#  # restrict incoming connections to proxy.otevrenamesta.cz only
+#  # to prevent X-Real-Ip: etc header spoofing
+#  networking.firewall.extraCommands = ''
+#    iptables -I FORWARD -o ${brDev} -p tcp -m multiport --dports 80,8080,8008 ! -s ${proxyIp} -j DROP
+#    iptables -I INPUT -i lo -j ACCEPT
+#    iptables -I INPUT -p tcp -m multiport --dports 80,8000,8001,8002 ! -s ${proxyIp} -j DROP
+#  '';
+#  networking.firewall.extraStopCommands = ''
+#    iptables -D FORWARD -o ${brDev} -p tcp -m multiport --dports 80,8080,8008 ! -s ${proxyIp} -j DROP || true
+#    iptables -D INPUT -i lo -j ACCEPT || true
+#    iptables -D INPUT -p tcp -m multiport --dports 80,8000,8001,8002 ! -s ${proxyIp} -j DROP || true
+#  '';
 
   networking.nat = {
     forwardPorts = [
