@@ -27,4 +27,6 @@
   services.mysql.package = pkgs.mysql;
 
   services.nginx.enable = true;
+
+  services.geoip-updater.enable = true; # downloads GeoIP dbs to /var/lib/geoip-databases
 }
