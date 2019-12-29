@@ -238,6 +238,10 @@
         locations = {
           "/" = {
             proxyPass = "http://37.205.14.138:10980";
+            extraConfig = ''
+              proxy_set_header Host $host;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            '';
           };
         };
       };
@@ -504,7 +508,7 @@
         default = true;
         forceSSL = true;
         enableACME = true;
-        serverAliases = ["otevrenamesta.cz"];
+        serverAliases = [ "otevrenamesta.cz" ];
 
         locations = {
           "/" = {
@@ -512,6 +516,14 @@
             extraConfig = ''
               proxy_set_header Host $host;
               proxy_set_header X-Forwarded-Proto $scheme;
+            '';
+          };
+
+          "/_matrix" = {
+            proxyPass = "http://37.205.14.138:10984";
+            extraConfig = ''
+              proxy_set_header Host $host;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             '';
           };
         };
