@@ -107,6 +107,7 @@ in
       ladislav.nesnera@otevrenamesta.cz        ${emails.ln_}
       marcel.kolaja@otevrenamesta.cz           ${emails.mk_}
       martin.sebek@otevrenamesta.cz            ${emails.ms_}
+      olmr@otevrenamesta.cz                    ${emails.vo_}
       ondrej.profant@otevrenamesta.cz          ${emails.op_}
       pavla.kadlecova@otevrenamesta.cz         ${emails.pk_}
 
