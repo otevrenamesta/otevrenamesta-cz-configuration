@@ -100,7 +100,7 @@ in
     virtual = ''
 
       # virtual users
-      cityvizor@otevrenamesta.cz               ${emails.pk_}, ${emails.ln_}
+      cityvizor@otevrenamesta.cz               ${emails.pk_}, ${emails.ln_}, ${emails.cv_}
       danidel.kolar@otevrenamesta.cz           ${emails.dk_}
       informace@otevrenamesta.cz               info@lists.otevrenamesta.cz
       iot@otevrenamesta.cz                     ${emails.ln_}, ${emails.zg_}
