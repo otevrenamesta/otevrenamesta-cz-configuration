@@ -92,7 +92,6 @@
       #};
 
       "forum.vesp.cz" = {
-        #globalRedirect = "forum.otevrenamesta.cz";
         forceSSL = true;
         enableACME = true;
 
@@ -107,19 +106,33 @@
       };
 
       "forum.otevrenamesta.cz" = {
-        serverAliases = [ "vesp.cz" "www.vesp.cz" ];
+        serverAliases = [ "vesp.cz" ];
         forceSSL = true;
         enableACME = true;
-        globalRedirect = "forum.vesp.cz";
 
-#        locations = {
-#          "/" = {
-#            proxyPass = "http://[2a03:3b40:fe:32::]";
-#            extraConfig = ''
-#              proxy_set_header Host $host;
-#            '';
-#          };
-#        };
+        extraConfig = ''
+          location = /registrace {
+            return 301 https://ec.europa.eu/eusurvey/runner/VeSP2020;
+          }
+          location / {
+            return 301 https://forum.vesp.cz$request_uri;
+          }
+        '';
+      };
+
+      # 200203 docasne, bude nahrazeno konferencnim webem
+      "www.vesp.cz" = {
+        forceSSL = true;
+        enableACME = true;
+
+        extraConfig = ''
+          location = /registrace {
+            return 301 https://ec.europa.eu/eusurvey/runner/VeSP2020;
+          }
+          location / {
+            return 301 https://www.otevrenamesta.cz/2020/VeSP2020.html;
+          }
+        '';
       };
 
       "glpi.otevrenamesta.cz" = {
