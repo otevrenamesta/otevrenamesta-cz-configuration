@@ -24,23 +24,6 @@
 
     virtualHosts = {
 
-      "2.cityvizor.cz" = {
-        forceSSL = true;
-        enableACME = true;
-
-        locations = {
-          "/" = {
-            proxyPass = "http://37.205.14.126:80";
-            extraConfig = ''
-              proxy_set_header Host $host;
-              proxy_set_header X-Real-IP $remote_addr;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header X-Forwarded-Proto $scheme;
-            '';
-          };
-        };
-      };
-
       "booked.otevrenamesta.cz" = {
         #forceSSL = true;
         addSSL = true;
@@ -53,6 +36,24 @@
             extraConfig = ''
               rewrite ^/$ /Web/index.php redirect;
               proxy_set_header Host $host;
+            '';
+          };
+        };
+      };
+
+      "cityvizor.cz" = {
+        serverAliases = [ "www.cityvizor.cz" "demo.cityvizor.cz" ];
+        forceSSL = true;
+        enableACME = true;
+
+        locations = {
+          "/" = {
+            proxyPass = "http://37.205.14.126:80";
+            extraConfig = ''
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto $scheme;
             '';
           };
         };
