@@ -251,7 +251,7 @@
 
         locations = {
           "/" = {
-            proxyPass = "http://37.205.14.138:10980";
+            proxyPass = "http://37.205.14.138:10984";
             extraConfig = ''
               proxy_set_header Host $host;
               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
