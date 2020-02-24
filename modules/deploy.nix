@@ -54,6 +54,11 @@ in
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
+          "mediawiki" = {
+            hostname = "192.168.122.105";
+            user = "root";
+            identityFile = "~/.ssh/mesta_deploy";
+          };
           "mesta-services" = {
             hostname = "37.205.14.138";
             user = "root";

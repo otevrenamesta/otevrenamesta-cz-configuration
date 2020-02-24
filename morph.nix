@@ -324,6 +324,30 @@ in
       };
   };
 
+  mediawiki = { config, pkgs, ... }: {
+    imports = [
+      ./env.nix
+      ./profiles/qemu.nix
+      ./machines/mediawiki.nix
+    ];
+
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = newerPkgs; }
+      ];
+    };
+
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/7364444d-c58e-4f5b-b1b7-d5300558bbe7";
+        fsType = "ext4";
+      };
+
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/006a7bc5-5b45-470c-943f-77eee9a24c2e";
+        fsType = "ext4";
+      };
+  };
+
   old-proxy = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix

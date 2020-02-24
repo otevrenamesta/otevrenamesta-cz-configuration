@@ -44,6 +44,9 @@
        { destination = "192.168.122.104:22";  sourcePort = 10422;}   # proxy ssh
        { destination = "192.168.122.104:80";  sourcePort = 80;}      # proxy web
        { destination = "192.168.122.104:443"; sourcePort = 443;}     # proxy ssl
+
+       { destination = "192.168.122.105:22";  sourcePort = 10522;}   # mediawiki ssh
+       { destination = "192.168.122.105:80";  sourcePort = 10580;}   # mediawiki web
      ];
   };
 
