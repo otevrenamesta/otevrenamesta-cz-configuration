@@ -45,6 +45,7 @@ in
       { destination = "192.168.122.107:22"; sourcePort = 10722;}    # nia ssh
       { destination = "192.168.122.108:22"; sourcePort = 10822;}    # ucto ssh
       { destination = "192.168.122.109:22"; sourcePort = 10922;}    # matrix ssh
+      { destination = "192.168.122.111:22"; sourcePort = 11122;}    # dsw-test ssh
 
       { destination = "192.168.122.103:80"; sourcePort = 10380;}    # roundcube http
       { destination = "192.168.122.104:80"; sourcePort = 10480;}    # glpi http
@@ -52,6 +53,7 @@ in
       { destination = "192.168.122.107:80"; sourcePort = 10780;}    # nia http
       { destination = "192.168.122.108:80"; sourcePort = 10880;}    # ucto http
       { destination = "192.168.122.109:8008"; sourcePort = 10980;}  # matrix http
+      { destination = "192.168.122.111:80"; sourcePort = 11180;}    # dsw-test http
 
       { destination = "192.168.122.109:8448"; sourcePort = 10984;}   # matrix synapse # FIXME client+federation ports can be shared
     ];
