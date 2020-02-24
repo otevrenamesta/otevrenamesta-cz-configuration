@@ -142,6 +142,16 @@
         enableACME = true;
 
         extraConfig = ''
+          location /2020/ {
+            alias /var/www/;
+            autoindex off;
+          }
+          location /2020 {
+            return 301 https://www.vesp.cz/2020/;
+          }
+          location = /faktomluva {
+            return 301 https://ec.europa.eu/eusurvey/runner/Faktomluva;
+          }
           location = /registrace {
             return 301 https://ec.europa.eu/eusurvey/runner/VeSP2020;
           }
