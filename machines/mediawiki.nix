@@ -29,11 +29,13 @@
       adminAddr = "info@otevrenamesta.cz";
       servedFiles = [
         { file = ../media/vesp135px.svg; urlPath = "/images/logo.svg"; }
+        { file = ../media/vesp-favicon.ico; urlPath = "/favicon.ico"; }
       ];
       extraConfig = ''
         # https://www.mediawiki.org/wiki/Manual:Short_URL/Apache
         RewriteEngine On
-        # do not rewrite uploadsDir nor logo.svg
+        # do not rewrite uploadsDir, logo.svg, favicon.ico
+        RewriteCond %{REQUEST_URI} !^/favicon.ico
         RewriteCond %{REQUEST_URI} !^/images/
         RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f
         RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-d
