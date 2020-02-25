@@ -90,8 +90,10 @@ in
   };
 
   services.postfix = {
-    # relay ML domains to sympa & allow sympa to send outgoing email
-    networks = [ "192.168.122.101/32" ];
+    networks = [
+      "192.168.122.101/32" # relay ML domains to sympa & allow sympa to send outgoing email
+      "192.168.122.105/32" # mediawiki
+    ];
     relayDomains = [ "lists.otevrenamesta.cz" ];
     transport = ''
       lists.otevrenamesta.cz    relay:[192.168.122.101]
@@ -175,7 +177,7 @@ in
   services.rspamd = {
     locals = {
       "options.inc" = { text = ''
-        local_addrs = [ "192.168.122.101" ];
+        local_addrs = [ "192.168.122.101", "192.168.122.105" ];
       ''; };
       "classifier-bayes.conf" = { text = ''
         autolearn = true;

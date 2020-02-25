@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="135"
+   height="135"
+   viewBox="0 0 200 200"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="vesp135px2.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.52679455"
+     inkscape:cx="22.144005"
+     inkscape:cy="62.498331"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1066"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     viewbox-height="200" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Vrstva 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-97)">
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:0;stroke:none;stroke-width:4.83837986;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect1052"
+       width="200"
+       height="200"
+       x="-1.7763568e-15"
+       y="97"
+       inkscape:export-xdpi="65.024002"
+       inkscape:export-ydpi="65.024002"
+       inkscape:export-filename="/home/michal/Dokumenty/Sazba, grafika a skoleni/VeSP/VeSP/512.png" />
+    <g
+       id="g1050"
+       transform="matrix(1.25,0,0,1.25,-24.126112,-49.527543)">
+      <path
+         d="M 63.510009,174.75444 H 53.384694 l -9.180287,38.4762 -9.517797,-38.4762 H 24.08878 L 37.994213,221.4659 H 50.07709 Z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:medium;line-height:42.18881226px;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Semi-Bold';letter-spacing:0px;word-spacing:0px;fill:#25aae2;fill-opacity:1;stroke:none;stroke-width:1.68755257px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="path941"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 95.522882,202.76781 c 0,-11.40785 -6.007687,-18.15806 -16.133003,-18.15806 -10.462827,0 -16.268008,8.37026 -16.268008,19.17059 0,11.20535 6.007688,18.76559 17.483046,18.76559 5.602674,0 10.057813,-2.02506 13.567923,-4.86015 l -3.982624,-5.40017 c -3.105097,2.16007 -5.670177,3.1051 -8.707772,3.1051 -4.590143,0 -7.830244,-2.02507 -8.505265,-8.91028 h 22.343197 c 0.0675,-1.01253 0.202506,-2.49758 0.202506,-3.71262 z m -9.517797,-2.29507 H 72.977179 c 0.540017,-6.81771 2.835088,-9.31529 6.615206,-9.31529 4.590143,0 6.4127,3.51011 6.4127,8.91028 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:medium;line-height:42.18881226px;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Semi-Bold';letter-spacing:0px;word-spacing:0px;fill:#25aae2;fill-opacity:1;stroke:none;stroke-width:1.68755257px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="path943"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 117.03812,173.67441 c -9.45029,0 -16.33551,5.19766 -16.33551,13.16291 0,7.08772 4.05013,11.13784 14.17545,14.31044 7.08772,2.16007 8.91027,3.78012 8.91027,7.49274 0,4.11762 -3.2401,6.4127 -8.03275,6.4127 -4.79265,0 -8.50526,-1.75506 -11.88037,-4.65765 l -5.130158,5.60268 c 3.847618,3.78011 9.517798,6.5477 17.280538,6.5477 11.34036,0 18.09057,-6.00769 18.09057,-14.58045 0,-8.64027 -5.40017,-12.15038 -13.83794,-14.85047 -7.62773,-2.36257 -9.38279,-3.71261 -9.38279,-6.95271 0,-3.30761 2.76759,-5.06266 6.81771,-5.06266 3.78012,0 7.02022,1.21504 10.32783,3.91512 l 4.72514,-5.46767 c -4.05012,-3.78012 -8.77527,-5.87268 -15.72799,-5.87268 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:medium;line-height:42.18881226px;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Semi-Bold';letter-spacing:0px;word-spacing:0px;fill:#f1592a;fill-opacity:1;stroke:none;stroke-width:1.68755257px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="path945"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 155.34241,174.75444 h -14.44546 v 46.71146 h 9.92281 v -15.9305 h 5.33267 c 10.66533,0 18.36057,-4.92765 18.36057,-15.72799 0,-10.19282 -7.29022,-15.05297 -19.17059,-15.05297 z m 0,23.49073 h -4.52265 v -16.33551 h 4.38764 c 5.80518,0 9.04528,2.43008 9.04528,7.89775 0,6.3452 -3.4426,8.43776 -8.91027,8.43776 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:medium;line-height:42.18881226px;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Semi-Bold';letter-spacing:0px;word-spacing:0px;fill:#9eb83b;fill-opacity:1;stroke:none;stroke-width:1.68755257px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="path947"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
+</svg>
