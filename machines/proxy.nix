@@ -133,6 +133,12 @@
           location / {
             return 301 https://forum.vesp.cz$request_uri;
           }
+          location /_matrix {
+            proxy_pass http://37.205.14.138:10984;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          }
+
         '';
       };
 
@@ -271,7 +277,7 @@
         };
       };
 
-      "matrix.otevrenamesta.cz" = {
+      "matrix.vesp.cz" = {
         forceSSL = true;
         enableACME = true;
 
