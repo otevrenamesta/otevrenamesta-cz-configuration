@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+
+with lib;
 
 {
+  # can be removed after upgrading to NixOS-20.03
   imports = [
     ../modules/parsoid_.nix
   ];
@@ -17,7 +20,7 @@
 
   services.mediawiki = {
     enable = true;
-    name = "Otevřená města";
+    name = "Veřejná správa prakticky - pískoviště";
     passwordFile = "/run/keys/mediawikiadmin";
     database = {
       type = "mysql";
@@ -42,7 +45,8 @@
         RewriteRule ^(.*)$ %{DOCUMENT_ROOT}/index.php [L]
       '';
     };
-    # versions of extensions must match MediaWiki version!
+    # Versions of extensions must match MediaWiki version!
+    # After updating the extensions please also update the `warnings` expression below.
     extensions = {
       VisualEditor = pkgs.fetchzip {
         url = "https://extdist.wmflabs.org/dist/extensions/VisualEditor-REL1_33-f64e411.tar.gz";
@@ -51,6 +55,10 @@
       ParserFunctions = pkgs.fetchzip {
         url = "https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_33-4395442.tar.gz";
         sha256 = "0d85qrmivb64w9x6hbkl2jmlb14qgma1nr2q6zksi619gvzmdl4y";
+      };
+      Matomo = pkgs.fetchzip {
+        url = "https://github.com/DaSchTour/matomo-mediawiki-extension/archive/v4.0.1.tar.gz";
+        sha256 = "0g5rd3zp0avwlmqagc59cg9bbkn3r7wx7p6yr80s644mj6dlvs1b";
       };
     };
 
@@ -64,6 +72,9 @@
         'auth' => false,
       ];
       $wgPasswordSender = "noreply@otevrenamesta.cz"; # try setting this to info@otevrenamesta.cz to avoid being classified as spam
+
+      # use https when generating absolute urls, should save some http->https redirects:
+      $wgServer = "https://${config.services.mediawiki.virtualHost.hostName}";
 
       # https://www.mediawiki.org/wiki/Manual:Short_URL
       $wgArticlePath = "/$1";
@@ -86,8 +97,21 @@
           // Parsoid "domain"
           'domain' => 'localhost',
       );
+
+      # matomo tracking
+      $wgMatomoURL = "navstevnost.otevrenamesta.cz";
+      $wgMatomoIDSite = "5";
     '';
   };
+
+  warnings = let
+    extVersion = "1.33";
+    mwVersion = config.services.mediawiki.package.version;
+  in
+  optional (!hasPrefix extVersion mwVersion) ''
+    Possible MediaWiki version mismatch: extensions are for ${extVersion} but MW is ${mwVersion}.
+    Please update `services.mediawiki.extensions` as well as this warning.
+  '';
 
   services.parsoid_ = {
     enable = true;
