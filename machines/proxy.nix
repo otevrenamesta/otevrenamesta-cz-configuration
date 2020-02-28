@@ -281,15 +281,16 @@
         forceSSL = true;
         enableACME = true;
 
-        locations = {
-          "/" = {
-            proxyPass = "http://37.205.14.138:10984";
-            extraConfig = ''
-              proxy_set_header Host $host;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            '';
-          };
-        };
+        extraConfig = ''
+          location = / {
+            return 302 https://riot.vesp.cz;
+          }
+          location / {
+            proxy_pass http://37.205.14.138:10984;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          }
+        '';
       };
 
       "midpoint.otevrenamesta.cz" = {
@@ -372,6 +373,21 @@
         locations = {
           "/" = {
             root = "/var/www";
+          };
+        };
+      };
+
+      "riot.vesp.cz" = {
+        forceSSL = true;
+        enableACME = true;
+
+        locations = {
+          "/" = {
+            proxyPass = "http://37.205.14.138:10980";
+            extraConfig = ''
+              proxy_set_header Host $host;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            '';
           };
         };
       };

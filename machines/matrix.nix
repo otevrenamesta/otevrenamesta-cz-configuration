@@ -1,5 +1,16 @@
 { config, pkgs, ... }:
 
+let
+  riotConfig = {
+    default_server_config = {
+      "m.homeserver" = {
+        base_url = "https://matrix.vesp.cz";
+        server_name = "vesp.cz";
+      };
+    };
+  };
+  riotPkg = pkgs.callPackages ../packages/riot-web.nix { conf = riotConfig; };
+in
 {
   environment.systemPackages = with pkgs; [
   ];
@@ -36,16 +47,6 @@
         type = "http";
         x_forwarded = true;
       }
-#      { # client
-#        bind_address = "";
-#        port = 8008;
-#        resources = [
-#          { compress = true; names = [ "client" "webclient" ]; }
-#        ];
-#        tls = false;
-#        type = "http";
-#        x_forwarded = true;
-#      }
     ];
     extraConfig = ''
       max_upload_size: "100M"
@@ -57,11 +58,16 @@
 #    recaptcha_private_key = ./matrix/recaptcha;
   };
 
+  services.nginx = {
+    enable = true;
+    virtualHosts."riot.vesp.cz".root = riotPkg;
+  };
+
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
-      8448  # Matrix federation
-      8008  # Matrix client
+      8448  # Matrix federation and client connections
+      80    # nginx+riot
     ];
   };
 }
