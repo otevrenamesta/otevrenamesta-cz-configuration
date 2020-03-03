@@ -93,6 +93,7 @@ in
     networks = [
       "192.168.122.101/32" # relay ML domains to sympa & allow sympa to send outgoing email
       "192.168.122.105/32" # mediawiki
+      "37.205.14.138/32"   # mesta-services (matrix)
     ];
     relayDomains = [ "lists.otevrenamesta.cz" ];
     transport = ''
@@ -177,7 +178,7 @@ in
   services.rspamd = {
     locals = {
       "options.inc" = { text = ''
-        local_addrs = [ "192.168.122.101", "192.168.122.105" ];
+        local_addrs = [ "192.168.122.101", "192.168.122.105", "37.205.14.138" ];
       ''; };
       "classifier-bayes.conf" = { text = ''
         autolearn = true;

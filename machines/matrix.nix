@@ -8,10 +8,31 @@ let
         server_name = "vesp.cz";
       };
     };
+    # don't allow choosing custom homeserver
+    disable_custom_urls = true;
   };
   riotPkg = pkgs.callPackages ../packages/riot-web.nix { conf = riotConfig; };
 in
 {
+  nixpkgs.overlays = [
+    # https://github.com/matrix-org/synapse/issues/6211
+    # https://twistedmatrix.com/trac/ticket/9740
+    # https://github.com/twisted/twisted/pull/1225
+    (self: super: {
+      python3 = super.python3.override {
+        packageOverrides = python-self: python-super: {
+          twisted = python-super.twisted.overrideAttrs (attrs: {
+            name = "patched-Twisted-18.9.0";
+            # package overrides patchPhase, adding patch to `patches` does nothing
+            patchPhase = attrs.patchPhase + ''
+              patch -p1 < ${../packages/twisted-smtp-tlsv10.patch}
+            '';
+          });
+        };
+      };
+    })
+  ];
+
   environment.systemPackages = with pkgs; [
   ];
 
@@ -50,6 +71,12 @@ in
     ];
     extraConfig = ''
       max_upload_size: "100M"
+
+      email:
+        smtp_host: mx.otevrenamesta.cz
+        smtp_port: 25
+        require_transport_security: true
+        notif_from: "Matrix <info@otevrenamesta.cz>"
     '';
 
     enable_registration = true;
