@@ -1,0 +1,44 @@
+diff --git a/synapse/app/homeserver.py b/synapse/app/homeserver.py
+index c2a334a2b..6fecae327 100644
+--- a/synapse/app/homeserver.py
++++ b/synapse/app/homeserver.py
+@@ -34,6 +34,7 @@ from twisted.python.failure import Failure
+ from twisted.web.resource import EncodingResourceWrapper, IResource, NoResource
+ from twisted.web.server import GzipEncoderFactory
+ from twisted.web.static import File
++from twisted.web.util import Redirect
+ 
+ import synapse
+ import synapse.config.logger
+@@ -241,16 +242,28 @@ class SynapseHomeServer(HomeServer):
+             resources[SERVER_KEY_V2_PREFIX] = KeyApiV2Resource(self)
+ 
+         if name == "webclient":
+-            webclient_path = self.get_config().web_client_location
++            webclient_loc = self.get_config().web_client_location
+ 
+-            if webclient_path is None:
++            if webclient_loc is None:
+                 logger.warning(
+                     "Not enabling webclient resource, as web_client_location is unset."
+                 )
++            elif webclient_loc.startswith("http://") or webclient_loc.startswith(
++                "https://"
++            ):
++                resources[WEB_CLIENT_PREFIX] = RootRedirect(webclient_loc)
+             else:
++                logger.warning(
++                    "Running webclient on the same domain is not recommended: "
++                    "https://github.com/matrix-org/synapse#security-note"
++                )
++                logger.warning(
++                    "After you move webclient to different host you can set "
++                    "web_client_location to its full URL to get redirected."
++                )
+                 # GZip is disabled here due to
+                 # https://twistedmatrix.com/trac/ticket/7678
+-                resources[WEB_CLIENT_PREFIX] = File(webclient_path)
++                resources[WEB_CLIENT_PREFIX] = File(webclient_loc)
+ 
+         if name == "metrics" and self.get_config().enable_metrics:
+             resources[METRICS_PREFIX] = MetricsResource(RegistryProxy)

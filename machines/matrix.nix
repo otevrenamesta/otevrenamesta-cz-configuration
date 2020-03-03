@@ -12,6 +12,13 @@ let
     disable_custom_urls = true;
   };
   riotPkg = pkgs.callPackages ../packages/riot-web.nix { conf = riotConfig; };
+  synapsePkg = pkgs.matrix-synapse.overrideAttrs (attrs: {
+    # https://github.com/matrix-org/synapse/pull/7006
+    # probably won't be accepted, can be handled by proxy instead
+    patches = attrs.patches ++ [
+      ../packages/synapse-web-client-redirect.patch
+    ];
+  });
 in
 {
   nixpkgs.overlays = [
@@ -47,6 +54,7 @@ in
   services.postgresql.enable = true;
 
   services.matrix-synapse = {
+    package = synapsePkg;
     enable = true;
     no_tls = true;
     server_name = "vesp.cz";
@@ -71,6 +79,8 @@ in
     ];
     extraConfig = ''
       max_upload_size: "100M"
+      # see the comment above synapsePkg definition
+      web_client_location: "https://riot.vesp.cz/"
 
       email:
         smtp_host: mx.otevrenamesta.cz
