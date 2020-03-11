@@ -8,8 +8,16 @@ let
         server_name = "vesp.cz";
       };
     };
+    defaultCountryCode = "CZ";
     # don't allow choosing custom homeserver
     disable_custom_urls = true;
+    ## matomo tracking
+    #piwik = {
+    #  url = "https://navstevnost.otevrenamesta.cz/";
+    #  siteId = 6;
+    #  whitelistedHSUrls = [ "https://matrix.vesp.cz" ];
+    #  whitelistedISUrls = [ "https://vector.im" "https://matrix.vesp.cz" ];
+    #};
   };
   riotPkg = pkgs.callPackages ../packages/riot-web.nix { conf = riotConfig; };
   synapsePkg = pkgs.matrix-synapse.overrideAttrs (attrs: {
