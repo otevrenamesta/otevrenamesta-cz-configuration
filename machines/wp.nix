@@ -35,6 +35,7 @@ in
 {
 
   environment.systemPackages = with pkgs; [
+    wp-cli
   ];
 
   networking = {
@@ -82,6 +83,11 @@ in
           $_SERVER['HTTPS'] = 'on';
           $_SERVER['SERVER_PORT'] = 443;
       }
+
+      // If you get an error about cookies being blocked when you try to log in to your network
+      // subsite (or log in fails with no error message), open your wp-config.php file and add this
+      // line after the other code you added to create the network:
+      define('COOKIE_DOMAIN', $_SERVER['HTTP_HOST']);
     '';
     themes = [ responsiveTheme ];
     plugins = [ akismetPlugin ];

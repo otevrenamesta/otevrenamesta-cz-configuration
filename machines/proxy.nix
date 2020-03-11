@@ -567,8 +567,7 @@
       "wp.otevrenamesta.cz" = {
         forceSSL = true;
         enableACME = true;
-        # i don't think enableACME works with wildcard certs, at least not in this nixpkgs version anyway
-        serverAliases = [ "p7.wp.otevrenamesta.cz" "ck.wp.otevrenamesta.cz" "paro.wp.otevrenamesta.cz" ];
+        serverAliases = [ "p7.wp.otevrenamesta.cz" "ck.wp.otevrenamesta.cz" "paro.wp.otevrenamesta.cz" "www2.vesp.cz" ];
 
         locations = {
           "/" = {
