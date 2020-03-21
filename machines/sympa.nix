@@ -4,9 +4,14 @@ let
   secrets = import ../secrets/sympa.nix;
 in
 {
+  imports = [
+    # local copy, get rid of it after upgrading to 20.03
+    # delete ../packages/sympa/ as well
+    ../modules/sympa-overrides.nix
+    ../modules/sympa.nix
+  ];
 
   environment.systemPackages = with pkgs; [ vim ];
-  #environment.systemPackages = with pkgs; [ vim (let n = import ../../nixpkgs {}; in n.pgloader) ];
 
   networking = {
      firewall.allowedTCPPorts = [ 80 25 443 ];
@@ -32,7 +37,6 @@ in
 
   documentation.enable = false;
   documentation.nixos.enable = false;
-  #services.nginx.virtualHosts."lists.try.otevrenamesta.cz" = { default = true; };
 
   services.postfix = {
     enable = true;
@@ -64,24 +68,8 @@ in
       host = "localhost";
       user = "sympa";
     };
-#    database = {
-#      type = "PostgreSQL";
-#      host = "/run/postgresql";
-#      user = "sympa";
-#    };
-    extraConfig = ''
-      cookie ${secrets.cookie}
-    '';
+    settings = {
+      cookie = secrets.cookie;
+    };
   };
-
-#  services.postgresql = {
-#    enable = true;
-#    package = pkgs.postgresql_11;
-#    authentication = "local all all trust";
-#    initialScript = pkgs.writeText "postgresql-init" ''
-#      CREATE ROLE sympa NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT LOGIN;
-#      CREATE DATABASE sympa OWNER sympa ENCODING 'UNICODE';
-#    '';
-#  };
-
 }

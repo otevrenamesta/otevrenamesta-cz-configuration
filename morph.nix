@@ -15,13 +15,6 @@ let
     sha256 = "0gxd10djy6khbjb012s9fl3lpjzqaknfv2g4dpfjxwwj9cbkj04h";
   }) {};
 
-  # newPkgs with sympa changes on top
-  # TODO update to newerPkgs + sympa module in this repo
-  sympaPkgs = builtins.fetchTarball {
-    url = "https://github.com/mmilata/nixpkgs/archive/68bc3f764ed497e1ded594eba64e38e25e769cf4.tar.gz";
-    sha256 = "0qmsmkjznx3ns20hyyqh1ym7jy29ypyjhd8yaxyglpfszrqffgk0";
-  };
-
   # for VZ nodes
   legacyPkgs = builtins.fetchTarball {
     url    = "https://d3g5gsiof5omrk.cloudfront.net/nixos/17.09/nixos-17.09.3243.bca2ee28db4/nixexprs.tar.xz";
@@ -150,7 +143,7 @@ in
 
     deployment = {
       nixPath = [
-        { prefix = "nixpkgs"; path = sympaPkgs; }
+        { prefix = "nixpkgs"; path = newerPkgs; }
       ];
     };
 
