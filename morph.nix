@@ -4,8 +4,8 @@ let
   # update with nix-prefetch-url --unpack <URL>
   # tracks nixos-19.09 branch
   newerPkgs = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/b9cb3b2fb2f45ac8f3a8f670c90739eb34207b0e.tar.gz";
-    sha256 = "1cpjmsa2lwfxg55ac02w9arbd3y5617d19x91sd1fq521jqbnnpc";
+    url = "https://github.com/NixOS/nixpkgs/archive/00108868bbedf880af5b568c61103275b09513af.tar.gz";
+    sha256 = "15r8dra1p0h4k4fwhs97yl4bnaz7dqjka6a984749xli7y1p0z5g";
   };
 
   # Pin the deployment package-set to a specific version of nixpkgs

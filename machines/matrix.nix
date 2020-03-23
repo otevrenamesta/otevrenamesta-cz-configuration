@@ -19,7 +19,7 @@ let
     #  whitelistedISUrls = [ "https://vector.im" "https://matrix.vesp.cz" ];
     #};
   };
-  riotPkg = pkgs.callPackages ../packages/riot-web.nix { conf = riotConfig; };
+  riotPkg = pkgs.riot-web.override { conf = riotConfig; };
   synapsePkg = pkgs.matrix-synapse.overrideAttrs (attrs: {
     # https://github.com/matrix-org/synapse/pull/7006
     # probably won't be accepted, can be handled by proxy instead
