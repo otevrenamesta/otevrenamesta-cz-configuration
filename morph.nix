@@ -103,6 +103,12 @@ in
       ./machines/mail.nix
     ];
 
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = newerPkgs; }
+      ];
+    };
+
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/50884094-57df-49fe-984a-5e25c1f629ac";
         fsType = "ext4";
