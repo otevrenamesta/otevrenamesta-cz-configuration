@@ -19,6 +19,7 @@ in
     enable = true;
     fqdn = "mx.otevrenamesta.cz";
     domains = [ "otevrenamesta.cz" "try.otevrenamesta.cz"];
+    certificateScheme = 3; # use LetsEncrypt, requires vhost on proxy
     loginAccounts = {
 
       ## domain @otevrenamesta.cz:

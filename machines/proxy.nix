@@ -304,6 +304,13 @@
         };
       };
 
+      # needed for mail server to obtain LE cert
+      "mx.otevrenamesta.cz" = {
+        enableACME = true;
+        addSSL = true;
+        acmeFallbackHost = "192.168.122.100";
+      };
+
       "navstevnost.otevrenamesta.cz" = {
         enableACME = true;
         forceSSL = true;
