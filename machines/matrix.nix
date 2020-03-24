@@ -11,13 +11,14 @@ let
     defaultCountryCode = "CZ";
     # don't allow choosing custom homeserver
     disable_custom_urls = true;
-    ## matomo tracking
-    #piwik = {
-    #  url = "https://navstevnost.otevrenamesta.cz/";
-    #  siteId = 6;
-    #  whitelistedHSUrls = [ "https://matrix.vesp.cz" ];
-    #  whitelistedISUrls = [ "https://vector.im" "https://matrix.vesp.cz" ];
-    #};
+    branding = {
+      authHeaderLogoUrl = "/vesp-logo.svg";
+      authFooterLinks = [
+	{ text = "Provozují Otevřená města, z.s."; url = "https://www.otevrenamesta.cz"; }
+	{ text = "Server poskytuje vpsFree.cz, z.s."; url = "https://www.vpsfree.cz"; }
+      ];
+    };
+    embeddedPages.welcomeUrl = "/vesp-welcome.html";
   };
   riotPkg = pkgs.riot-web.override { conf = riotConfig; };
   synapsePkg = pkgs.matrix-synapse.overrideAttrs (attrs: {
@@ -105,7 +106,12 @@ in
 
   services.nginx = {
     enable = true;
-    virtualHosts."riot.vesp.cz".root = riotPkg;
+    virtualHosts."riot.vesp.cz" = {
+      root = riotPkg;
+      locations."=/vesp-logo.svg".alias = ../media/vesp135px-matrix.svg;
+      # keep this in sync with ${riotPkg}/welcome.html
+      locations."=/vesp-welcome.html".alias = ../media/matrix-welcome.html;
+    };
   };
 
   networking.firewall = {
