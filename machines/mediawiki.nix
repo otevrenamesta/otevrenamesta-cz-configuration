@@ -56,6 +56,11 @@ with lib;
         url = "https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_33-4395442.tar.gz";
         sha256 = "0d85qrmivb64w9x6hbkl2jmlb14qgma1nr2q6zksi619gvzmdl4y";
       };
+      # after 20.09, see also https://github.com/NixOS/nixpkgs/pull/83436
+      ConfirmEdit = pkgs.fetchzip {
+        url = "https://extdist.wmflabs.org/dist/extensions/ConfirmEdit-REL1_33-0e549d7.tar.gz";
+        sha256 = "0dkdawhjwcw7kpy1wlrp90kkbyw7xd4jl4627bj1jlc65lkzv7vi";
+      };
       Matomo = pkgs.fetchzip {
         url = "https://github.com/DaSchTour/matomo-mediawiki-extension/archive/v4.0.1.tar.gz";
         sha256 = "0g5rd3zp0avwlmqagc59cg9bbkn3r7wx7p6yr80s644mj6dlvs1b";
@@ -101,6 +106,15 @@ with lib;
       # matomo tracking
       $wgMatomoURL = "navstevnost.otevrenamesta.cz";
       $wgMatomoIDSite = "5";
+
+      # anti-spam
+      wfLoadExtension('ConfirmEdit/QuestyCaptcha');
+      $wgCaptchaQuestions = [
+        'Jak se jmenuje druhé největší město ČR?' => 'Brno',
+        'Pátý den týdne je?' => [ 'Pátek', 'Patek' ],
+        'Pátým měsícem roku je?' => [ 'Květen', 'Kveten' ],
+        'Kolik prstů má ruka?' => [ '5', 'Pět', 'Pet' ],
+      ];
     '';
   };
 
