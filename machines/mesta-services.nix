@@ -8,6 +8,9 @@ in
     ../modules/libvirt.nix
   ];
 
+  # TODO: move to profiles/ct.nix after mesta-libvirt is also upgraded
+  systemd.services.systemd-udev-trigger.enable = false;
+
   environment.systemPackages = with pkgs; [
      nmap
   ];
@@ -20,7 +23,7 @@ in
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 80 3306 ]; # FIXME really expose mysql to everyone?
+  networking.firewall.allowedTCPPorts = [ 80 ];
 
 # old proxy needs access for NIA
 #  # restrict incoming connections to proxy.otevrenamesta.cz only

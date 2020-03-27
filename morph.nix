@@ -92,6 +92,12 @@ in
       ./profiles/ct.nix
       ./machines/mesta-services.nix
     ];
+
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = newerPkgs; }
+      ];
+    };
   };
 
   # qemu guest port 10022 (mail)
