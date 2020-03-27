@@ -77,8 +77,8 @@
     glpi = {
       listen = "/run/phpfpm-glpi.sock";
       phpPackage = pkgs.php;
+      user = "nginx";
       extraConfig = ''
-        user = nginx
         pm = dynamic
         pm.max_children = 75
         pm.start_servers = 10

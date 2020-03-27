@@ -69,6 +69,12 @@ in
       ./machines/glpi.nix
     ];
 
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = newerPkgs; }
+      ];
+    };
+
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/11e70a61-7abc-478d-a436-4d601c8b1502";
         fsType = "ext4";
@@ -113,7 +119,7 @@ in
       };
   };
 
-  # qemu guest port 10222 (consul na services)
+  # qemu guest port 10322 (roundcube na services)
   roundcube = { config, pkgs, ... }: with pkgs; {
     imports = [
       ./env.nix
