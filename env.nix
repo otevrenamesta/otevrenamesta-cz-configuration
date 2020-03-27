@@ -1,4 +1,22 @@
 { config, pkgs, ... }:
+let
+  vimCustom = (pkgs.vimUtils.makeCustomizable pkgs.vim).customize {
+    name = "vim";
+    vimrcConfig = {
+      customRC = ''
+        runtime vimrc
+
+        set mouse=
+        if has("autocmd")
+          au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+        endif
+      '';
+      packages.myVimPackage = with pkgs.vimPlugins; {
+        start = [ vim-nix ];
+      };
+    };
+  };
+in
 {
   time.timeZone = "Europe/Amsterdam";
   networking.nameservers = [ "172.18.2.10" "172.18.2.11" "208.67.222.222" "208.67.220.220" ];
@@ -12,7 +30,7 @@
     lynx
     screen
     tmux
-    vim
+    vimCustom
     wget
     git
     nmap
