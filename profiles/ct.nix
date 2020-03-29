@@ -10,6 +10,8 @@ in
     "${vpsadminos}/os/lib/nixos-container/networking.nix"
   ];
 
+  systemd.services.systemd-udev-trigger.enable = false;
+
   services.resolved.enable = false;
 }
 

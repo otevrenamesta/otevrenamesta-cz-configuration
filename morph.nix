@@ -40,6 +40,12 @@ in
       ./profiles/ct.nix
       ./machines/mesta-libvirt.nix
     ];
+
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = newerPkgs; }
+      ];
+    };
   };
 
   # qemu guest port 10222 (consul na services)
@@ -193,26 +199,6 @@ in
       { device = "/dev/disk/by-uuid/a821424a-1ffd-4c08-acf9-74078ee1eeff";
         fsType = "ext4";
       };
-
-    /*
-    deployment = {
-      healthChecks = {
-        cmd = [{
-          cmd = ["true" "one argument" "another argument"];
-          description = "Testing that 'true' works.";
-        }];
-        http = [
-          {
-            scheme = "http";
-            port = 80;
-            path = "/";
-            description = "Check whether nginx is running.";
-            period = 1; # number of seconds between retries
-          }
-        ];
-      };
-    };
-    */
   };
 
   # qemu guest port 10322 (matomo)

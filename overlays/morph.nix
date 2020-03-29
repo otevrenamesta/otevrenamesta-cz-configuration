@@ -1,7 +1,7 @@
 self: super:
 {
   morph = super.morph.overrideAttrs (oldAttrs: rec {
-    name = oldAttrs.name + "-sorki";
+    name = oldAttrs.pname + "-1.2.0-sorki";
     src = super.fetchFromGitHub {
       owner = "sorki";
       repo = "morph";

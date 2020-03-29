@@ -8,9 +8,6 @@ in
     ../modules/libvirt.nix
   ];
 
-  # TODO: move to profiles/ct.nix after mesta-libvirt is also upgraded
-  systemd.services.systemd-udev-trigger.enable = false;
-
   environment.systemPackages = with pkgs; [
      nmap
   ];
