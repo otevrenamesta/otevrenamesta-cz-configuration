@@ -30,18 +30,25 @@ let
   });
 in
 {
-  nixpkgs.overlays = [
+  nixpkgs.overlays = let
     # https://github.com/matrix-org/synapse/issues/6211
     # https://twistedmatrix.com/trac/ticket/9740
     # https://github.com/twisted/twisted/pull/1225
+    # can be removed after upgrading to twisted > 20.3.y
+    twistedSmtpTLSv10Patch = pkgs.fetchpatch {
+      name = "twisted-smtp-tlsv10.patch";
+      url = "https://github.com/twisted/twisted/pull/1225.diff";
+      sha256 = "14bk57b90n2kzd8mv9xngqzsr0dr7a05nj2mpkp6dmyhjsd3skih";
+    };
+  in [
     (self: super: {
       python3 = super.python3.override {
         packageOverrides = python-self: python-super: {
           twisted = python-super.twisted.overrideAttrs (attrs: {
-            name = "patched-Twisted-18.9.0";
+            pname = "patched-Twisted";
             # package overrides patchPhase, adding patch to `patches` does nothing
             patchPhase = attrs.patchPhase + ''
-              patch -p1 < ${../packages/twisted-smtp-tlsv10.patch}
+              patch -p1 < ${twistedSmtpTLSv10Patch}
             '';
           });
         };
