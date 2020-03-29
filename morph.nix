@@ -34,7 +34,7 @@ in
   };
 
   # uses network.pkgs
-  mesta-libvirt = { config, pkgs, ... }: with pkgs; {
+  mesta-libvirt = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/ct.nix
@@ -43,7 +43,7 @@ in
   };
 
   # qemu guest port 10222 (consul na services)
-  consul = { config, pkgs, ... }: with pkgs; {
+  consul = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/qemu.nix
@@ -62,7 +62,7 @@ in
   };
 
   # qemu guest port 10422 (GLPI)
-  glpi = { config, pkgs, ... }: with pkgs; {
+  glpi = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/qemu.nix
@@ -86,7 +86,7 @@ in
       };
   };
 
-  mesta-services = { config, pkgs, ... }: with pkgs; {
+  mesta-services = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/ct.nix
@@ -101,7 +101,7 @@ in
   };
 
   # qemu guest port 10022 (mail)
-  mail = { config, pkgs, ... }: with pkgs; {
+  mail = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/qemu.nix
@@ -126,7 +126,7 @@ in
   };
 
   # qemu guest port 10322 (roundcube na services)
-  roundcube = { config, pkgs, ... }: with pkgs; {
+  roundcube = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/qemu.nix
@@ -146,7 +146,7 @@ in
 
 
   # qemu guest port 10122 (sympa)
-  sympa = { config, pkgs, ... }: with pkgs; {
+  sympa = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/qemu.nix
@@ -171,7 +171,7 @@ in
   };
 
   # qemu guest port 10222 (midpoint)
-  midpoint = { config, pkgs, ... }: with pkgs; {
+  midpoint = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/qemu.nix
@@ -216,7 +216,7 @@ in
   };
 
   # qemu guest port 10322 (matomo)
-  matomo = { config, pkgs, ... }: with pkgs; {
+  matomo = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/qemu.nix
@@ -241,7 +241,7 @@ in
   };
 
   # qemu guest port 10722 (nia na services)
-  nia = { config, pkgs, ... }: with pkgs; {
+  nia = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/qemu.nix
@@ -260,7 +260,7 @@ in
   };
 
   # qemu guest port 10822 (ucto na services)
-  ucto = { config, pkgs, ... }: with pkgs; {
+  ucto = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/qemu.nix
@@ -285,7 +285,7 @@ in
   };
 
   # qemu guest port 10922 (matrix na services)
-  matrix = { config, pkgs, ... }: with pkgs; {
+  matrix = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/qemu.nix
@@ -311,7 +311,7 @@ in
 
 
   # qemu guest port 10522 (wp)
-  wp = { config, pkgs, ... }: with pkgs; {
+  wp = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/qemu.nix
@@ -359,7 +359,7 @@ in
       };
   };
 
-  old-proxy = { config, pkgs, ... }: with pkgs; {
+  old-proxy = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./machines/proxy.nix
@@ -412,7 +412,8 @@ in
       };
     };
   };
-  new-proxy = { config, pkgs, ... }: with pkgs; {
+
+  new-proxy = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/qemu.nix
