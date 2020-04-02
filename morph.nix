@@ -3,14 +3,8 @@ let
   # update with nix-prefetch-url --unpack <URL>
   # tracks nixos-19.09 branch
   pkgs1909 = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/00108868bbedf880af5b568c61103275b09513af.tar.gz";
-    sha256 = "15r8dra1p0h4k4fwhs97yl4bnaz7dqjka6a984749xli7y1p0z5g";
-  };
-
-  # TODO consul and NIA remaining
-  oldPkgs = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs-channels/archive/180aa21259b666c6b7850aee00c5871c89c0d939.tar.gz";
-    sha256 = "0gxd10djy6khbjb012s9fl3lpjzqaknfv2g4dpfjxwwj9cbkj04h";
+    url = "https://github.com/NixOS/nixpkgs/archive/d011e4749457af484adf2e90062c83a44ad072a4.tar.gz";
+    sha256 = "1nvhya0v98agidgxv83sb7xyb559qagx9f6iqknpxhxsv09j2qsp";
   };
 
   # for VZ nodes
@@ -31,7 +25,6 @@ in
     description = "om hosts";
   };
 
-  # uses network.pkgs
   mesta-libvirt = { config, pkgs, ... }: {
     imports = [
       ./env.nix
@@ -47,12 +40,6 @@ in
       ./profiles/qemu.nix
       ./machines/consul.nix
     ];
-
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = oldPkgs; }
-      ];
-    };
 
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/292f707d-271c-4864-9e44-9d5c3d3b4243";
@@ -196,7 +183,18 @@ in
       ./machines/nia.nix
     ];
 
-    deployment = {
+    assertions = [
+      { assertion = false;
+        message = "Machine managed locally by Marek, sync with configuration.nix before deleting this assertion.";
+      }
+    ];
+
+    deployment = let
+      oldPkgs = builtins.fetchTarball {
+        url = "https://github.com/NixOS/nixpkgs-channels/archive/180aa21259b666c6b7850aee00c5871c89c0d939.tar.gz";
+        sha256 = "0gxd10djy6khbjb012s9fl3lpjzqaknfv2g4dpfjxwwj9cbkj04h";
+      };
+    in {
       nixPath = [
         { prefix = "nixpkgs"; path = oldPkgs; }
       ];
