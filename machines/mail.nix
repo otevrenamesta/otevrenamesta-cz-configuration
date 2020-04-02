@@ -24,7 +24,7 @@ in
   mailserver = {
     enable = true;
     fqdn = "mx.otevrenamesta.cz";
-    domains = [ "otevrenamesta.cz" "try.otevrenamesta.cz"];
+    domains = [ "otevrenamesta.cz" "try.otevrenamesta.cz" "dotace.praha3.cz" ];
     certificateScheme = 3; # use LetsEncrypt, requires vhost on proxy
     loginAccounts = {
 
@@ -73,6 +73,14 @@ in
                redirect "${emails.ln_}";
                redirect "${emails.lnl_}";
           ''; 
+      };
+
+      "noreply@dotace.praha3.cz" = {
+        hashedPassword = hashes.dp_;
+
+        #sieveScript = ''
+        # redirect "${email.somewhere-else}";
+        #'';
       };
     };
 

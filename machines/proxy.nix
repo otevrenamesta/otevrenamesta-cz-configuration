@@ -109,7 +109,7 @@
       };
 
       "dsw2.otevrenamesta.cz" = {
-        serverAliases = [ "praha3.dsw2.otevrenamesta.cz" "novemestonm.dsw2.otevrenamesta.cz" ];
+        serverAliases = [ "praha3.dsw2.otevrenamesta.cz" "novemestonm.dsw2.otevrenamesta.cz" "dotace.praha3.cz" ];
         forceSSL = true;
         enableACME = true;
 
