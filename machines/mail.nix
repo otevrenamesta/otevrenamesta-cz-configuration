@@ -1,8 +1,14 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   emails = import ../secrets/private-mail.nix;
   hashes = import ../secrets/private-mail-hash.nix;
 
+  ipWhitelist = [
+    "192.168.122.101" # relay ML domains to sympa & allow sympa to send outgoing email
+    "192.168.122.105" # mediawiki
+    "37.205.14.138"   # mesta-services (matrix)
+    "185.8.165.109"   # dsw2
+  ];
 in
 
 {
@@ -91,11 +97,7 @@ in
   };
 
   services.postfix = {
-    networks = [
-      "192.168.122.101/32" # relay ML domains to sympa & allow sympa to send outgoing email
-      "192.168.122.105/32" # mediawiki
-      "37.205.14.138/32"   # mesta-services (matrix)
-    ];
+    networks = map (ip: "${ip}/32") ipWhitelist;
     relayDomains = [ "lists.otevrenamesta.cz" ];
     transport = ''
       lists.otevrenamesta.cz    relay:[192.168.122.101]
@@ -161,7 +163,7 @@ in
 
     # disable smtpd_sender_restrictions = reject_sender_login_mismatch that SNM adds
     # KEEP THIS IN SYNC W/ submissionOptions IN nixos-mailserver/mail-server/postfix.nix
-    submissionOptions = pkgs.lib.mkForce {
+    submissionOptions = lib.mkForce {
       smtpd_tls_security_level = "encrypt";
       smtpd_sasl_auth_enable = "yes";
       smtpd_sasl_type = "dovecot";
@@ -179,7 +181,7 @@ in
   services.rspamd = {
     locals = {
       "options.inc" = { text = ''
-        local_addrs = [ "192.168.122.101", "192.168.122.105", "37.205.14.138" ];
+        local_addrs = [ ${lib.concatMapStringsSep ", " (ip: ''"${ip}"'' ) ipWhitelist} ];
       ''; };
       "classifier-bayes.conf" = { text = ''
         autolearn = true;

@@ -109,6 +109,7 @@
       };
 
       "dsw2.otevrenamesta.cz" = {
+        serverAliases = [ "praha3.dsw2.otevrenamesta.cz" "novemestonm.dsw2.otevrenamesta.cz" ];
         forceSSL = true;
         enableACME = true;
 
