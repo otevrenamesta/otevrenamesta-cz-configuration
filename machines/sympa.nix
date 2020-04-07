@@ -35,7 +35,6 @@ in
     ];
   };
 
-  documentation.enable = false;
   documentation.nixos.enable = false;
 
   services.postfix = {
@@ -70,6 +69,16 @@ in
     };
     settings = {
       cookie = secrets.cookie;
+    };
+    settingsFile = {
+      "etc/lists.otevrenamesta.cz/scenari/send.privateoreditorkey-whitelist-om".text = ''
+        title.gettext Private, moderated for non subscribers, @otevrenamesta.cz whitelisted
+
+        is_subscriber([listname],[sender]) smtp,dkim,md5,smime    -> do_it
+        is_editor([listname],[sender])     smtp,dkim,md5,smime    -> do_it
+        match([sender], /.*@otevrenamesta.cz/) smtp,dkim,md5,smime -> do_it
+        true()                             smtp,dkim,md5,smime    -> editorkey
+      '';
     };
   };
 }
