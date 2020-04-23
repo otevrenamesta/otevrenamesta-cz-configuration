@@ -19,6 +19,7 @@ in
       url = "https://github.com/otevrenamesta/nixos-mailserver/archive/70ec1432187f5a97c6ed2b4614ca4c83a0755e65.tar.gz";
       sha256 = "1vqrbvjf0fxmlg3qc8ggx3k8ha7sqw2gzc0pbhwhprvarx1haqaa";
     })
+    ../modules/postfix-report.nix
   ];
 
   mailserver = {
@@ -195,5 +196,12 @@ in
         autolearn = true;
       ''; };
     };
+  };
+
+  services.postfix-report = {
+    enable = true;
+    saslUsername = "noreply@dotace.praha3.cz";
+    sshDestination = "maillog@185.8.165.109";
+    onCalendar = "2020-4,5,6-* 23:30:00";
   };
 }
