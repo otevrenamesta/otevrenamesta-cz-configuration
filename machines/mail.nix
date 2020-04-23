@@ -52,6 +52,14 @@ in
           ''; 
       };
 
+      "dmarc@otevrenamesta.cz" = {
+        hashedPassword = hashes.dmarc_;
+
+        sieveScript = ''
+          redirect "${emails.mm_}";
+        '';
+      };
+
       ## domain @try.otevrenamesta.cz:
       "user1@try.otevrenamesta.cz" = {
           hashedPassword = "${hashes.tt_}";
@@ -100,7 +108,7 @@ in
   services.postsrsd = {
     enable = true;
     domain = "otevrenamesta.cz";
-    excludeDomains = [ "lists.otevrenamesta.cz" ];
+    excludeDomains = [ "lists.otevrenamesta.cz" "dotace.praha3.cz" ];
     forwardPort = 10001;
     reversePort = 10002;
   };
@@ -189,13 +197,30 @@ in
 
   services.rspamd = {
     locals = {
-      "options.inc" = { text = ''
+      "options.inc".text = ''
         local_addrs = [ ${lib.concatMapStringsSep ", " (ip: ''"${ip}"'' ) ipWhitelist} ];
-      ''; };
-      "classifier-bayes.conf" = { text = ''
+      '';
+      "classifier-bayes.conf".text = ''
         autolearn = true;
-      ''; };
+      '';
+      "redis.conf".text = ''
+        servers = "127.0.0.1";
+      '';
+      "actions.conf".text = ''
+        greylist = 4;
+        add_header = 6;
+        reject = 15;
+      '';
+      "dkim_signing.conf".text = ''
+        enable = false;
+      '';
     };
+  };
+
+  # needed by rspamd for greylisting to work
+  services.redis = {
+    enable = true;
+    bind = "127.0.0.1";
   };
 
   services.postfix-report = {

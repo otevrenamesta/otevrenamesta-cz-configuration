@@ -17,6 +17,13 @@
           { destination = "[fda7:1646:3af8:666e:5054:ff:fe27:cbe]:22";  sourcePort = 22; }
           { destination = "[fda7:1646:3af8:666e:5054:ff:fe27:cbe]:80";  sourcePort = 80; }
           { destination = "[fda7:1646:3af8:666e:5054:ff:fe27:cbe]:443"; sourcePort = 443; }
+
+          { destination = "[fda7:1646:3af8:666e:5054:ff:fe6b:6c86]:25"; sourcePort = 25; }
+          { destination = "[fda7:1646:3af8:666e:5054:ff:fe6b:6c86]:143"; sourcePort = 143; }
+          { destination = "[fda7:1646:3af8:666e:5054:ff:fe6b:6c86]:587"; sourcePort = 587; }
+          { destination = "[fda7:1646:3af8:666e:5054:ff:fe6b:6c86]:993"; sourcePort = 993; }
+          { destination = "[fda7:1646:3af8:666e:5054:ff:fe6b:6c86]:4190"; sourcePort = 4190; }
+          { destination = "[fda7:1646:3af8:666e:5054:ff:fe6b:6c86]:12340"; sourcePort = 12340; }
         ];
       };
     };
