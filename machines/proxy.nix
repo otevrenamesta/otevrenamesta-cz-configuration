@@ -187,7 +187,8 @@
       };
 
       "glpi.otevrenamesta.cz" = {
-        #forceSSL = true;
+        forceSSL = true;
+        #addSSL = true;
         enableACME = true;
 
         locations = {

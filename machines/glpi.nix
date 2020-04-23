@@ -28,33 +28,33 @@
     root = "/var/www/glpi";
     extraConfig = ''
       location = /index.php {
-        fastcgi_pass unix:/run/phpfpm-glpi.sock;
+        fastcgi_pass unix:${config.services.phpfpm.pools.glpi.socket};
       }
       location = /apixmlrpc.php {
-        fastcgi_pass unix:/run/phpfpm-glpi.sock;
+        fastcgi_pass unix:${config.services.phpfpm.pools.glpi.socket};
       }
       location = /apirest.php {
-        fastcgi_pass unix:/run/phpfpm-glpi.sock;
+        fastcgi_pass unix:${config.services.phpfpm.pools.glpi.socket};
       }
       location = /status.php {
-        fastcgi_pass unix:/run/phpfpm-glpi.sock;
+        fastcgi_pass unix:${config.services.phpfpm.pools.glpi.socket};
       }
       location = /test.php {
-        fastcgi_pass unix:/run/phpfpm-glpi.sock;
+        fastcgi_pass unix:${config.services.phpfpm.pools.glpi.socket};
       }
 #start by practice
       location = /install/install.php {
-        fastcgi_pass unix:/run/phpfpm-glpi.sock;
+        fastcgi_pass unix:${config.services.phpfpm.pools.glpi.socket};
       }
       location = /front/login.php {
-        fastcgi_pass unix:/run/phpfpm-glpi.sock;
+        fastcgi_pass unix:${config.services.phpfpm.pools.glpi.socket};
       }
       location = /front/central.php {
-        fastcgi_pass unix:/run/phpfpm-glpi.sock;
+        fastcgi_pass unix:${config.services.phpfpm.pools.glpi.socket};
       }
   #přestalo mě bavit to dělat pro každý script extra
       location ~* ^.+.php$ {
-        fastcgi_pass unix:/run/phpfpm-glpi.sock;
+        fastcgi_pass unix:${config.services.phpfpm.pools.glpi.socket};
       }
 #end
       location = /robots.txt {
@@ -75,17 +75,18 @@
 
   services.phpfpm.pools = {
     glpi = {
-      listen = "/run/phpfpm-glpi.sock";
       phpPackage = pkgs.php;
       user = "nginx";
-      extraConfig = ''
-        pm = dynamic
-        pm.max_children = 75
-        pm.start_servers = 10
-        pm.min_spare_servers = 5
-        pm.max_spare_servers = 20
-        pm.max_requests = 500
-      '';
+      settings = {
+        "pm" = "dynamic";
+        "pm.max_children" = "75";
+        "pm.start_servers" = "10";
+        "pm.min_spare_servers" = "5";
+        "pm.max_spare_servers" = "20";
+        "pm.max_requests" = "500";
+        "listen.owner" = "nginx";
+        "listen.group" = "nginx";
+      };
     };
   };
 
