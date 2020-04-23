@@ -176,6 +176,10 @@ in
       sender_canonical_classes = [ "envelope_sender" ];
       recipient_canonical_maps = "tcp:localhost:10002";
       recipient_canonical_classes = [ "envelope_recipient" "header_recipient" ];
+
+      # alternatively we can force ipv4 for gmail only:
+      # https://serverfault.com/questions/832945/how-to-contact-gmail-team-regarding-block/834161#834161
+      smtp_address_preference = "ipv4";
     };
 
     # disable smtpd_sender_restrictions = reject_sender_login_mismatch that SNM adds
