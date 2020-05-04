@@ -39,6 +39,12 @@ in
 
         IDS=$($JOURNAL_CMD -g "$PATTERN" | egrep -o "[A-F0-9]{10}" | tr '\n' '|' | sed "s/|$//")
         FILENAME="mail-$(date -Idate).log"
+
+        if [ "x$IDS" = "x" ]; then
+          ${pkgs.openssh}/bin/ssh ${cfg.sshDestination} "echo 'no matching logs for this time period' > $FILENAME"
+          exit 0
+        fi
+
         $JOURNAL_CMD -g "($IDS): " | ${pkgs.openssh}/bin/ssh ${cfg.sshDestination} "cat > $FILENAME"
       '';
     };
