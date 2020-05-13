@@ -52,6 +52,13 @@ in
   };
 
   services.wordpress."wp.otevrenamesta.cz" = {
+    package = pkgs.wordpress.overrideAttrs (attrs: {
+      version = "5.2.6";
+      src = pkgs.fetchurl {
+        url = "https://wordpress.org/wordpress-5.2.6.tar.gz";
+        sha256 = "1svzxlnbw3ibb1vvnf4xg4g2ckz55rsj2vyb7vy1pi5sqal2v6iq";
+      };
+    });
     database = {
       host = "127.0.0.1";
       createLocally = true;
