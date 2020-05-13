@@ -103,6 +103,7 @@ in
         smtp_port: 25
         require_transport_security: true
         notif_from: "Matrix <info@otevrenamesta.cz>"
+        template_dir: ${../media/synapse-email-templates}
     '';
 
     enable_registration = true;
