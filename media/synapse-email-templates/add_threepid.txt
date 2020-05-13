@@ -1,6 +1,6 @@
-A request to add an email address to your Matrix account has been received. If this was you,
-please click the link below to confirm adding this email:
+Přijali jsme požadavek na přidání emailové adresy k Vašemu Matrix účtu. Pokud jste to
+byli Vy, klikněte prosím na tento odkaz pro potvrzení přidání emailu:
 
 {{ link }}
 
-If this was not you, you can safely ignore this email. Thank you.
+Pokud jste to nebyli Vy, ignorujte prosím tento email.

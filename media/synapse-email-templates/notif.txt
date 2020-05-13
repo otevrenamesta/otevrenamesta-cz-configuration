@@ -13,4 +13,4 @@
 {% endif %}
 {% endfor %}
 
-View {{ room.title }} at {{ notif.link }}
+Zobrazit {{ room.title }}: {{ notif.link }}

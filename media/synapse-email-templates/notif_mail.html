@@ -14,7 +14,7 @@
                     <table class="header">
                         <tr>
                             <td>
-                                <div class="salutation">Hi {{ user_display_name }},</div>
+                                <div class="salutation">Dobrý den {{ user_display_name }},</div>
                                 <div class="summarytext">{{ summary_text }}</div>
                             </td>
                             <td class="logo">
@@ -32,18 +32,17 @@
                         {% include 'room.html' with context %}
                     {% endfor %}
                     <div class="footer">
-                        <a href="{{ unsubscribe_link }}">Unsubscribe</a>
+                        <a href="{{ unsubscribe_link }}">Zrušit odběr notifikací</a>
                         <br/>
                         <br/>
                         <div class="debug">
-                            Sending email at {{ reason.now|format_ts("%c") }} due to activity in room {{ reason.room_name }} because
-                            an event was received at {{ reason.received_at|format_ts("%c") }}
-                            which is more than {{ "%.1f"|format(reason.delay_before_mail_ms / (60*1000)) }} ({{ reason.delay_before_mail_ms }}) mins ago,
+                            Email odeslán v {{ reason.now|format_ts("%c") }} z důvodu aktivity v místnosti {{ reason.room_name }} v
+                            {{ reason.received_at|format_ts("%c") }} což je před více než {{ "%.1f"|format(reason.delay_before_mail_ms / (60*1000)) }} minutami,
                             {% if reason.last_sent_ts %}
-                                and the last time we sent a mail for this room was {{ reason.last_sent_ts|format_ts("%c") }},
-                                which is more than {{ "%.1f"|format(reason.throttle_ms / (60*1000)) }} (current throttle_ms) mins ago.
+                                přičemž naposledy byl pro tuto místnost email odeslán v {{ reason.last_sent_ts|format_ts("%c") }},
+                                tedy více než {{ "%.1f"|format(reason.throttle_ms / (60*1000)) }} minutami (nastavení throttle_ms).
                             {% else %}
-                                and we don't have a last time we sent a mail for this room.
+                                přičemž nikdy předtím email pro tuto místnost odeslán nebyl.
                             {% endif %}
                         </div>
                     </div>

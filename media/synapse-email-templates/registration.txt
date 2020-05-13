@@ -1,10 +1,10 @@
-Hello there,
+Dobrý den,
 
-You have asked us to register this email with a new Matrix account. If this
-was you, please click the link below to confirm your email address:
+Přijali jsme požadavek na registraci nového Matrix účtu s touto emailovou adresou.
+Pokud jste to byli Vy, klikněte prosím na tento odkaz pro potvrzení registrace:
 
 {{ link }}
 
-If this was not you, you can safely disregard this email.
+Pokud jste to nebyli Vy, ignorujte prosím tento email.
 
-Thank you.
+Děkujeme.
