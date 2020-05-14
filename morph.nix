@@ -183,23 +183,6 @@ in
       ./machines/nia.nix
     ];
 
-    assertions = [
-      { assertion = false;
-        message = "Machine managed locally by Marek, sync with configuration.nix before deleting this assertion.";
-      }
-    ];
-
-    deployment = let
-      oldPkgs = builtins.fetchTarball {
-        url = "https://github.com/NixOS/nixpkgs-channels/archive/180aa21259b666c6b7850aee00c5871c89c0d939.tar.gz";
-        sha256 = "0gxd10djy6khbjb012s9fl3lpjzqaknfv2g4dpfjxwwj9cbkj04h";
-      };
-    in {
-      nixPath = [
-        { prefix = "nixpkgs"; path = oldPkgs; }
-      ];
-    };
-
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/0b49a00a-9583-40de-99d5-bb7b3d34a00c";
         fsType = "ext4";

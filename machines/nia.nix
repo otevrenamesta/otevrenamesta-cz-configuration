@@ -5,6 +5,10 @@
     ../modules/nia-otevrenamesta-cz.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    php fish byobu git unbound
+  ];
+
   networking = {
      firewall.allowedTCPPorts = [ 80 ];
 
