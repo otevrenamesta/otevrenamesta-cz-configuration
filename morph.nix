@@ -3,8 +3,8 @@ let
   # update with nix-prefetch-url --unpack <URL>
   # tracks nixos-19.09 branch
   pkgs1909 = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/d011e4749457af484adf2e90062c83a44ad072a4.tar.gz";
-    sha256 = "1nvhya0v98agidgxv83sb7xyb559qagx9f6iqknpxhxsv09j2qsp";
+    url = "https://github.com/NixOS/nixpkgs/archive/d858110e35b652a02e11deabe7fba2fc28f10945.tar.gz";
+    sha256 = "1b7sdy9nhk97s9wbn40yij67hmln3d8030mlkx9rwi0wgg90irc1";
   };
 
   # for VZ nodes
