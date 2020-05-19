@@ -13,6 +13,10 @@ nodePackages."${packageName}".override {
   nativeBuildInputs = [ pkgs.makeWrapper ];
 
   postInstall = ''
+    pushd $out/lib/node_modules/matrix-appservice-gitter
+    patch -p1 < ${./schema-path.patch}
+    popd
+
     makeWrapper '${nodejs}/bin/node' "$out/bin/matrix-appservice-gitter" \
     --add-flags "$out/lib/node_modules/matrix-appservice-gitter/index.js"
   '';
