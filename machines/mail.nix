@@ -8,6 +8,7 @@ let
     "192.168.122.105" # mediawiki
     "37.205.14.138"   # mesta-services (matrix)
     "185.8.165.109"   # dsw2
+    "2a01:430:17:1::ffff:1309" # dsw2 ipv6
   ];
 in
 
@@ -113,8 +114,11 @@ in
     reversePort = 10002;
   };
 
-  services.postfix = {
-    networks = map (ip: "${ip}/32") ipWhitelist;
+  services.postfix = let
+    ipWhitelist4 = builtins.filter (s: !(lib.hasInfix ":" s)) ipWhitelist;
+    ipWhitelist6 = builtins.filter (lib.hasInfix ":") ipWhitelist;
+  in {
+    networks = map (ip: "${ip}/32") ipWhitelist4 ++ map (ip: "[${ip}]") ipWhitelist6;
     relayDomains = [ "lists.otevrenamesta.cz" ];
     transport = ''
       lists.otevrenamesta.cz    relay:[192.168.122.101]
@@ -133,6 +137,7 @@ in
       olmr@otevrenamesta.cz                    ${emails.vo_}
       ondrej.profant@otevrenamesta.cz          ${emails.op_}
       pavla.kadlecova@otevrenamesta.cz         ${emails.pk_}
+      dsw2@otevrenamesta.cz                    info@lists.otevrenamesta.cz
 
       # virtual lists
       listmaster@otevrenamesta.cz              listmaster@lists.otevrenamesta.cz
