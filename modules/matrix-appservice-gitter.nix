@@ -30,6 +30,14 @@ in
           Registration file used to connect to matrix homeserver.
         '';
       };
+
+      port = mkOption {
+        type = types.port;
+        default = 6789;
+        description = ''
+          Port to listen on;
+        '';
+      };
     };
 
   };
@@ -44,12 +52,14 @@ in
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" ];
       serviceConfig = {
-        #ExecStart = "${pkg}/bin/matrix-appservice-gitter --config ${configFile} --file ${registrationFile}"; #XXX -p?
-        ExecStart = "${pkg}/bin/matrix-appservice-gitter --config ${cfg.configFile}";
+        ExecStart = "${pkg}/bin/matrix-appservice-gitter --config ${cfg.configFile} --file ${cfg.registrationFile} --port ${toString cfg.port}";
 
         DynamicUser = true;
         User = "matrix-appservice-gitter";
         Group = "matrix-appservice-gitter";
+
+        StateDirectory = "matrix-appservice-gitter";
+        WorkingDirectory = "/var/lib/matrix-appservice-gitter";
 
         CapabilityBoundingSet = "";
         NoNewPrivileges = true;

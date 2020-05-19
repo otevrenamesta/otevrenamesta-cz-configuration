@@ -28,8 +28,13 @@ let
       ../packages/synapse-web-client-redirect.patch
     ];
   });
+  gitterBridgeRegistration = ../secrets/matrix-appservice-gitter/gitter-registration.yaml;
 in
 {
+  imports = [
+    ../modules/matrix-appservice-gitter.nix
+  ];
+
   nixpkgs.overlays = let
     # https://github.com/matrix-org/synapse/issues/6211
     # https://twistedmatrix.com/trac/ticket/9740
@@ -93,6 +98,9 @@ in
         x_forwarded = true;
       }
     ];
+    app_service_config_files = [
+      gitterBridgeRegistration
+    ];
     extraConfig = ''
       max_upload_size: "100M"
       # see the comment above synapsePkg definition
@@ -120,6 +128,12 @@ in
       # keep this in sync with ${riotPkg}/welcome.html
       locations."=/vesp-welcome.html".alias = ../media/matrix-welcome.html;
     };
+  };
+
+  services.matrix-appservice-gitter = {
+    enable = true;
+    configFile = ../secrets/matrix-appservice-gitter/gitter-config.yaml;
+    registrationFile = gitterBridgeRegistration;
   };
 
   networking.firewall = {
