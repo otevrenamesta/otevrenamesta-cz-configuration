@@ -238,4 +238,7 @@ in
     sshDestination = "maillog@185.8.165.109";
     onCalendar = "2020-4,5,6-* 23:30:00";
   };
+
+  # acmeFallbackHost uses ip as Host:, make sure we end up at the AMCE endpoint
+  services.nginx.virtualHosts."mx.otevrenamesta.cz".default = true;
 }
