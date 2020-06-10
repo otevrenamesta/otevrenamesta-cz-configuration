@@ -3,8 +3,13 @@ let
   # update with nix-prefetch-url --unpack <URL>
   # tracks nixos-19.09 branch
   pkgs1909 = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/d858110e35b652a02e11deabe7fba2fc28f10945.tar.gz";
-    sha256 = "1b7sdy9nhk97s9wbn40yij67hmln3d8030mlkx9rwi0wgg90irc1";
+    url = "https://github.com/NixOS/nixpkgs/archive/2f9bafaca90acd010cccd0e79e5f27aa7537957e.tar.gz";
+    sha256 = "1mm7dqd2n775sazhjrdc2p9hjrgh5q4jqgj0f4m9h18pkp0i2wim";
+  };
+
+  pkgs2003 = builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/70717a337f7ae4e486ba71a500367cad697e5f09.tar.gz";
+    sha256 = "1sbmqn7yc5iilqnvy9nvhsa9bx6spfq1kndvvis9031723iyymd1";
   };
 
   # for VZ nodes
@@ -240,6 +245,12 @@ in
       ./profiles/qemu.nix
       ./machines/wp.nix
     ];
+
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = pkgs2003; }
+      ];
+    };
 
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/2e1eef19-5376-4c21-a6d2-a543b22cb079";
