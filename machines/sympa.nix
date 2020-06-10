@@ -11,6 +11,8 @@ in
     ../modules/sympa.nix
   ];
 
+  disabledModules = [ "services/mail/sympa.nix" ];
+
   environment.systemPackages = with pkgs; [ vim ];
 
   networking = {

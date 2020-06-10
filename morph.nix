@@ -131,6 +131,12 @@ in
       ./machines/sympa.nix
     ];
 
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = pkgs2003; }
+      ];
+    };
+
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/3558270a-9c25-492b-bf4b-dcd2db2c5cfa";
         fsType = "ext4";

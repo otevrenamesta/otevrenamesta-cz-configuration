@@ -148,7 +148,7 @@ in
         };
 
         config.settings = mkIf (cfg.web.enable && config.webHost != null) {
-          wwsympa_url = mkDefault "https://${config.webHost}${strings.removeSuffix "/" config.webLocation}";
+          wwsympa_url = mkDefault "https://${config.webHost}${removeSuffix "/" config.webLocation}";
         };
       }));
 
@@ -516,10 +516,6 @@ in
           include ${config.services.nginx.package}/conf/fastcgi_params;
 
           fastcgi_pass unix:/run/sympa/wwsympa.socket;
-          fastcgi_split_path_info ^(${loc})(.*)$;
-
-          fastcgi_param PATH_INFO       $fastcgi_path_info;
-          fastcgi_param SCRIPT_FILENAME ${pkg}/lib/sympa/cgi/wwsympa.fcgi;
         '';
       }) // {
         "/static-sympa/".alias = "${dataDir}/static_content/";
