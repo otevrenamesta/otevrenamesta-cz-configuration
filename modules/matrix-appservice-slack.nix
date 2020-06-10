@@ -38,30 +38,6 @@ in
           Port to listen on for connections from Matrix Homeserver;
         '';
       };
-
-      database = {
-        user = mkOption {
-          type = types.str;
-          description = ''
-            Database user. Currently only used by createLocally.
-          '';
-        };
-
-        name = mkOption {
-          type = types.str;
-          description = ''
-            Database name. Currently only used by createLocally.
-          '';
-        };
-
-        createLocally = mkOption {
-          type = types.bool;
-          default = false;
-          description = ''
-            Whether to enable local PostgreSQL and create user and database.
-          '';
-        };
-      };
     };
   };
 
@@ -77,12 +53,12 @@ in
       serviceConfig = {
         ExecStart = "${pkg}/bin/matrix-appservice-slack --config ${cfg.configFile} --file ${cfg.registrationFile} --port ${toString cfg.matrixPort}";
 
-        DynamicUser = true;
-        User = "matrix-appservice-slack";
-        Group = "matrix-appservice-slack";
+        User = "slackbridge";
+        Group = "slackbridge";
 
         StateDirectory = "matrix-appservice-slack";
-        WorkingDirectory = "/var/lib/matrix-appservice-slack";
+        # https://github.com/matrix-org/matrix-appservice-slack/pull/415
+        WorkingDirectory = "${pkg}/lib/node_modules/matrix-appservice-slack";
 
         CapabilityBoundingSet = "";
         NoNewPrivileges = true;
@@ -94,7 +70,7 @@ in
         ProtectKernelTunables = true;
         ProtectKernelModules = true;
         ProtectControlGroups = true;
-        RestrictAddressFamilies = [ "AF_INET" "AF_INET6" ];
+        RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" ];
         RestrictNamespaces = true;
         LockPersonality = true;
         RestrictRealtime = true;
@@ -103,15 +79,10 @@ in
       };
     };
 
-    services.postgresql = mkIf cfg.db.createLocally {
-      enable = true;
-      ensureDatabases = [ cfg.db.name ];
-      ensureUsers = [{
-        name = cfg.db.user;
-        ensurePermissions = {
-          "DATABASE ${cfg.db.name}" = "ALL PRIVILEGES";
-        };
-      }];
+    users.users.slackbridge = {
+      group = "slackbridge";
+      isSystemUser = true;
     };
+    users.groups.slackbridge = { };
   };
 }
