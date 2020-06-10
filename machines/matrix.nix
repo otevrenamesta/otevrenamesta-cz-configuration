@@ -29,10 +29,12 @@ let
     ];
   });
   gitterBridgeRegistration = ../secrets/matrix-appservice-gitter/gitter-registration.yaml;
+  slackBridgeRegistration = ../secrets/matrix-appservice-slack/slack-registration.yaml;
 in
 {
   imports = [
     ../modules/matrix-appservice-gitter.nix
+    ../modules/matrix-appservice-slack.nix
   ];
 
   nixpkgs.overlays = let
@@ -72,7 +74,16 @@ in
   users.extraUsers.root.openssh.authorizedKeys.keys =
     with import ../ssh-keys.nix; [ rh ];
 
-  services.postgresql.enable = true;
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [ "slack_bridge" ];
+    ensureUsers = [{
+      name = "slackbridge";
+      ensurePermissions = {
+	"DATABASE slack_bridge" = "ALL PRIVILEGES";
+      };
+    }];
+  };
 
   services.matrix-synapse = {
     package = synapsePkg;
@@ -100,6 +111,7 @@ in
     ];
     app_service_config_files = [
       gitterBridgeRegistration
+      slackBridgeRegistration
     ];
     extraConfig = ''
       max_upload_size: "100M"
@@ -134,6 +146,12 @@ in
     enable = true;
     configFile = ../secrets/matrix-appservice-gitter/gitter-config.yaml;
     registrationFile = gitterBridgeRegistration;
+  };
+
+  services.matrix-appservice-slack = {
+    enable = true;
+    registrationFile = slackBridgeRegistration;
+    configFile = ../secrets/matrix-appservice-slack/slack-config.yaml;
   };
 
   networking.firewall = {
