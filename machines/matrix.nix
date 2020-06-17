@@ -21,13 +21,6 @@ let
     embeddedPages.welcomeUrl = "/vesp-welcome.html";
   };
   riotPkg = pkgs.riot-web.override { conf = riotConfig; };
-  synapsePkg = pkgs.matrix-synapse.overrideAttrs (attrs: {
-    # https://github.com/matrix-org/synapse/pull/7006
-    # probably won't be accepted, can be handled by proxy instead
-    patches = attrs.patches ++ [
-      ../packages/synapse-web-client-redirect.patch
-    ];
-  });
   gitterBridgeRegistration = ../secrets/matrix-appservice-gitter/gitter-registration.yaml;
   slackBridgeRegistration = ../secrets/matrix-appservice-slack/slack-registration.yaml;
 in
@@ -85,8 +78,11 @@ in
     }];
   };
 
+  services.postgresqlBackup = {
+    enable = true;
+  };
+
   services.matrix-synapse = {
-    package = synapsePkg;
     enable = true;
     no_tls = true;
     server_name = "vesp.cz";

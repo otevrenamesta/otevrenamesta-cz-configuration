@@ -232,6 +232,12 @@ in
       ./machines/matrix.nix
     ];
 
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = pkgs2003; }
+      ];
+    };
+
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/9bdeed3f-a0de-4438-be71-357742e9a08b";
         fsType = "ext4";
