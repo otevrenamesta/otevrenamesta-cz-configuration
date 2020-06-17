@@ -117,6 +117,12 @@ in
       ./machines/roundcube.nix
     ];
 
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = pkgs2003; }
+      ];
+    };
+
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/26380b05-91d2-4521-816c-b6e3c226e127";
         fsType = "ext4";
