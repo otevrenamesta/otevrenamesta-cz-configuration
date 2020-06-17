@@ -46,6 +46,12 @@ in
       ./machines/consul.nix
     ];
 
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = pkgs2003; }
+      ];
+    };
+
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/292f707d-271c-4864-9e44-9d5c3d3b4243";
         fsType = "ext4";
