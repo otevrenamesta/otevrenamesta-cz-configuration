@@ -15,8 +15,8 @@
      };
   };
 
+  services.nginx.enable = true;
   services.matomo.enable = true;
-
   services.matomo.nginx = {
     forceSSL = false;
     enableACME = false;
@@ -26,7 +26,10 @@
   services.mysql.enable = true;
   services.mysql.package = pkgs.mysql;
 
-  services.nginx.enable = true;
+  services.mysqlBackup = {
+    enable = true;
+    databases = [ "matomo" ];
+  };
 
   # see also https://github.com/NixOS/nixpkgs/pull/55867
   services.geoip-updater.enable = true; # downloads GeoIP dbs to /var/lib/geoip-databases
