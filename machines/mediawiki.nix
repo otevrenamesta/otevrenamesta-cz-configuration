@@ -3,11 +3,6 @@
 with lib;
 
 {
-  # can be removed after upgrading to NixOS-20.03
-  imports = [
-    ../modules/parsoid_.nix
-  ];
-
   environment.systemPackages = with pkgs; [
   ];
 
@@ -30,10 +25,10 @@ with lib;
       hostName = "wiki.vesp.cz";
       serverAliases = [ "${config.networking.hostName}.${config.networking.domain}" ];
       adminAddr = "info@otevrenamesta.cz";
-      servedFiles = [
-        { file = ../media/vesp135px.svg; urlPath = "/images/logo.svg"; }
-        { file = ../media/vesp-favicon.ico; urlPath = "/favicon.ico"; }
-      ];
+      locations = {
+        "/images/logo.svg".alias = ../media/vesp135px.svg;
+        "/favicon.ico".alias = ../media/vesp-favicon.ico;
+      };
       extraConfig = ''
         # https://www.mediawiki.org/wiki/Manual:Short_URL/Apache
         RewriteEngine On
@@ -49,17 +44,17 @@ with lib;
     # After updating the extensions please also update the `warnings` expression below.
     extensions = {
       VisualEditor = pkgs.fetchzip {
-        url = "https://extdist.wmflabs.org/dist/extensions/VisualEditor-REL1_33-f64e411.tar.gz";
-        sha256 = "1czdgz2d3jraw1vkpiby9lxb9jiqnqqkv8g1rxifb141jx6659qh";
+        url = "https://extdist.wmflabs.org/dist/extensions/VisualEditor-REL1_34-74116a7.tar.gz";
+        sha256 = "12lwna2qlc80smba2ci4ig144ppq6b6rwm1jdcx9ghixy8ckzkfp";
       };
       ParserFunctions = pkgs.fetchzip {
-        url = "https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_33-4395442.tar.gz";
-        sha256 = "0d85qrmivb64w9x6hbkl2jmlb14qgma1nr2q6zksi619gvzmdl4y";
+        url = "https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_34-4de6f30.tar.gz";
+        sha256 = "1rvlphcal24w92icma13ganxjcg541c11209ijfapqrlk8a5y1ks";
       };
       # after 20.09, see also https://github.com/NixOS/nixpkgs/pull/83436
       ConfirmEdit = pkgs.fetchzip {
-        url = "https://extdist.wmflabs.org/dist/extensions/ConfirmEdit-REL1_33-0e549d7.tar.gz";
-        sha256 = "0dkdawhjwcw7kpy1wlrp90kkbyw7xd4jl4627bj1jlc65lkzv7vi";
+        url = "https://extdist.wmflabs.org/dist/extensions/ConfirmEdit-REL1_34-45ca059.tar.gz";
+        sha256 = "1j4ax7l127brkxdmbjxcada22biqrg6dhk0p5yfjhmwbq4ldykk7";
       };
       Matomo = pkgs.fetchzip {
         url = "https://github.com/DaSchTour/matomo-mediawiki-extension/archive/v4.0.1.tar.gz";
@@ -119,7 +114,7 @@ with lib;
   };
 
   warnings = let
-    extVersion = "1.33";
+    extVersion = "1.34";
     mwVersion = config.services.mediawiki.package.version;
   in
   optional (!hasPrefix extVersion mwVersion) ''
@@ -127,13 +122,18 @@ with lib;
     Please update `services.mediawiki.extensions` as well as this warning.
   '';
 
-  services.parsoid_ = {
+  services.parsoid = {
     enable = true;
     wikis = [ "http://localhost/api.php" ];
   };
 
   services.mysql = {
     enable = true;
+  };
+
+  services.mysqlBackup = {
+    enable = true;
+    databases = [ "mediawiki" ];
   };
   
 }

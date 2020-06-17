@@ -282,6 +282,12 @@ in
       ./machines/mediawiki.nix
     ];
 
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = pkgs2003; }
+      ];
+    };
+
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/7364444d-c58e-4f5b-b1b7-d5300558bbe7";
         fsType = "ext4";
