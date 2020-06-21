@@ -224,6 +224,12 @@ in
       ./machines/nia.nix
     ];
 
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = pkgs2003; }
+      ];
+    };
+
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/0b49a00a-9583-40de-99d5-bb7b3d34a00c";
         fsType = "ext4";

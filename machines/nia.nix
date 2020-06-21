@@ -34,6 +34,11 @@
     ];
   };
 
+  services.mysqlBackup = {
+    enable = true;
+    databases = [ "niatest" ];
+  };
+
   services.nia-otevrenamesta-cz = {
     enable = true;
     hostName = "${config.networking.hostName}.${config.networking.domain}";
