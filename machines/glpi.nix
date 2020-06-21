@@ -19,6 +19,10 @@
 
   services.mysql.enable = true;
   services.mysql.package = pkgs.mysql;
+  services.mysqlBackup = {
+    enable = true;
+    databases = [ "glpi" ];
+  };
 
   services.nginx.enable = true;
   services.nginx.virtualHosts."glpi.otevrenamesta.cz" = {

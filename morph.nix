@@ -71,6 +71,12 @@ in
       ./machines/glpi.nix
     ];
 
+    deployment = {
+      nixPath = [
+        { prefix = "nixpkgs"; path = pkgs2003; }
+      ];
+    };
+
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/11e70a61-7abc-478d-a436-4d601c8b1502";
         fsType = "ext4";
