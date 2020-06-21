@@ -52,7 +52,7 @@ let
     };
   };
 
-  django_2_0 = pyPkgs: pyPkgs.django_2_1.overrideDerivation (_: rec {
+  django_2_0 = pyPkgs: pyPkgs.django_2_2.overrideDerivation (_: rec {
     pname = "Django";
     version = "2.0.13";
     src = pyPkgs.fetchPypi {

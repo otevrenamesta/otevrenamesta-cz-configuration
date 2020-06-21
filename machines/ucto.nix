@@ -40,6 +40,7 @@
       };
     }];
   };
+  services.postgresqlBackup.enable = true;
 
   systemd.services.proplaceni.environment = {
     #PIROPLACENI_DEBUG = "b-on";
