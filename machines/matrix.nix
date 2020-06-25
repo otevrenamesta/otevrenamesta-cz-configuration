@@ -14,8 +14,8 @@ let
     branding = {
       authHeaderLogoUrl = "/vesp-logo.svg";
       authFooterLinks = [
-	{ text = "Provozují Otevřená města, z.s."; url = "https://www.otevrenamesta.cz"; }
-	{ text = "Server poskytuje vpsFree.cz, z.s."; url = "https://www.vpsfree.cz"; }
+        { text = "Provozují Otevřená města, z.s."; url = "https://www.otevrenamesta.cz"; }
+        { text = "Server poskytuje vpsFree.cz, z.s."; url = "https://www.vpsfree.cz"; }
       ];
     };
     embeddedPages.welcomeUrl = "/vesp-welcome.html";
@@ -73,7 +73,7 @@ in
     ensureUsers = [{
       name = "slackbridge";
       ensurePermissions = {
-	"DATABASE slack_bridge" = "ALL PRIVILEGES";
+        "DATABASE slack_bridge" = "ALL PRIVILEGES";
       };
     }];
     initialScript = pkgs.writeText "matrix-db-init.sql" ''
