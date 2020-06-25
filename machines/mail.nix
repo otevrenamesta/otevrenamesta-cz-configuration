@@ -15,11 +15,16 @@ in
 {
   imports = [
     # updating simple-nixos-mailserver? make sure submissionOptions below stays in sync
-    # fork that enables rspamd web UI, this will likely be part of SNM soon
-    (builtins.fetchTarball {
-      url = "https://github.com/otevrenamesta/nixos-mailserver/archive/70ec1432187f5a97c6ed2b4614ca4c83a0755e65.tar.gz";
-      sha256 = "1vqrbvjf0fxmlg3qc8ggx3k8ha7sqw2gzc0pbhwhprvarx1haqaa";
-    })
+    (
+      let
+        commit = "fb8886547b569be3e6b72b526cea64c02424a5c4";
+      in
+      builtins.fetchTarball {
+       url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${commit}/nixos-mailserver-${commit}.tar.gz";
+       # And set its hash
+       sha256 = "1cf9jgvb2ls3w7mdg5q2ls076amhbh8kq3qpn9ypfs5ycn638jam";
+      }
+    )
     ../modules/postfix-report.nix
   ];
 
@@ -208,12 +213,10 @@ in
     locals = {
       "options.inc".text = ''
         local_addrs = [ ${lib.concatMapStringsSep ", " (ip: ''"${ip}"'' ) ipWhitelist} ];
+        dynamic_conf = "/var/lib/rspamd/rspamd_dynamic"; # For allowing to change options in the web UI
       '';
       "classifier-bayes.conf".text = ''
         autolearn = true;
-      '';
-      "redis.conf".text = ''
-        servers = "127.0.0.1";
       '';
       "actions.conf".text = ''
         greylist = 4;
@@ -224,12 +227,23 @@ in
         enable = false;
       '';
     };
-  };
 
-  # needed by rspamd for greylisting to work
-  services.redis = {
-    enable = true;
-    bind = "127.0.0.1";
+    # settings that enable rspamd web UI, this may eventually become part of SNM
+    # (dynamic_conf = ... above too)
+    workers.controller = {
+      bindSockets = lib.mkAfter [{
+        # Use "ssh -L 8080:localhost:11334 youruser@example.com -N" to tunnel this securely to your browser's machine port 8080
+        socket = "localhost:11334";
+      }];
+      extraConfig = ''
+        # static files for the web interface
+        static_dir = "''${WWWDIR}";
+
+        # For not having to enter the password on the command line
+        secure_ip = "::1";
+        secure_ip = "127.0.0.1";
+      '';
+    };
   };
 
   services.postfix-report = {
