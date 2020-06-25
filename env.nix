@@ -37,6 +37,11 @@ in
     tcpdump
   ];
 
+  security.acme = {
+    email = "info@otevrenamesta.cz";
+    acceptTerms = true;
+  };
+
   users.extraUsers.root.openssh.authorizedKeys.keys =
     with import ./ssh-keys.nix; [ deploy ln mm srk ];
 
