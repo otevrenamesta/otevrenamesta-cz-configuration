@@ -28,6 +28,7 @@ in
   imports = [
     ../modules/matrix-appservice-gitter.nix
     ../modules/matrix-appservice-slack.nix
+    ../modules/mautrix-facebook.nix
   ];
 
   nixpkgs.overlays = let
@@ -54,6 +55,7 @@ in
         };
       };
     })
+    (import ../overlays/mautrix-facebook.nix)
   ];
 
   environment.systemPackages = with pkgs; [
@@ -115,6 +117,9 @@ in
     app_service_config_files = [
       gitterBridgeRegistration
       slackBridgeRegistration
+
+      # NOTE needs to be copied manually after mautrix-facebook is first started
+      "/var/lib/matrix-synapse/facebook-registration.yml"
     ];
     extraConfig = ''
       max_upload_size: "100M"
@@ -155,6 +160,19 @@ in
     enable = true;
     registrationFile = slackBridgeRegistration;
     configFile = ../secrets/matrix-appservice-slack/slack-config.yaml;
+  };
+
+  services.mautrix-facebook = {
+    enable = true;
+    settings = {
+      homeserver.address = "http://localhost:8448";
+      homeserver.domain = "vesp.cz";
+      bridge.permissions = {
+        "vesp.cz" = "user";
+        "@b42:matrix.org" = "admin";
+        "@nesnera_om:vesp.cz" = "admin";
+      };
+    };
   };
 
   networking.firewall = {
