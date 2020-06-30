@@ -63,11 +63,14 @@ in
 
   services.mysql.enable = true;
   services.mysql.package = pkgs.mysql;
+  services.mysqlBackup = {
+    enable = true;
+    databases = [ "glpi" "bookedscheduler" ];
+  };
 
   services.httpd = {
     enable = true;
     enablePHP = true;
-    listen = [{ ip = "127.0.0.1"; port = 8000; }];
 
     phpOptions = ''
       extension=${pkgs.phpPackages.apcu}/lib/php/extensions/apcu.so
@@ -76,11 +79,9 @@ in
     '';
 
     adminAddr = "webmaster@otevrenamesta.cz";
-    documentRoot = "/var/www";
 
-    virtualHosts = [
-      {
-        hostName = "booked.otevrenamesta.cz";
+    virtualHosts = {
+      "booked.otevrenamesta.cz" = {
         documentRoot = "/var/www/html";
         listen = [{ ip = "127.0.0.1"; port = 8001; }];
         extraConfig = ''
@@ -88,18 +89,8 @@ in
             DirectoryIndex index.php
           </Directory>
         '';
-      }
-      #{
-      #  hostName = "glpi.otevrenamesta.cz";
-      #  documentRoot = "/var/www/glpi";
-      #  listen = [{ ip = "127.0.0.1"; port = 8002; }];
-      #  extraConfig = ''
-      #    <Directory /var/www/glpi>
-      #      DirectoryIndex index.php
-      #    </Directory>
-      #  '';
-      #}
-    ];
+      };
+    };
   };
 
   services.nginx = {

@@ -1,15 +1,10 @@
 let
   # Pin the deployment package-set to a specific version of nixpkgs
   # update with nix-prefetch-url --unpack <URL>
-  # tracks nixos-19.09 branch
-  pkgs1909 = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/289466dd6a11c65a7de4a954d6ebf66c1ad07652.tar.gz";
-    sha256 = "0r5ja052s86fr54fm1zlhld3fwawz2w1d1gd6vbvpjrpjfyajibn";
-  };
-
+  # tracks nixos-20.03 branch
   pkgs2003 = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/6460602eec5ced5b9720f4d9fdb0dd717b89b4fd.tar.gz";
-    sha256 = "0fk22vc780xf8jza4hcin7f88z1g9gsly5mjhfbygcxfxv334q2i";
+    url = "https://github.com/NixOS/nixpkgs/archive/30fb4e1e206d2936fa03859f96d5c2fa3d1ae595.tar.gz";
+    sha256 = "068jxdgd9b4va371q8pn1fipqjxs0hkr7ya3kn389qs81jn091jc";
   };
 
   # for VZ nodes
@@ -26,7 +21,7 @@ let
 in
 {
   network =  {
-    pkgs = import pkgs1909 { };
+    pkgs = import pkgs2003 { };
     description = "om hosts";
   };
 
@@ -46,12 +41,6 @@ in
       ./machines/consul.nix
     ];
 
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = pkgs2003; }
-      ];
-    };
-
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/292f707d-271c-4864-9e44-9d5c3d3b4243";
         fsType = "ext4";
@@ -70,12 +59,6 @@ in
       ./profiles/qemu.nix
       ./machines/glpi.nix
     ];
-
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = pkgs2003; }
-      ];
-    };
 
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/11e70a61-7abc-478d-a436-4d601c8b1502";
@@ -104,12 +87,6 @@ in
       ./machines/mail.nix
     ];
 
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = pkgs2003; }
-      ];
-    };
-
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/50884094-57df-49fe-984a-5e25c1f629ac";
         fsType = "ext4";
@@ -128,12 +105,6 @@ in
       ./profiles/qemu.nix
       ./machines/roundcube.nix
     ];
-
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = pkgs2003; }
-      ];
-    };
 
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/26380b05-91d2-4521-816c-b6e3c226e127";
@@ -155,12 +126,6 @@ in
       ./machines/sympa.nix
     ];
 
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = pkgs2003; }
-      ];
-    };
-
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/3558270a-9c25-492b-bf4b-dcd2db2c5cfa";
         fsType = "ext4";
@@ -179,12 +144,6 @@ in
       ./profiles/qemu.nix
       ./machines/midpoint.nix
     ];
-
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = pkgs2003; }
-      ];
-    };
 
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/86171d08-b62d-4c99-b1d6-ea075e8183d0";
@@ -205,12 +164,6 @@ in
       ./machines/matomo.nix
     ];
 
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = pkgs2003; }
-      ];
-    };
-
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/7274ccea-6b6f-4dde-96cf-822ab916a20a";
         fsType = "ext4";
@@ -229,12 +182,6 @@ in
       ./profiles/qemu.nix
       ./machines/nia.nix
     ];
-
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = pkgs2003; }
-      ];
-    };
 
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/0b49a00a-9583-40de-99d5-bb7b3d34a00c";
@@ -255,12 +202,6 @@ in
       ./machines/ucto.nix
     ];
 
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = pkgs2003; }
-      ];
-    };
-
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/586ee5e6-778f-4a0e-978d-639ac1a9f605";
         fsType = "ext4";
@@ -279,12 +220,6 @@ in
       ./profiles/qemu.nix
       ./machines/matrix.nix
     ];
-
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = pkgs2003; }
-      ];
-    };
 
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/9bdeed3f-a0de-4438-be71-357742e9a08b";
@@ -306,12 +241,6 @@ in
       ./machines/wp.nix
     ];
 
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = pkgs2003; }
-      ];
-    };
-
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/2e1eef19-5376-4c21-a6d2-a543b22cb079";
         fsType = "ext4";
@@ -329,12 +258,6 @@ in
       ./profiles/qemu.nix
       ./machines/mediawiki.nix
     ];
-
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = pkgs2003; }
-      ];
-    };
 
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/7364444d-c58e-4f5b-b1b7-d5300558bbe7";
@@ -407,12 +330,6 @@ in
       ./profiles/qemu.nix
       ./machines/proxy.nix
     ];
-
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = pkgs2003; }
-      ];
-    };
 
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/3bc8b6e8-56e1-40c4-b0de-8eba32313610";

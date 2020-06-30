@@ -12,6 +12,10 @@ in
 
   systemd.services.systemd-udev-trigger.enable = false;
 
+  # vpsf doesn't use dhcp for interface configuration
+  # configure with networking.interfaces.<name?>.useDHCP as needed
+  networking.useDHCP = false;
+
   services.resolved.enable = false;
 }
 
