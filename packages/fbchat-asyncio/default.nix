@@ -8,11 +8,11 @@
 
 buildPythonPackage rec {
   pname = "fbchat-asyncio";
-  version = "0.6.3";
+  version = "0.6.6";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "03rciyml2i4p0sfn6gpq6fx9rvfmzc92lyi6d4sjsc0f4mi8ppij";
+    sha256 = "0h26i7rsmvdj1qf5hmkx0ghknwbqs0rh9n93nc2zvc8v459aanxk";
   };
 
   propagatedBuildInputs = [

@@ -18,13 +18,13 @@
 
 buildPythonApplication rec {
   pname = "mautrix-facebook";
-  version = "20-06-19git";
+  version = "20-06-30git";
 
   src = fetchFromGitHub {
     owner = "tulir";
     repo = pname;
-    rev = "acdb531814af7d8386b94cc0265c80d9d3c4a8cf";
-    sha256 = "09za0jd0mi463pkpx2174hvgm2d4djdcgjwb1590rj3vlzcipyf8";
+    rev = "cefeae9d680c0ac87bd60ab6e2824e778dabc640";
+    sha256 = "0c3mv6n88ydncc1xakccbgwbd20lcj3gdmmn38p67n5wpb5g2l9n";
   };
 
   postPatch = ''
