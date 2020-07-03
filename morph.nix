@@ -317,4 +317,12 @@ in
       };
     };
   };
+
+  status = { config, pkgs, ... }: {
+    imports = [
+      ./env.nix
+      ./profiles/ct.nix
+      ./machines/status.nix
+    ];
+  };
 }
