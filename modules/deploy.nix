@@ -10,10 +10,6 @@ in
     "${home-manager-src}/nixos"
   ];
 
-  nixpkgs.overlays = [
-    (import ../overlays/morph.nix)
-  ];
-
   environment.systemPackages = with pkgs; [
     morph
     screen
