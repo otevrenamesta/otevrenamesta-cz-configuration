@@ -80,7 +80,7 @@ in
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";
           };
-          "new-proxy" = {
+          "proxy" = {
             hostname = "192.168.122.104";
             user = "root";
             identityFile = "~/.ssh/mesta_deploy";

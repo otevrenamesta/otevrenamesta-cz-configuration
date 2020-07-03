@@ -3,21 +3,9 @@ let
   # update with nix-prefetch-url --unpack <URL>
   # tracks nixos-20.03 branch
   pkgs2003 = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/30fb4e1e206d2936fa03859f96d5c2fa3d1ae595.tar.gz";
-    sha256 = "068jxdgd9b4va371q8pn1fipqjxs0hkr7ya3kn389qs81jn091jc";
+    url = "https://github.com/NixOS/nixpkgs/archive/d6260a33e43a500528b2be834d3ee4ad45441a6a.tar.gz";
+    sha256 = "18ailgn3d8smjdg66di3mg1q1l86s2s5ch856ifzy5kc3a224ssf";
   };
-
-  # for VZ nodes
-  legacyPkgs = builtins.fetchTarball {
-    url    = "https://d3g5gsiof5omrk.cloudfront.net/nixos/17.09/nixos-17.09.3243.bca2ee28db4/nixexprs.tar.xz";
-    sha256 = "1adi0m8x5wckginbrq0rm036wgd9n1j1ap0zi2ph4kll907j76i2";
-  };
-
-  buildVpsFreeTemplates = builtins.fetchTarball {
-    url = "https://github.com/vpsfreecz/build-vpsfree-templates/archive/f5829847c8ee1666481eb8a64df61f3018635ec7.tar.gz";
-    sha256 = "1r8b3wyn4ggw1skdalib6i4c4i0cwmbr828qm4msx7c0j76910z4";
-  };
-
 in
 {
   network =  {
@@ -270,61 +258,7 @@ in
       };
   };
 
-  old-proxy = { config, pkgs, ... }: {
-    imports = [
-      ./env.nix
-      ./machines/proxy.nix
-      "${buildVpsFreeTemplates}/files/configuration.nix"
-    ];
-
-    deployment = {
-      nixPath = [
-        { prefix = "nixpkgs"; path = legacyPkgs; }
-      ];
-
-      healthChecks = {
-        http = [
-          {
-            scheme = "http";
-            port = 80;
-            host = "otevrenamesta.cz";
-            path = "/";
-            description = "Nginx is up";
-          }
-          {
-            scheme = "https";
-            port = 443;
-            host = "otevrenamesta.cz";
-            path = "/";
-            description = "Web is up";
-          }
-          {
-            scheme = "https";
-            port = 443;
-            host = "www.otevrenamesta.cz";
-            path = "/";
-            description = "WWW is up";
-          }
-          {
-            scheme = "https";
-            port = 443;
-            host = "forum.otevrenamesta.cz";
-            path = "/latest";
-            description = "Forum is up";
-          }
-          {
-            scheme = "https";
-            port = 443;
-            host = "iot.otevrenamesta.cz";
-            path = "/about";
-            description = "IoT is up";
-          }
-        ];
-      };
-    };
-  };
-
-  new-proxy = { config, pkgs, ... }: {
+  proxy = { config, pkgs, ... }: {
     imports = [
       ./env.nix
       ./profiles/qemu.nix
