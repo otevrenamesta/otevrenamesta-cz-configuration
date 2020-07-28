@@ -23,8 +23,8 @@ buildPythonApplication rec {
   src = fetchFromGitHub {
     owner = "tulir";
     repo = pname;
-    rev = "cefeae9d680c0ac87bd60ab6e2824e778dabc640";
-    sha256 = "0c3mv6n88ydncc1xakccbgwbd20lcj3gdmmn38p67n5wpb5g2l9n";
+    rev = "896736cc1ca95c84fec8fcb301356f115a9d6ac2";
+    sha256 = "0ln9bp1ydgkwf995ssnjz1b4paax8i41v6m4a31qkpqxjdwzda0y";
   };
 
   postPatch = ''
