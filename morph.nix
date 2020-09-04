@@ -3,8 +3,8 @@ let
   # update with nix-prefetch-url --unpack <URL>
   # tracks nixos-20.03 branch
   pkgs2003 = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/7c85b91589222b3710e9ff24b228b83f8be8e937.tar.gz";
-    sha256 = "1cgvlc92gkpwy5i8f7li9051jypaq20631l735j9z03ajv80jvxm";
+    url = "https://github.com/NixOS/nixpkgs/archive/ebf599162322c48f52321b251ab7d16ce8951485.tar.gz";
+    sha256 = "13rw1cxhb4wdz7d1chldn2zdc3q96adj21fkjh3a14q06ira3lwa";
   };
 in
 {

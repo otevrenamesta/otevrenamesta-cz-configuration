@@ -53,8 +53,8 @@ with lib;
       };
       # after 20.09, see also https://github.com/NixOS/nixpkgs/pull/83436
       ConfirmEdit = pkgs.fetchzip {
-        url = "https://extdist.wmflabs.org/dist/extensions/ConfirmEdit-REL1_34-45ca059.tar.gz";
-        sha256 = "1j4ax7l127brkxdmbjxcada22biqrg6dhk0p5yfjhmwbq4ldykk7";
+        url = "https://extdist.wmflabs.org/dist/extensions/ConfirmEdit-REL1_34-a84d99c.tar.gz";
+        sha256 = "094np8zkivxs68vvd52096f3zxc1h8nk272zj9cbyb0zm7z8dc0i";
       };
       Matomo = pkgs.fetchzip {
         url = "https://github.com/DaSchTour/matomo-mediawiki-extension/archive/v4.0.1.tar.gz";
