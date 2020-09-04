@@ -31,7 +31,7 @@ in
   mailserver = {
     enable = true;
     fqdn = "mx.otevrenamesta.cz";
-    domains = [ "otevrenamesta.cz" "try.otevrenamesta.cz" "dotace.praha3.cz" ];
+    domains = [ "otevrenamesta.cz" "try.otevrenamesta.cz" "dotace.praha3.cz" "dotace.praha12.cz" ];
     certificateScheme = 3; # use LetsEncrypt, requires vhost on proxy
     loginAccounts = {
 
@@ -41,6 +41,9 @@ in
       };
       "universal@otevrenamesta.cz" = {
           hashedPassword = "${hashes.uu_}";
+      };
+      "forum@otevrenamesta.cz" = {
+	  hashedPassword = hashes.forum_;
       };
       "user1@otevrenamesta.cz" = {
           hashedPassword = "${hashes.tt_}";
@@ -91,11 +94,11 @@ in
       };
 
       "noreply@dotace.praha3.cz" = {
-        hashedPassword = hashes.dp_;
+        hashedPassword = hashes.dp3_;
+      };
 
-        #sieveScript = ''
-        # redirect "${email.somewhere-else}";
-        #'';
+      "noreply@dotace.praha12.cz" = {
+        hashedPassword = hashes.dp12_;
       };
     };
 
@@ -114,7 +117,7 @@ in
   services.postsrsd = {
     enable = true;
     domain = "otevrenamesta.cz";
-    excludeDomains = [ "lists.otevrenamesta.cz" "dotace.praha3.cz" ];
+    excludeDomains = [ "lists.otevrenamesta.cz" "dotace.praha3.cz" "dotace.praha12.cz" ];
     forwardPort = 10001;
     reversePort = 10002;
   };
@@ -142,7 +145,7 @@ in
       olmr@otevrenamesta.cz                    ${emails.vo_}
       ondrej.profant@otevrenamesta.cz          ${emails.op_}
       pavla.kadlecova@otevrenamesta.cz         ${emails.pk_}
-      dsw2@otevrenamesta.cz                    info@lists.otevrenamesta.cz
+      dsw2@otevrenamesta.cz                    dsw2@lists.otevrenamesta.cz
 
       # virtual lists
       listmaster@otevrenamesta.cz              listmaster@lists.otevrenamesta.cz
