@@ -431,8 +431,8 @@ in
     ++ (concatLists (flip mapAttrsToList enabledFiles (k: v: [
       # sympa doesn't handle symlinks well (e.g. fails to create locks)
       # force-copy instead
-      "R ${dataDir}/${k}              -    -       -        - -"
-      "C ${dataDir}/${k}              0700 ${user}  ${group} - ${v.source}"
+      "r ${dataDir}/${k}              -    -       -        - -"
+      "C ${dataDir}/${k}              0600 ${user}  ${group} - ${v.source}"
     ])));
 
     systemd.services.sympa = {

@@ -1,0 +1,31 @@
+diff --git a/po/sympa/cs.po b/po/sympa/cs.po
+index 49a723e59..d2174220f 100644
+--- a/po/sympa/cs.po
++++ b/po/sympa/cs.po
+@@ -14475,7 +14475,7 @@ msgstr ""
+ #. Check the strftime manpage for format details : http://docs.freebsd.org/info/gawk/gawk.info.Time_Functions.html
+ #: default/mhonarc-ressources.tt2:90
+ msgid "%Y/%m"
+-msgstr ""
++msgstr "%m/%Y"
+ 
+ #: default/mhonarc-ressources.tt2:112
+ msgid "Archive powered by"
+@@ -14499,7 +14499,7 @@ msgstr "Podle vláken"
+ #: default/mhonarc-ressources.tt2:391 default/mhonarc-ressources.tt2:687
+ #: default/mhonarc-ressources.tt2:693 default/mhonarc-ressources.tt2:699
+ msgid "%m/%d/%Y"
+-msgstr ""
++msgstr "%d. %m. %Y"
+ 
+ #: default/mhonarc-ressources.tt2:425
+ msgid ", <em>(continued)</em>"
+@@ -14552,7 +14552,7 @@ msgstr "adresa odesilatele"
+ #. Check the strftime manpage for format details : http://docs.freebsd.org/info/gawk/gawk.info.Time_Functions.html
+ #: default/mhonarc-ressources.tt2:745
+ msgid "%y/%m/%d"
+-msgstr ""
++msgstr "%d. %m. %y"
+ 
+ #: default/scenari/add.auth:1
+ #, fuzzy

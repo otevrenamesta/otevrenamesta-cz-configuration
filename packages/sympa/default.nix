@@ -87,7 +87,7 @@ stdenv.mkDerivation rec {
   ];
   nativeBuildInputs = [ autoreconfHook ];
   buildInputs = [ perlEnv ];
-  patches = [ ./make-docs.patch ];
+  patches = [ ./make-docs.patch ./sympa-csdate.patch ];
 
   prePatch = ''
     patchShebangs po/sympa/add-lang.pl
