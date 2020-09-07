@@ -5,8 +5,14 @@
     firewall.allowedTCPPorts = [ 80 443 ];
   };
 
+  services.prometheus.exporters.nginx = {
+    enable = true;
+    openFirewall = true;
+  };
+
   services.nginx = {
     enable = true;
+    statusPage = true;
     clientMaxBodySize = "2G";
     #recommendedProxySettings = true;
     recommendedTlsSettings = true;

@@ -106,7 +106,7 @@ in
         bind_address = "";
         port = 8448;
         resources = [
-          { compress = true; names = [ "client" "webclient" ]; }
+          { compress = true; names = [ "client" "webclient" "metrics" ]; }
           { compress = false; names = [ "federation" ]; }
         ];
         tls = false;
@@ -121,6 +121,8 @@ in
       # NOTE needs to be copied manually after mautrix-facebook is first started
       "/var/lib/matrix-synapse/facebook-registration.yml"
     ];
+    enable_metrics = true;
+    report_stats = true;
     extraConfig = ''
       max_upload_size: "100M"
       # see the comment above synapsePkg definition

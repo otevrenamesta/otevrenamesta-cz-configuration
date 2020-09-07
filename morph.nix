@@ -17,6 +17,7 @@ in
     imports = [
       ./env.nix
       ./profiles/ct.nix
+      ./profiles/exporter-node.nix
       ./machines/mesta-libvirt.nix
     ];
   };
@@ -26,6 +27,7 @@ in
     imports = [
       ./env.nix
       ./profiles/qemu.nix
+      ./profiles/exporter-node.nix
       ./machines/consul.nix
     ];
 
@@ -45,6 +47,7 @@ in
     imports = [
       ./env.nix
       ./profiles/qemu.nix
+      ./profiles/exporter-node.nix
       ./machines/glpi.nix
     ];
 
@@ -63,6 +66,7 @@ in
     imports = [
       ./env.nix
       ./profiles/ct.nix
+      ./profiles/exporter-node.nix
       ./machines/mesta-services.nix
     ];
   };
@@ -72,6 +76,7 @@ in
     imports = [
       ./env.nix
       ./profiles/qemu.nix
+      ./profiles/exporter-node.nix
       ./machines/mail.nix
     ];
 
@@ -91,6 +96,7 @@ in
     imports = [
       ./env.nix
       ./profiles/qemu.nix
+      ./profiles/exporter-node.nix
       ./machines/roundcube.nix
     ];
 
@@ -111,6 +117,7 @@ in
     imports = [
       ./env.nix
       ./profiles/qemu.nix
+      ./profiles/exporter-node.nix
       ./machines/sympa.nix
     ];
 
@@ -130,6 +137,7 @@ in
     imports = [
       ./env.nix
       ./profiles/qemu.nix
+      ./profiles/exporter-node.nix
       ./machines/midpoint.nix
     ];
 
@@ -149,6 +157,7 @@ in
     imports = [
       ./env.nix
       ./profiles/qemu.nix
+      ./profiles/exporter-node.nix
       ./machines/matomo.nix
     ];
 
@@ -168,6 +177,7 @@ in
     imports = [
       ./env.nix
       ./profiles/qemu.nix
+      ./profiles/exporter-node.nix
       ./machines/nia.nix
     ];
 
@@ -187,6 +197,7 @@ in
     imports = [
       ./env.nix
       ./profiles/qemu.nix
+      ./profiles/exporter-node.nix
       ./machines/ucto.nix
     ];
 
@@ -206,6 +217,7 @@ in
     imports = [
       ./env.nix
       ./profiles/qemu.nix
+      ./profiles/exporter-node.nix
       ./machines/matrix.nix
     ];
 
@@ -226,6 +238,7 @@ in
     imports = [
       ./env.nix
       ./profiles/qemu.nix
+      ./profiles/exporter-node.nix
       ./machines/wp.nix
     ];
 
@@ -244,6 +257,7 @@ in
     imports = [
       ./env.nix
       ./profiles/qemu.nix
+      ./profiles/exporter-node.nix
       ./machines/mediawiki.nix
     ];
 
@@ -262,6 +276,7 @@ in
     imports = [
       ./env.nix
       ./profiles/qemu.nix
+      ./profiles/exporter-node.nix
       ./machines/proxy.nix
     ];
 

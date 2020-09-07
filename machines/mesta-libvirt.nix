@@ -38,22 +38,28 @@
        { destination = "192.168.122.100:993";   sourcePort = 993;}   # mail IMAPS, SSL
        { destination = "192.168.122.100:4190";  sourcePort = 4190;}  # mail dovecot
        { destination = "192.168.122.100:12340"; sourcePort = 12340;} # mail dovecot
+       { destination = "192.168.122.100:9100";  sourcePort = 10091;} # mail prometheus node collector
 
        { destination = "192.168.122.101:22"; sourcePort = 10122;}    # sympa ssh
        #{ destination = "192.168.122.101:80"; sourcePort = 10180;}    # sympa web # proxy accesses this host directly via br0
+       { destination = "192.168.122.101:9100";  sourcePort = 10191;} # sympa prometheus node collector
 
        { destination = "192.168.122.102:22"; sourcePort = 10222;}    # midpoint ssh
        #{ destination = "192.168.122.102:8080"; sourcePort = 10280;}  # midpoint web # proxy accesses this host directly via br0
 
        { destination = "192.168.122.103:22"; sourcePort = 10322;}    # matomo ssh
        #{ destination = "192.168.122.103:80"; sourcePort = 10380;}    # matomo web # proxy accesses this host directly via br0
+       { destination = "192.168.122.103:9100";  sourcePort = 10391;} # matomo prometheus node collector
 
        { destination = "192.168.122.104:22";  sourcePort = 10422;}   # proxy ssh
        { destination = "192.168.122.104:80";  sourcePort = 80;}      # proxy web
        { destination = "192.168.122.104:443"; sourcePort = 443;}     # proxy ssl
+       { destination = "192.168.122.104:9100";  sourcePort = 10491;} # proxy prometheus node collector
+       { destination = "192.168.122.104:9113";  sourcePort = 10493;} # proxy prometheus nginx collector
 
        { destination = "192.168.122.105:22";  sourcePort = 10522;}   # mediawiki ssh
        { destination = "192.168.122.105:80";  sourcePort = 10580;}   # mediawiki web
+       { destination = "192.168.122.105:9100";  sourcePort = 10591;} # mediawiki prometheus node collector
      ];
   };
 

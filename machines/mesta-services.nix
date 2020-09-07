@@ -55,6 +55,11 @@ in
       { destination = "192.168.122.109:80"; sourcePort = 10980;}    # matrix http (riot)
       { destination = "192.168.122.111:80"; sourcePort = 11180;}    # dsw-test http
 
+      { destination = "192.168.122.104:9100"; sourcePort = 10491;}  # glpi prometheus node exporter
+      { destination = "192.168.122.105:9100"; sourcePort = 10591;}  # wp prometheus node exporter
+      { destination = "192.168.122.107:9100"; sourcePort = 10791;}  # nia prometheus node exporter
+      { destination = "192.168.122.109:9100"; sourcePort = 10991;}  # matrix prometheus node exporter
+
       { destination = "192.168.122.109:8448"; sourcePort = 10984;}  # matrix synapse (clients+federation)
     ];
   };
