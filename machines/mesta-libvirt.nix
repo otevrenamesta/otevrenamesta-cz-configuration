@@ -2,7 +2,7 @@
 let
   brDev = config.virtualisation.libvirtd.networking.bridgeName;
   statusIp = "83.167.228.98";
-  statusPorts = "9100,9113";
+  statusPorts = "9100,9113,9154,7980";
 in
 {
   imports = [
@@ -56,6 +56,8 @@ in
        { destination = "192.168.122.100:4190";  sourcePort = 4190;}  # mail dovecot
        { destination = "192.168.122.100:12340"; sourcePort = 12340;} # mail dovecot
        { destination = "192.168.122.100:9100";  sourcePort = 10091;} # mail prometheus node collector
+       { destination = "192.168.122.100:9154";  sourcePort = 10094;} # mail prometheus postfix collector
+       { destination = "192.168.122.100:7980";  sourcePort = 10098;} # mail prometheus rspamd collector
 
        { destination = "192.168.122.101:22"; sourcePort = 10122;}    # sympa ssh
        #{ destination = "192.168.122.101:80"; sourcePort = 10180;}    # sympa web # proxy accesses this host directly via br0

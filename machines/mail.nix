@@ -262,4 +262,17 @@ in
 
   # acmeFallbackHost uses ip as Host:, make sure we end up at the AMCE endpoint
   services.nginx.virtualHosts."mx.otevrenamesta.cz".default = true;
+
+  services.prometheus.exporters.postfix = {
+    enable = true;
+    openFirewall = true;
+    showqPath = "/var/lib/postfix/queue/public/showq";
+    systemd.enable = true;
+  };
+  systemd.services.prometheus-postfix-exporter.serviceConfig.SupplementaryGroups = [ "postdrop" ];
+
+  services.prometheus.exporters.rspamd = {
+    enable = true;
+    openFirewall = true;
+  };
 }

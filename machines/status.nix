@@ -112,6 +112,26 @@
         scheme = "https";
         static_configs = oneStaticTarget "matrix.vesp.cz";
       }
+      # postfix
+      (let
+        instances = {
+          "37.205.14.17:10094"  = "mx.otevrenamesta.cz";
+        };
+      in {
+        job_name = "postfix";
+        static_configs = staticTargets (lib.attrNames instances);
+        relabel_configs = lib.mapAttrsToList relabelAddressInstance instances;
+      })
+      # rspamd
+      (let
+        instances = {
+          "37.205.14.17:10098"  = "mx.otevrenamesta.cz";
+        };
+      in {
+        job_name = "rspamd";
+        static_configs = staticTargets (lib.attrNames instances);
+        relabel_configs = lib.mapAttrsToList relabelAddressInstance instances;
+      })
       # mysql
       (let
         instances = {
