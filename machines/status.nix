@@ -34,7 +34,7 @@
     relabelAddressInstance = address: replacement: {
       source_labels = [ "__address__" ];
       target_label = "instance";
-      regex = address;
+      regex = builtins.replaceStrings ["[" "]"] [".?" ".?"] address;
       replacement = replacement;
     };
   in
@@ -86,6 +86,8 @@
           "37.205.14.17:10391"  = "navstevnost.otevrenamesta.cz";
           "37.205.14.17:10491"  = "proxy.otevrenamesta.cz";
           "37.205.14.17:10591"  = "wiki.vesp.cz";
+
+          "[2a01:430:17:1::ffff:1309]:9100" = "dsw2.otevrenamesta.cz";
         };
       in {
         job_name = "node";
@@ -96,6 +98,7 @@
       (let
         instances = {
           "37.205.14.17:10493" = "proxy.otevrenamesta.cz";
+          "[2a01:430:17:1::ffff:1309]:9113" = "dsw2.otevrenamesta.cz";
         };
       in {
         job_name = "nginx";
@@ -109,6 +112,16 @@
         scheme = "https";
         static_configs = oneStaticTarget "matrix.vesp.cz";
       }
+      # mysql
+      (let
+        instances = {
+          "[2a01:430:17:1::ffff:1309]:9104" = "dsw2.otevrenamesta.cz";
+        };
+      in {
+        job_name = "mysql";
+        static_configs = staticTargets (lib.attrNames instances);
+        relabel_configs = lib.mapAttrsToList relabelAddressInstance instances;
+      })
     ];
 
     rules = [
