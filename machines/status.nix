@@ -99,6 +99,7 @@
         instances = {
           "37.205.14.17:10493" = "proxy.otevrenamesta.cz";
           "[2a01:430:17:1::ffff:1309]:9113" = "dsw2.otevrenamesta.cz";
+          "37.205.14.138:10993" = "matrix.otevrenamesta.cz";
         };
       in {
         job_name = "nginx";
@@ -139,6 +140,16 @@
         };
       in {
         job_name = "mysql";
+        static_configs = staticTargets (lib.attrNames instances);
+        relabel_configs = lib.mapAttrsToList relabelAddressInstance instances;
+      })
+      # postresql
+      (let
+        instances = {
+          "37.205.14.138:10997" = "matrix.otevrenamesta.cz";
+        };
+      in {
+        job_name = "postgresql";
         static_configs = staticTargets (lib.attrNames instances);
         relabel_configs = lib.mapAttrsToList relabelAddressInstance instances;
       })

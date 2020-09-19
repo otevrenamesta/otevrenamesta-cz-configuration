@@ -4,7 +4,7 @@ let
   proxyIp = "37.205.14.17";
   proxyPorts = "80,8000,8001,8002,8008,8080";
   statusIp = "83.167.228.98";
-  statusPorts = "9100";
+  statusPorts = "9100,9187,9113";
 in
 {
   imports = [
@@ -66,6 +66,8 @@ in
       { destination = "192.168.122.105:9100"; sourcePort = 10591;}  # wp prometheus node exporter
       { destination = "192.168.122.107:9100"; sourcePort = 10791;}  # nia prometheus node exporter
       { destination = "192.168.122.109:9100"; sourcePort = 10991;}  # matrix prometheus node exporter
+      { destination = "192.168.122.109:9187"; sourcePort = 10997;}  # matrix prometheus postgresql exporter
+      { destination = "192.168.122.109:9113"; sourcePort = 10993;}  # matrix prometheus nginx exporter
 
       { destination = "192.168.122.109:8448"; sourcePort = 10984;}  # matrix synapse (clients+federation)
     ];

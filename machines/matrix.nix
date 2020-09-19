@@ -144,6 +144,7 @@ in
 
   services.nginx = {
     enable = true;
+    statusPage = true;
     virtualHosts."riot.vesp.cz" = {
       root = riotPkg;
       locations."=/vesp-logo.svg".alias = ../media/vesp135px-matrix.svg;
@@ -175,6 +176,16 @@ in
         "@nesnera_om:vesp.cz" = "admin";
       };
     };
+  };
+
+  services.prometheus.exporters.postgres = {
+    enable = true;
+    openFirewall = true;
+    runAsLocalSuperUser = true;
+  };
+  services.prometheus.exporters.nginx = {
+    enable = true;
+    openFirewall = true;
   };
 
   networking.firewall = {
