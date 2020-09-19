@@ -1,9 +1,26 @@
 { config, lib, pkgs, ... }:
+let
+  brDev = config.virtualisation.libvirtd.networking.bridgeName;
+  statusIp = "83.167.228.98";
+  statusPorts = "9100,9113";
+in
 {
   imports = [
     ../modules/libvirt.nix
     ../modules/deploy.nix
   ];
+
+  # restrict connections to prometheus exporters to status.otevrenamesta.cz only
+  networking.firewall.extraCommands = ''
+    iptables -I FORWARD -o ${brDev} -p tcp -m multiport --dports ${statusPorts} ! -s ${statusIp} -j DROP
+    iptables -I INPUT -i lo -j ACCEPT
+    iptables -I INPUT -p tcp -m multiport --dports ${statusPorts} ! -s ${statusIp} -j DROP
+  '';
+  networking.firewall.extraStopCommands = ''
+    iptables -D FORWARD -o ${brDev} -p tcp -m multiport --dports ${statusPorts} ! -s ${statusIp} -j DROP || true
+    iptables -D INPUT -i lo -j ACCEPT || true
+    iptables -D INPUT -p tcp -m multiport --dports ${statusPorts} ! -s ${statusIp} -j DROP || true
+  '';
 
   virtualisation.libvirtd = {
     enable = true;
@@ -58,7 +75,7 @@
        { destination = "192.168.122.104:9113";  sourcePort = 10493;} # proxy prometheus nginx collector
 
        { destination = "192.168.122.105:22";  sourcePort = 10522;}   # mediawiki ssh
-       { destination = "192.168.122.105:80";  sourcePort = 10580;}   # mediawiki web
+       #{ destination = "192.168.122.105:80";  sourcePort = 10580;}   # mediawiki web
        { destination = "192.168.122.105:9100";  sourcePort = 10591;} # mediawiki prometheus node collector
      ];
   };

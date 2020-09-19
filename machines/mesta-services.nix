@@ -2,6 +2,9 @@
 let
   brDev = config.virtualisation.libvirtd.networking.bridgeName;
   proxyIp = "37.205.14.17";
+  proxyPorts = "80,8000,8001,8002,8008,8080";
+  statusIp = "83.167.228.98";
+  statusPorts = "9100";
 in
 {
   imports = [
@@ -22,19 +25,23 @@ in
 
   networking.firewall.allowedTCPPorts = [ 80 ];
 
-# old proxy needs access for NIA
-#  # restrict incoming connections to proxy.otevrenamesta.cz only
-#  # to prevent X-Real-Ip: etc header spoofing
-#  networking.firewall.extraCommands = ''
-#    iptables -I FORWARD -o ${brDev} -p tcp -m multiport --dports 80,8080,8008 ! -s ${proxyIp} -j DROP
-#    iptables -I INPUT -i lo -j ACCEPT
-#    iptables -I INPUT -p tcp -m multiport --dports 80,8000,8001,8002 ! -s ${proxyIp} -j DROP
-#  '';
-#  networking.firewall.extraStopCommands = ''
-#    iptables -D FORWARD -o ${brDev} -p tcp -m multiport --dports 80,8080,8008 ! -s ${proxyIp} -j DROP || true
-#    iptables -D INPUT -i lo -j ACCEPT || true
-#    iptables -D INPUT -p tcp -m multiport --dports 80,8000,8001,8002 ! -s ${proxyIp} -j DROP || true
-#  '';
+  # restrict incoming connections to proxy.otevrenamesta.cz only
+  # to prevent X-Real-Ip: etc header spoofing
+  # also restrict connections to prometheus exporters to status.otevrenamesta.cz only
+  networking.firewall.extraCommands = ''
+    iptables -I FORWARD -o ${brDev} -p tcp -m multiport --dports ${proxyPorts} ! -s ${proxyIp} -j DROP
+    iptables -I FORWARD -o ${brDev} -p tcp -m multiport --dports ${statusPorts} ! -s ${statusIp} -j DROP
+    iptables -I INPUT -i lo -j ACCEPT
+    iptables -I INPUT -p tcp -m multiport --dports ${proxyPorts} ! -s ${proxyIp} -j DROP
+    iptables -I INPUT -p tcp -m multiport --dports ${statusPorts} ! -s ${statusIp} -j DROP
+  '';
+  networking.firewall.extraStopCommands = ''
+    iptables -D FORWARD -o ${brDev} -p tcp -m multiport --dports ${proxyPorts} ! -s ${proxyIp} -j DROP || true
+    iptables -D FORWARD -o ${brDev} -p tcp -m multiport --dports ${statusPorts} ! -s ${statusIp} -j DROP || true
+    iptables -D INPUT -i lo -j ACCEPT || true
+    iptables -D INPUT -p tcp -m multiport --dports ${proxyPorts} ! -s ${proxyIp} -j DROP || true
+    iptables -D INPUT -p tcp -m multiport --dports ${statusPorts} ! -s ${statusIp} -j DROP || true
+  '';
 
   networking.nat = {
     forwardPorts = [
