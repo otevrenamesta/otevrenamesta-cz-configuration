@@ -3,8 +3,8 @@ let
   # update with nix-prefetch-url --unpack <URL>
   # tracks nixos-20.03 branch
   pkgs2003 = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/ebf599162322c48f52321b251ab7d16ce8951485.tar.gz";
-    sha256 = "13rw1cxhb4wdz7d1chldn2zdc3q96adj21fkjh3a14q06ira3lwa";
+    url = "https://github.com/NixOS/nixpkgs/archive/985047d3c9fb16bb05bc8cde7d2a1a703f670eae.tar.gz";
+    sha256 = "028bq6gwhp5nbvl2m7fxzdan195ajnk99rqw93k1mxgpr8c449ic";
   };
 in
 {
@@ -90,6 +90,27 @@ in
         fsType = "ext4";
       };
   };
+
+  # qemu guest port 11322 (redmine na services)
+  redmine = { config, pkgs, ... }: {
+    imports = [
+      ./env.nix
+      ./profiles/qemu.nix
+      ./profiles/exporter-node.nix
+      ./machines/redmine.nix
+    ];
+
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/2fe5b280-91fe-40e1-af64-9c814f03726b";
+	fsType = "ext4";
+      };
+
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/9af35a3b-7073-4fdb-afba-fc3d995016c9";
+	fsType = "ext4";
+      };
+  };
+
 
   # qemu guest port 10322 (roundcube na services)
   roundcube = { config, pkgs, ... }: {
