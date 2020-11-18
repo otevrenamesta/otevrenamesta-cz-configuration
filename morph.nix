@@ -1,15 +1,15 @@
 let
   # Pin the deployment package-set to a specific version of nixpkgs
   # update with nix-prefetch-url --unpack <URL>
-  # tracks nixos-20.03 branch
-  pkgs2003 = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/985047d3c9fb16bb05bc8cde7d2a1a703f670eae.tar.gz";
-    sha256 = "028bq6gwhp5nbvl2m7fxzdan195ajnk99rqw93k1mxgpr8c449ic";
+  # tracks nixos-20.09 branch
+  pkgs2009 = builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/f41c0fc7d8e49d94220f74495d4d702922df2a67.tar.gz";
+    sha256 = "01wim7ayn69y056q28ifw2f0mdypidpc0z15dda54aj5yy5vai09";
   };
 in
 {
   network =  {
-    pkgs = import pkgs2003 { };
+    pkgs = import pkgs2009 { };
     description = "om hosts";
   };
 
@@ -311,47 +311,48 @@ in
         fsType = "ext4";
       };
 
-    deployment = {
-      healthChecks = {
-        http = [
-          {
-            scheme = "http";
-            port = 80;
-            host = "otevrenamesta.cz";
-            path = "/";
-            description = "Nginx is up";
-          }
-          {
-            scheme = "https";
-            port = 443;
-            host = "otevrenamesta.cz";
-            path = "/";
-            description = "Web is up";
-          }
-          {
-            scheme = "https";
-            port = 443;
-            host = "www.otevrenamesta.cz";
-            path = "/";
-            description = "WWW is up";
-          }
-          {
-            scheme = "https";
-            port = 443;
-            host = "forum.otevrenamesta.cz";
-            path = "/latest";
-            description = "Forum is up";
-          }
-          {
-            scheme = "https";
-            port = 443;
-            host = "iot.otevrenamesta.cz";
-            path = "/about";
-            description = "IoT is up";
-          }
-        ];
-      };
-    };
+# FIXME does not work due to how we do NAT
+#    deployment = {
+#      healthChecks = {
+#        http = [
+#          {
+#            scheme = "http";
+#            port = 80;
+#            host = "otevrenamesta.cz";
+#            path = "/";
+#            description = "Nginx is up";
+#          }
+#          {
+#            scheme = "https";
+#            port = 443;
+#            host = "otevrenamesta.cz";
+#            path = "/";
+#            description = "Web is up";
+#          }
+#          {
+#            scheme = "https";
+#            port = 443;
+#            host = "www.otevrenamesta.cz";
+#            path = "/";
+#            description = "WWW is up";
+#          }
+#          {
+#            scheme = "https";
+#            port = 443;
+#            host = "forum.otevrenamesta.cz";
+#            path = "/latest";
+#            description = "Forum is up";
+#          }
+#          {
+#            scheme = "https";
+#            port = 443;
+#            host = "iot.otevrenamesta.cz";
+#            path = "/about";
+#            description = "IoT is up";
+#          }
+#        ];
+#      };
+#    };
   };
 
   status = { config, pkgs, ... }: {

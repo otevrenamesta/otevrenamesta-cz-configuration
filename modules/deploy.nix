@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 let
   home-manager-src = builtins.fetchTarball {
-    url = "https://github.com/rycee/home-manager/archive/8b15f1899356762187ce119980ca41c0aba782bb.tar.gz";
-    sha256 = "17bahz18icdnfa528zrgrfpvmsi34i859glfa595jy8qfap4ckng";
+    url = "https://github.com/nix-community/home-manager/archive/63f299b3347aea183fc5088e4d6c4a193b334a41.tar.gz";
+    sha256 = "0iksjch94wfvyq0cgwv5wq52j0dc9cavm68wka3pahhdvjlxd3js";
   };
 in
 {

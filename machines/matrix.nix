@@ -20,7 +20,7 @@ let
     };
     embeddedPages.welcomeUrl = "/vesp-welcome.html";
   };
-  riotPkg = pkgs.riot-web.override { conf = riotConfig; };
+  riotPkg = pkgs.element-web.override { conf = riotConfig; };
   gitterBridgeRegistration = ../secrets/matrix-appservice-gitter/gitter-registration.yaml;
   slackBridgeRegistration = ../secrets/matrix-appservice-slack/slack-registration.yaml;
 in

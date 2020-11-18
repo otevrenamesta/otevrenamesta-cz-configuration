@@ -87,7 +87,7 @@ in
     enablePHP = true;
 
     phpOptions = ''
-      extension=${pkgs.phpPackages.apcu}/lib/php/extensions/apcu.so
+      extension=${pkgs.php.extensions.apcu}/lib/php/extensions/apcu.so
       zend_extension = opcache.so
       opcache.enable = 1
     '';

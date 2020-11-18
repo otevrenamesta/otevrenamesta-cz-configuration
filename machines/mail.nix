@@ -17,12 +17,12 @@ in
     # updating simple-nixos-mailserver? make sure submissionOptions below stays in sync
     (
       let
-        commit = "fb8886547b569be3e6b72b526cea64c02424a5c4";
+        commit = "c04260cf5e685fc99ccb669654e147f94e3de8a4";
       in
       builtins.fetchTarball {
        url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${commit}/nixos-mailserver-${commit}.tar.gz";
        # And set its hash
-       sha256 = "1cf9jgvb2ls3w7mdg5q2ls076amhbh8kq3qpn9ypfs5ycn638jam";
+       sha256 = "1cfzlfdfiw8347cgi0y4akj528lpwplhdpq3fv5rw7fb1zq2w6ib";
       }
     )
     ../modules/postfix-report.nix
@@ -110,6 +110,59 @@ in
         hashedPassword = hashes.dp14_;
       };
     };
+    # aliases for virtual users and mailing lists
+    forwards = {
+      # virtual users
+      "cityvizor@otevrenamesta.cz"        =      [ emails.pk_ emails.ln_ emails.cv_ ];
+      "danidel.kolar@otevrenamesta.cz"    =      emails.dk_;
+      "informace@otevrenamesta.cz"        =      "info@lists.otevrenamesta.cz";
+      "iot@otevrenamesta.cz"              =      [ emails.ln_ emails.zg_ ];
+      "jiri.hlavenka@otevrenamesta.cz"    =      emails.jh_;
+      "jiri.marek@otevrenamesta.cz"       =      emails.jm_;
+      "ladislav.nesnera@otevrenamesta.cz" =      emails.ln_;
+      "marcel.kolaja@otevrenamesta.cz"    =      emails.mk_;
+      "martin.sebek@otevrenamesta.cz"     =      emails.ms_;
+      "olmr@otevrenamesta.cz"             =      emails.vo_;
+      "ondrej.profant@otevrenamesta.cz"   =      emails.op_;
+      "pavla.kadlecova@otevrenamesta.cz"  =      emails.pk_;
+      "stepan.strebl@otevrenamesta.cz"    =      emails.ss_;
+      "dsw2@otevrenamesta.cz"             =      "dsw2@lists.otevrenamesta.cz";
+
+      # virtual lists
+      "listmaster@otevrenamesta.cz"             = "listmaster@lists.otevrenamesta.cz";
+
+      "sympa@otevrenamesta.cz"                  = "sympa@lists.otevrenamesta.cz";
+      "sympa-request@otevrenamesta.cz"          = "sympa-request@lists.otevrenamesta.cz";
+      "sympa-owner@otevrenamesta.cz"            = "sympa-owner@lists.otevrenamesta.cz";
+
+      "info@otevrenamesta.cz"                   = "info@lists.otevrenamesta.cz";
+      "info-request@otevrenamesta.cz"           = "info-request@lists.otevrenamesta.cz";
+      "info-editor@otevrenamesta.cz"            = "info-editor@lists.otevrenamesta.cz";
+      "info-owner@otevrenamesta.cz"             = "info-owner@lists.otevrenamesta.cz";
+      "info-subscribe@otevrenamesta.cz"         = "info-subscribe@lists.otevrenamesta.cz";
+      "info-unsubscribe@otevrenamesta.cz"       = "info-unsubscribe@lists.otevrenamesta.cz";
+
+      "konference@otevrenamesta.cz"             = "konference@lists.otevrenamesta.cz";
+      "konference-request@otevrenamesta.cz"     = "konference-request@lists.otevrenamesta.cz";
+      "konference-editor@otevrenamesta.cz"      = "konference-editor@lists.otevrenamesta.cz";
+      "konference-owner@otevrenamesta.cz"       = "konference-owner@lists.otevrenamesta.cz";
+      "konference-subscribe@otevrenamesta.cz"   = "konference-subscribe@lists.otevrenamesta.cz";
+      "konference-unsubscribe@otevrenamesta.cz" = "konference-unsubscribe@lists.otevrenamesta.cz";
+
+      "testforum@otevrenamesta.cz"              = "testforum@lists.otevrenamesta.cz";
+      "testforum-request@otevrenamesta.cz"      = "testforum-request@lists.otevrenamesta.cz";
+      "testforum-editor@otevrenamesta.cz"       = "testforum-editor@lists.otevrenamesta.cz";
+      "testforum-owner@otevrenamesta.cz"        = "testforum-owner@lists.otevrenamesta.cz";
+      "testforum-subscribe@otevrenamesta.cz"    = "testforum-subscribe@lists.otevrenamesta.cz";
+      "testforum-unsubscribe@otevrenamesta.cz"  = "testforum-unsubscribe@lists.otevrenamesta.cz";
+
+      "vybor@otevrenamesta.cz"                  = "vybor@lists.otevrenamesta.cz";
+      "vybor-request@otevrenamesta.cz"          = "vybor-request@lists.otevrenamesta.cz";
+      "vybor-editor@otevrenamesta.cz"           = "vybor-editor@lists.otevrenamesta.cz";
+      "vybor-owner@otevrenamesta.cz"            = "vybor-owner@lists.otevrenamesta.cz";
+      "vybor-subscribe@otevrenamesta.cz"        = "vybor-subscribe@lists.otevrenamesta.cz";
+      "vybor-unsubscribe@otevrenamesta.cz"      = "vybor-unsubscribe@lists.otevrenamesta.cz";
+    };
 
     extraVirtualAliases = {
         # address = forward address;
@@ -139,60 +192,6 @@ in
     relayDomains = [ "lists.otevrenamesta.cz" ];
     transport = ''
       lists.otevrenamesta.cz    relay:[192.168.122.101]
-    '';
-    # aliases for virtual users and mailing lists
-    virtual = ''
-
-      # virtual users
-      cityvizor@otevrenamesta.cz               ${emails.pk_}, ${emails.ln_}, ${emails.cv_}
-      danidel.kolar@otevrenamesta.cz           ${emails.dk_}
-      informace@otevrenamesta.cz               info@lists.otevrenamesta.cz
-      iot@otevrenamesta.cz                     ${emails.ln_}, ${emails.zg_}
-      jiri.hlavenka@otevrenamesta.cz           ${emails.jh_}
-      jiri.marek@otevrenamesta.cz              ${emails.jm_}
-      ladislav.nesnera@otevrenamesta.cz        ${emails.ln_}
-      marcel.kolaja@otevrenamesta.cz           ${emails.mk_}
-      martin.sebek@otevrenamesta.cz            ${emails.ms_}
-      olmr@otevrenamesta.cz                    ${emails.vo_}
-      ondrej.profant@otevrenamesta.cz          ${emails.op_}
-      pavla.kadlecova@otevrenamesta.cz         ${emails.pk_}
-      stepan.strebl@otevrenamesta.cz           ${emails.ss_}
-      dsw2@otevrenamesta.cz                    dsw2@lists.otevrenamesta.cz
-
-      # virtual lists
-      listmaster@otevrenamesta.cz              listmaster@lists.otevrenamesta.cz
-
-      sympa@otevrenamesta.cz                   sympa@lists.otevrenamesta.cz
-      sympa-request@otevrenamesta.cz           sympa-request@lists.otevrenamesta.cz
-      sympa-owner@otevrenamesta.cz             sympa-owner@lists.otevrenamesta.cz
-      
-      info@otevrenamesta.cz                    info@lists.otevrenamesta.cz
-      info-request@otevrenamesta.cz            info-request@lists.otevrenamesta.cz
-      info-editor@otevrenamesta.cz             info-editor@lists.otevrenamesta.cz
-      info-owner@otevrenamesta.cz              info-owner@lists.otevrenamesta.cz
-      info-subscribe@otevrenamesta.cz          info-subscribe@lists.otevrenamesta.cz
-      info-unsubscribe@otevrenamesta.cz        info-unsubscribe@lists.otevrenamesta.cz
-      
-      konference@otevrenamesta.cz              konference@lists.otevrenamesta.cz
-      konference-request@otevrenamesta.cz      konference-request@lists.otevrenamesta.cz
-      konference-editor@otevrenamesta.cz       konference-editor@lists.otevrenamesta.cz
-      konference-owner@otevrenamesta.cz        konference-owner@lists.otevrenamesta.cz
-      konference-subscribe@otevrenamesta.cz    konference-subscribe@lists.otevrenamesta.cz
-      konference-unsubscribe@otevrenamesta.cz  konference-unsubscribe@lists.otevrenamesta.cz
-      
-      testforum@otevrenamesta.cz               testforum@lists.otevrenamesta.cz
-      testforum-request@otevrenamesta.cz       testforum-request@lists.otevrenamesta.cz
-      testforum-editor@otevrenamesta.cz        testforum-editor@lists.otevrenamesta.cz
-      testforum-owner@otevrenamesta.cz         testforum-owner@lists.otevrenamesta.cz
-      testforum-subscribe@otevrenamesta.cz     testforum-subscribe@lists.otevrenamesta.cz
-      testforum-unsubscribe@otevrenamesta.cz   testforum-unsubscribe@lists.otevrenamesta.cz
-      
-      vybor@otevrenamesta.cz                   vybor@lists.otevrenamesta.cz
-      vybor-request@otevrenamesta.cz           vybor-request@lists.otevrenamesta.cz
-      vybor-editor@otevrenamesta.cz            vybor-editor@lists.otevrenamesta.cz
-      vybor-owner@otevrenamesta.cz             vybor-owner@lists.otevrenamesta.cz
-      vybor-subscribe@otevrenamesta.cz         vybor-subscribe@lists.otevrenamesta.cz
-      vybor-unsubscribe@otevrenamesta.cz       vybor-unsubscribe@lists.otevrenamesta.cz
     '';
 
     # enable postsrsd integration
@@ -251,9 +250,6 @@ in
         socket = "localhost:11334";
       }];
       extraConfig = ''
-        # static files for the web interface
-        static_dir = "''${WWWDIR}";
-
         # For not having to enter the password on the command line
         secure_ip = "::1";
         secure_ip = "127.0.0.1";

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   secrets = import ../secrets/sympa.nix;
@@ -106,5 +106,10 @@ in
         true()                           smtp,dkim,md5,smime -> do_it
       '';
     };
+  };
+
+  services.mysqlBackup = {
+    enable = true;
+    databases = [ "sympa" ];
   };
 }
