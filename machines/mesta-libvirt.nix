@@ -50,6 +50,7 @@ in
      forwardPorts = [
        { destination = "192.168.122.100:22";    sourcePort = 10022;} # mail ssh
        { destination = "192.168.122.100:25";    sourcePort = 25;}    # mail SMTP
+       { destination = "192.168.122.100:143";   sourcePort = 110;}   # mail POP3
        { destination = "192.168.122.100:143";   sourcePort = 143;}   # mail IMAP
        { destination = "192.168.122.100:587";   sourcePort = 587;}   # mail email message submission
        { destination = "192.168.122.100:993";   sourcePort = 993;}   # mail IMAPS, SSL
