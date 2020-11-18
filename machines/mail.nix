@@ -42,6 +42,7 @@ in
       "universal@otevrenamesta.cz" = {
           hashedPassword = "${hashes.uu_}";
       };
+      # asi nepoužívané
       "forum@otevrenamesta.cz" = {
 	  hashedPassword = hashes.forum_;
       };
@@ -67,6 +68,10 @@ in
         sieveScript = ''
           redirect "${emails.mm_}";
         '';
+      };
+
+      "webforum@otevrenamesta.cz" = {
+	  hashedPassword = "${hashes.webforum_}";
       };
 
       ## domain @try.otevrenamesta.cz:
@@ -143,12 +148,15 @@ in
       danidel.kolar@otevrenamesta.cz           ${emails.dk_}
       informace@otevrenamesta.cz               info@lists.otevrenamesta.cz
       iot@otevrenamesta.cz                     ${emails.ln_}, ${emails.zg_}
+      jiri.hlavenka@otevrenamesta.cz           ${emails.jh_}
+      jiri.marek@otevrenamesta.cz              ${emails.jm_}
       ladislav.nesnera@otevrenamesta.cz        ${emails.ln_}
       marcel.kolaja@otevrenamesta.cz           ${emails.mk_}
       martin.sebek@otevrenamesta.cz            ${emails.ms_}
       olmr@otevrenamesta.cz                    ${emails.vo_}
       ondrej.profant@otevrenamesta.cz          ${emails.op_}
       pavla.kadlecova@otevrenamesta.cz         ${emails.pk_}
+      stepan.strebl@otevrenamesta.cz           ${emails.ss_}
       dsw2@otevrenamesta.cz                    dsw2@lists.otevrenamesta.cz
 
       # virtual lists
