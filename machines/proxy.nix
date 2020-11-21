@@ -105,7 +105,7 @@
       };
 
       "dsw2.otevrenamesta.cz" = {
-        serverAliases = [ "novemestonm.dsw2.otevrenamesta.cz" "medlanky.dsw2.otevrenamesta.cz" "dotace.praha3.cz" "dotace.praha12.cz" "dotace.praha8.cz" "dotace.praha14.cz" ];
+        serverAliases = [ "novemestonm.dsw2.otevrenamesta.cz" "medlanky.dsw2.otevrenamesta.cz" "dotace.praha3.cz" "dotace.praha12.cz" "dotace.praha8.cz" "dotace.praha14.cz" "praha4.dsw2.otevrenamesta.cz" "usti-nad-labem.dsw2.otevrenamesta.cz" ];
         forceSSL = true;
         enableACME = true;
 
