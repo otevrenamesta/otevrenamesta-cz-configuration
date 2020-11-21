@@ -106,6 +106,16 @@
         static_configs = staticTargets (lib.attrNames instances);
         relabel_configs = lib.mapAttrsToList relabelAddressInstance instances;
       })
+      # nginxlog, currently DSW2 only
+      (let
+        instances = {
+          "[2a01:430:17:1::ffff:1309]:4040" = "dsw2.otevrenamesta.cz";
+        };
+      in {
+        job_name = "nginxlog";
+        static_configs = staticTargets (lib.attrNames instances);
+        relabel_configs = lib.mapAttrsToList relabelAddressInstance instances;
+      })
       # matrix-synapse
       {
         job_name = "synapse";
