@@ -76,6 +76,11 @@ in
 	  hashedPassword = "${hashes.webforum_}";
       };
 
+      # Prometheus Alertmanager
+      "status@otevrenamesta.cz" = {
+          hashedPassword = hashes.status_;
+      };
+
       ## domain @try.otevrenamesta.cz:
       "user1@try.otevrenamesta.cz" = {
           hashedPassword = "${hashes.tt_}";
@@ -129,6 +134,7 @@ in
       "pavla.kadlecova@otevrenamesta.cz"  =      emails.pk_;
       "stepan.strebl@otevrenamesta.cz"    =      emails.ss_;
       "dsw2@otevrenamesta.cz"             =      "dsw2@lists.otevrenamesta.cz";
+      "alert@otevrenamesta.cz"            =      [ emails.mm_ emails.ln_ ];
 
       # virtual lists
       "listmaster@otevrenamesta.cz"             = "listmaster@lists.otevrenamesta.cz";

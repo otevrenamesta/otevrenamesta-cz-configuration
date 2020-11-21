@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  writeJson = name: tree: pkgs.writeText name (builtins.toJSON tree);
+in
 {
   users.users.niap = {
     description = "NIA proxy user (no shell, port forwarding only)";
@@ -59,6 +62,60 @@
       };
     };
 
+    alertmanagers = [
+      {
+        scheme = "http";
+        static_configs = [
+          {
+            targets = [ "localhost:${toString config.services.prometheus.alertmanager.port}" ];
+          }
+        ];
+      }
+    ];
+
+    alertmanager = {
+      enable = true;
+      configuration = {
+        global = {
+          smtp_smarthost = "mx.otevrenamesta.cz:587";
+          smtp_hello = "status.otevrenamesta.cz";
+          smtp_from = "status@otevrenamesta.cz";
+          smtp_auth_username = "status@otevrenamesta.cz";
+          smtp_auth_password = (import ../secrets/status.nix).smtpPassword;
+        };
+        route = {
+          receiver = "ignore";
+          group_wait = "30s";
+          group_interval = "5m";
+          repeat_interval = "4h";
+          group_by = [ "alertname" ];
+
+          routes = [
+            {
+              receiver = "email";
+              group_wait = "30s";
+              match.severity = "page";
+            }
+          ];
+        };
+        receivers = [
+          {
+            # with no *_config, this will drop all alerts directed to it
+            name = "ignore";
+          }
+          {
+            name = "email";
+            email_configs = [
+              {
+                send_resolved = true;
+                to = "alert@otevrenamesta.cz";
+              }
+            ];
+          }
+        ];
+      };
+    };
+
     scrapeConfigs = [
       {
         job_name = "prometheus";
@@ -75,10 +132,10 @@
 
           "37.205.14.138:9100"  = "mesta-services";
           "37.205.14.138:10491" = "glpi.otevrenamesta.cz";
-          "37.205.14.138:10591" = "wp.otevrenamesta.cz";
+          #"37.205.14.138:10591" = "wp.otevrenamesta.cz";
           "37.205.14.138:10791" = "nia.otevrenamesta.cz";
           "37.205.14.138:10991" = "matrix.otevrenamesta.cz";
-          "37.205.14.138:11391" = "redmine.otevrenamesta.cz";
+          #"37.205.14.138:11391" = "redmine.otevrenamesta.cz";
 
           "37.205.14.17:9100"   = "mesta-libvirt";
           "37.205.14.17:10091"  = "mx.otevrenamesta.cz";
@@ -165,11 +222,42 @@
       })
     ];
 
-    rules = [
-      (builtins.readFile (pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/matrix-org/synapse/v1.9.0/contrib/prometheus/synapse-v2.rules"; 
+    ruleFiles = [
+      # matrix-synapse
+      (pkgs.fetchurl {
+        url = "https://raw.githubusercontent.com/matrix-org/synapse/v1.9.0/contrib/prometheus/synapse-v2.rules";
         sha256 = "0dw05qwnr24hrshp6vmncfbxhzbh1rbbnz0rqkvrjj6qjhzpmfhq";
-      }))
+      })
+
+      # alerting
+      (writeJson "alerting.json" {
+        groups = [
+          {
+            name = "system";
+            rules = [
+              {
+                alert = "RootPartitionLowInodes";
+                expr = ''node_filesystem_files_free{mountpoint="/"} <= 10000'';
+                for = "30m";
+                labels.severity = "page";
+              }
+              {
+                alert = "RootPartitionLowDiskSpace";
+                expr = ''node_filesystem_avail_bytes{mountpoint="/"} <= 1000000000'';
+                for = "30m";
+                labels.severity = "page";
+              }
+              {
+                alert = "NodeDown";
+                expr = ''up{job="node"} < 1'';
+                for = "2m";
+                labels.severity = "page";
+              }
+            ];
+          }
+        ];
+      })
+
     ];
   };
 
