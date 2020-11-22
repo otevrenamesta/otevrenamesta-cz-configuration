@@ -134,7 +134,7 @@ in
       "pavla.kadlecova@otevrenamesta.cz"  =      emails.pk_;
       "stepan.strebl@otevrenamesta.cz"    =      emails.ss_;
       "dsw2@otevrenamesta.cz"             =      "dsw2@lists.otevrenamesta.cz";
-      "alert@otevrenamesta.cz"            =      [ emails.mm_ emails.ln_ ];
+      "alert@otevrenamesta.cz"            =      [ emails.mm_ emails.ln_ emails.srk_ ];
 
       # virtual lists
       "listmaster@otevrenamesta.cz"             = "listmaster@lists.otevrenamesta.cz";

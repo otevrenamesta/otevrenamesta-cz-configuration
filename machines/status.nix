@@ -73,6 +73,8 @@ in
       }
     ];
 
+    # to access the web ui, run something like ssh -L 9093:localhost:9093 status.otevrenamesta.cz -N
+    # and then open http://localhost:9093 in your browser
     alertmanager = {
       enable = true;
       configuration = {
@@ -87,7 +89,7 @@ in
           receiver = "ignore";
           group_wait = "30s";
           group_interval = "5m";
-          repeat_interval = "4h";
+          repeat_interval = "6h";
           group_by = [ "alertname" ];
 
           routes = [
