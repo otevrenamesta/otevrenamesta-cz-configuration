@@ -3,5 +3,4 @@
 *.secret
 
 /attic
-/secrets
 /static
