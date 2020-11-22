@@ -14,6 +14,8 @@ in
     morph
     screen
     git
+    git-crypt
+    gnupg pinentry
   ];
 
   home-manager.users.root = {
