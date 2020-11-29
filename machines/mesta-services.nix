@@ -20,6 +20,15 @@ in
     networking = {
       enable = true;
       infiniteLeaseTime = true;
+      ipv6 = {
+        network = "fda7:1646:3af8:666d::/64";
+        hostAddress = "fda7:1646:3af8:666d::1";
+        forwardPorts = [
+          #{ destination = "[fda7:1646:3af8:666d:5054:ff:fe27:cbe]:22";  sourcePort = 22; }
+          #{ destination = "[fda7:1646:3af8:666d:5054:ff:fe27:cbe]:80";  sourcePort = 80; }
+          #{ destination = "[fda7:1646:3af8:666d:5054:ff:fe27:cbe]:443"; sourcePort = 443; }
+        ];
+      };
     };
   };
 
