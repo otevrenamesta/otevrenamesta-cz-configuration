@@ -1,3 +1,7 @@
+
+Deprecated. The content has been moved to GitLab.
+*************************************************
+
 otevrenamesta.cz configuration
 ==============================
 
